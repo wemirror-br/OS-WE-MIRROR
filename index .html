@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OS We Mirror — programação de produção</title>
+<meta name="description" content="Ordem de produção diária de espelhos e bandejas.">
+<meta name="theme-color" content="#24413B">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icone-192.png">
+<link rel="apple-touch-icon" href="./icone-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="OS We Mirror">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>html,body{margin:0;padding:0;background:#EDEFEA;-webkit-tap-highlight-color:transparent}</style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16211F; --petrol:#24413B; --petrol-2:#35564F;
+    --paper:#EDEFEA; --panel:#FFFFFF; --line:#D5D9D2; --line-2:#E6E9E3;
+    --ochre:#A2650F; --ochre-soft:#F7EBD7; --rust:#8C3A2B; --mute:#6C7A75;
+    --sans:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;
+    --slab:'Zilla Slab',Georgia,'Times New Roman',serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  #app{font-family:var(--sans);color:var(--ink);background:var(--paper);
+    min-height:100dvh;display:flex;flex-direction:column;font-size:15px;line-height:1.45;
+    -webkit-font-smoothing:antialiased}
+  #app *{font-variant-numeric:tabular-nums}
+
+  /* ---------- topo ---------- */
+  .top{background:var(--petrol);color:#fff;padding:14px 16px 13px}
+  .top h1{font-family:var(--slab);font-weight:600;font-size:19px;letter-spacing:-.01em;line-height:1.15}
+  .top p{font-size:12.5px;color:#B6C7C2;margin-top:2px}
+  .top .row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .savedot{font-size:11.5px;color:#9FB5AF;white-space:nowrap;padding-top:4px;text-align:right}
+  .tprofile{display:block;margin-top:3px;margin-left:auto;background:none;border:0;padding:0;
+    font-family:var(--sans);font-size:11.5px;color:#B6C7C2;cursor:pointer;text-decoration:underline}
+  .trava{max-width:330px;margin:26px auto}
+  .trava h2{font-size:19px;margin-bottom:4px}
+  .trava .btn{width:100%;margin-top:8px;padding:12px}
+  .erro{font-size:13px;color:var(--rust);margin-top:8px}
+  .savedot.on{color:#F0D9A8}
+
+  /* ---------- conteúdo ---------- */
+  main{flex:1;padding:14px 16px calc(104px + env(safe-area-inset-bottom,0));max-width:900px;width:100%;margin:0 auto}
+  section{margin-bottom:18px}
+  h2{font-family:var(--slab);font-size:16px;font-weight:600;margin-bottom:8px}
+  .sub{font-size:12.5px;color:var(--mute)}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:3px}
+  .pad{padding:12px 13px}
+
+  /* ---------- semana ---------- */
+  .weeknav{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .weeknav .lbl{flex:1;text-align:center;font-family:var(--slab);font-size:15.5px;font-weight:600}
+  .arrow{width:38px;height:38px;flex:none;border:1px solid var(--line);background:var(--panel);
+    border-radius:3px;font-size:17px;color:var(--petrol);cursor:pointer;font-family:var(--sans)}
+  .arrow:hover{background:var(--line-2)}
+  .days{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:12px}
+  .day{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:7px 2px 6px;
+    text-align:center;cursor:pointer;font-family:var(--sans)}
+  .day b{display:block;font-size:15px;font-weight:600;line-height:1.1}
+  .day i{display:block;font-style:normal;font-size:10.5px;color:var(--mute);margin-top:1px}
+  .day u{display:block;text-decoration:none;font-size:11px;font-weight:600;color:var(--ochre);margin-top:3px;min-height:14px}
+  .day.sel{background:var(--petrol);border-color:var(--petrol);color:#fff}
+  .day.sel i{color:#B6C7C2} .day.sel u{color:#F0D9A8}
+  .day.today:not(.sel){border-color:var(--ochre);border-width:1.5px}
+
+  /* ---------- números grandes ---------- */
+  .figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:14px}
+  .fig{background:var(--panel);padding:9px 10px 10px;min-width:0}
+  .fig span{display:block;font-size:11.5px;color:var(--mute);letter-spacing:.01em}
+  .fig b{display:block;font-family:var(--slab);font-size:25px;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-top:1px}
+  .fig b em{font-style:normal;font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--mute);margin-left:3px}
+
+  /* ---------- lista de produtos ---------- */
+  .tools{display:flex;gap:7px;margin-bottom:9px}
+  ::placeholder{color:#A9B3AF}
+  input[type=text],input[type=date],input[type=number],select,textarea{
+    font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--panel);
+    border:1px solid var(--line);border-radius:3px;padding:9px 10px;width:100%}
+  input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,.day:focus-visible{
+    outline:2px solid var(--ochre);outline-offset:1px}
+  .btn{font-family:var(--sans);font-size:14px;font-weight:600;padding:9px 13px;border-radius:3px;
+    border:1px solid var(--petrol);background:var(--petrol);color:#fff;cursor:pointer;white-space:nowrap}
+  .btn:hover{background:var(--petrol-2)}
+  .btn.ghost{background:var(--panel);color:var(--petrol)}
+  .btn.ghost:hover{background:var(--line-2)}
+  .btn.danger{border-color:var(--rust);background:var(--panel);color:var(--rust)}
+  .btn:disabled{opacity:.45;cursor:default}
+
+  .grp{font-family:var(--slab);font-size:12.5px;font-weight:600;color:var(--petrol);
+    background:var(--line-2);padding:5px 13px;border-bottom:1px solid var(--line)}
+  .item{display:flex;align-items:center;gap:10px;padding:7px 13px;border-bottom:1px solid var(--line-2)}
+  .item:last-child{border-bottom:0}
+  .item label{flex:1;font-size:14px;line-height:1.3}
+  .item .qty{width:78px;flex:none;text-align:right;font-weight:600;padding:7px 8px}
+  .item .qty.has{border-color:var(--ochre);background:#FFFDF8}
+  .item .hint{font-size:11.5px;color:var(--mute);display:block;margin-top:1px}
+
+  /* ---------- tabela de programação ---------- */
+  table{width:100%;border-collapse:collapse}
+  .plist .prow{display:grid;grid-template-columns:1fr auto;gap:1px 12px;align-items:center;
+    padding:8px 12px;border-bottom:1px solid var(--line-2)}
+  .plist .prow:last-child{border-bottom:0}
+  .plist .pn{font-size:14px;line-height:1.3}
+  .plist .pd{grid-column:1;display:flex;flex-wrap:wrap;gap:2px 11px}
+  .plist .c{font-size:12px;color:var(--mute)}
+  .plist .c::before{content:attr(data-l) " ";color:#98A5A0}
+  .plist .pf{grid-row:1 / span 2;grid-column:2;font-family:var(--slab);font-weight:700;
+    font-size:21px;letter-spacing:-.02em;text-align:right;min-width:62px;
+    background:var(--ochre-soft);border-radius:2px;padding:3px 7px}
+  .plist .phead{display:none}
+  .plist.d3 .prow{grid-template-columns:1fr auto auto;gap:1px 9px}
+  .plist.f2 .prow{grid-template-columns:1fr auto auto;gap:1px 8px}
+  .plist.f2 .pin.v{grid-column:2;grid-row:1 / span 2}
+  .plist.f2 .pin.p{grid-column:3;grid-row:1 / span 2}
+  @media (max-width:719px){
+    .plist.d3 .prow{grid-template-columns:1fr 62px 64px}
+    .plist.d3 .pf{width:62px;min-width:0}
+    .plist.d3 .pin{width:64px}
+    .plist.d3 .phead{display:grid;background:var(--petrol);border-bottom:0;padding:7px 12px}
+    .plist.d3 .phead .pn{color:#DCE5E2;font-size:11px;font-weight:600;line-height:1.2}
+    .plist.d3 .phead .pd{display:none}
+    .plist.d3 .phead .pf{background:none;padding:0;font-family:var(--sans);font-size:11px;
+      font-weight:600;color:#DCE5E2;grid-row:1;grid-column:2;text-align:right;letter-spacing:0}
+    .plist.d3 .phead .ph6{display:block;color:#DCE5E2;font-size:11px;font-weight:600;
+      grid-row:1;grid-column:3;text-align:right;align-self:end}
+    .plist.d3 .phead .ph6::before{display:none}
+    .plist.f2 .prow{grid-template-columns:1fr 64px 64px}
+    .plist.f2 .pin{width:64px}
+    .plist.f2 .phead{display:grid;background:var(--petrol);border-bottom:0;padding:7px 12px}
+    .plist.f2 .phead .pn{color:#DCE5E2;font-size:11px;font-weight:600;line-height:1.2}
+    .plist.f2 .phead .pd{display:none}
+    .plist.f2 .phead .c{color:#DCE5E2;font-size:11px;font-weight:600;text-align:right;
+      align-self:end;grid-row:1}
+    .plist.f2 .phead .c::before{display:none}
+    .plist.f2 .phead .fh3{grid-column:2}
+    .plist.f2 .phead .fh4{grid-column:3}
+  }
+  .seg{display:flex;gap:0;margin-bottom:12px;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+  .seg button{flex:1;background:var(--panel);border:0;padding:9px 6px;cursor:pointer;
+    font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--mute)}
+  .seg button+button{border-left:1px solid var(--line)}
+  .seg button.sel{background:var(--petrol);color:#fff}
+  .plist .pin{grid-row:1 / span 2;grid-column:3;width:64px;text-align:right;
+    padding:6px 7px;font-weight:600;font-size:14px}
+  .plist .pin.has{border-color:var(--petrol);background:#F4F7F5}
+  .tag{font-style:normal;font-size:10.5px;font-weight:600;color:#7A4A08;background:#F3DFBC;
+    border-radius:2px;padding:1px 5px;margin-left:5px;white-space:nowrap}
+  .tag.late{color:#71291C;background:#F0D2CA}
+  .plist .ptot{background:var(--line-2);font-weight:700}
+  .plist .ptot .pf{background:none;padding-right:7px}
+  @media (min-width:720px){
+    .plist .prow{grid-template-columns:1fr 74px 84px 88px 96px;gap:0 8px;padding:7px 12px}
+    .plist .pd{display:contents}
+    .plist .prow>.pn{grid-column:1;grid-row:1}
+    .plist .c{text-align:right;font-size:13.5px;color:var(--ink)}
+    .plist .c::before{display:none}
+    .plist .pd>.c:nth-child(1){grid-column:2;grid-row:1}
+    .plist .pd>.c:nth-child(2){grid-column:3;grid-row:1}
+    .plist .pd>.c:nth-child(3){grid-column:4;grid-row:1}
+    .plist .pf{grid-row:1;grid-column:5;font-size:16px}
+    .plist.d3 .prow{grid-template-columns:1fr 64px 84px 74px 82px 80px}
+    .plist.d3 .pf{grid-column:5}
+    .plist .pin{grid-row:1;grid-column:6;width:100%}
+    .plist .ph6{grid-column:6;text-align:right}
+    .plist.f2 .prow{grid-template-columns:1fr 86px 92px 92px;gap:0 8px}
+    .plist.f2 .pd{display:contents}
+    .plist.f2 .pd>.c:nth-child(1){grid-column:2;grid-row:1}
+    .plist.f2 .pin.v{grid-column:3;grid-row:1;width:100%}
+    .plist.f2 .pin.p{grid-column:4;grid-row:1;width:100%}
+    .plist.f2 .fh3{grid-column:3;text-align:right}
+    .plist.f2 .fh4{grid-column:4;text-align:right}
+    .plist .phead{display:grid;background:var(--petrol);border-bottom:0;padding:8px 12px}
+    .plist .phead .pn,.plist .phead .c,.plist .phead .pf{font-family:var(--sans);font-size:11px;
+      font-weight:600;color:#DCE5E2;background:none;padding:0;line-height:1.2}
+  }
+  .tablewrap{overflow-x:auto}
+  table.wide{min-width:520px}
+  th,td{padding:7px 8px;font-size:13.5px;text-align:right;border-bottom:1px solid var(--line-2)}
+  th{font-family:var(--sans);font-size:11px;font-weight:600;color:#DCE5E2;background:var(--petrol);
+    border-bottom:0;line-height:1.2;vertical-align:bottom}
+  th:first-child,td:first-child{text-align:left}
+  td.prod{font-size:13.5px;line-height:1.25}
+  td.make{font-weight:700;font-size:15px;background:var(--ochre-soft);font-family:var(--slab)}
+  tr.sub td{background:var(--line-2);font-weight:700;font-size:13px}
+  .zero{color:var(--mute)}
+
+  .note{font-size:12.5px;color:var(--mute);margin-top:7px;line-height:1.5}
+  .warn{background:#FBF0EC;border:1px solid #E4C4BB;border-radius:3px;padding:9px 11px;
+    font-size:13px;color:#6E2E22;margin-bottom:12px}
+  .ok{background:var(--ochre-soft);border:1px solid #E3CDA6;border-radius:3px;padding:9px 11px;
+    font-size:13px;margin-bottom:12px}
+  .field{margin-bottom:11px}
+  .field span{display:block;font-size:12.5px;color:var(--mute);margin-bottom:3px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
+  /* ---------- abas ---------- */
+  nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--panel);
+    border-top:1px solid var(--line);box-shadow:0 -1px 6px rgba(22,33,31,.07);
+    padding-bottom:env(safe-area-inset-bottom,0)}
+  nav button{flex:1;background:none;border:0;padding:9px 4px 11px;cursor:pointer;font-family:var(--sans);
+    font-size:11.5px;font-weight:600;color:var(--mute);border-top:2.5px solid transparent}
+  nav button b{display:block;font-family:var(--slab);font-size:15px;font-weight:600;line-height:1.2}
+  nav button.sel{color:var(--petrol);border-top-color:var(--ochre)}
+  @media (min-width:720px){
+    nav{position:static;box-shadow:none;border-top:0;border-bottom:1px solid var(--line);
+      max-width:900px;margin:0 auto;width:100%;background:var(--paper)}
+    nav button{flex:none;padding:11px 16px;border-top:0;border-bottom:2.5px solid transparent}
+    nav button.sel{border-bottom-color:var(--ochre)}
+    nav button b{display:inline;font-size:15px}
+    main{padding-bottom:30px}
+    .two{grid-template-columns:1fr 1fr 1fr}
+  }
+  #modal{position:fixed;inset:0;background:rgba(22,33,31,.5);display:none;align-items:center;
+    justify-content:center;padding:16px;z-index:20}
+  #modal.on{display:flex}
+  #modal .box{background:var(--panel);border-radius:4px;max-width:520px;width:100%;padding:16px;
+    max-height:88%;overflow:auto}
+  #modal h3{font-family:var(--slab);font-size:17px;font-weight:600;margin-bottom:6px}
+  #print{display:none}
+  @media print{
+    nav,.top,.tools,.weeknav,.days,#modal{display:none!important}
+    #app{background:#fff}
+    main{display:none}
+    #print{display:block;padding:0;font-family:var(--sans);color:#000}
+    #print h1{font-family:var(--slab);font-size:19px;margin-bottom:2px}
+    #print .m{font-size:12px;color:#444;margin-bottom:10px}
+    #print th{background:#24413B!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    #print td.make{background:#F7EBD7!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    #print td,#print th{border:.5px solid #999}
+    #print tr{page-break-inside:avoid}
+  }
+</style>
+
+<div id="app">
+  <div class="top">
+    <div class="row">
+      <div>
+        <h1>Programação de produção</h1>
+        <p id="topsub">espelhos e bandejas</p>
+      </div>
+      <div style="text-align:right">
+        <div class="savedot" id="savedot"></div>
+        <div id="perfilbox"></div>
+      </div>
+    </div>
+  </div>
+  <nav id="tabs"></nav>
+  <main id="view"></main>
+</div>
+<div id="print"></div>
+<div id="modal"><div class="box" id="modalbox"></div></div>
+
+<script>
+/* --- onde os dados ficam guardados ---------------------------------------
+   Dentro do Claude existe window.storage. Fora dele (site, celular, PWA)
+   usamos o armazenamento do próprio navegador, com a mesma interface.      */
+if(!window.storage){
+  const LS=window.localStorage;
+  window.storage={
+    get:async k=>{const v=LS.getItem(k);if(v===null)throw new Error('sem chave: '+k);
+      return {key:k,value:v,shared:false}},
+    set:async(k,v)=>{LS.setItem(k,v);return {key:k,value:v,shared:false}},
+    delete:async k=>{LS.removeItem(k);return {key:k,deleted:true,shared:false}},
+    list:async p=>{const ks=[];for(let i=0;i<LS.length;i++){const k=LS.key(i);
+      if(!p||k.startsWith(p))ks.push(k)}return {keys:ks,prefix:p,shared:false}}
+  };
+}
+
+const SEED = {"produtos":[{"id":"organico60x40ccosturamarrom","nome":"Orgânico 60x40 C/Costura - Marrom","grupo":"C"},{"id":"organico60x40ccosturapreto","nome":"Orgânico 60x40 C/Costura - Preto","grupo":"C"},{"id":"organico80x60ccosturamarrom","nome":"Orgânico 80x60 C/Costura - Marrom","grupo":"C"},{"id":"organico80x60ccosturapreto","nome":"Orgânico 80x60 C/Costura - Preto","grupo":"C"},{"id":"effect70x50ccosturamarrom","nome":"Effect 70x50 C/Costura - Marrom","grupo":"C"},{"id":"effect70x50ccosturapreto","nome":"Effect 70x50 C/Costura - Preto","grupo":"C"},{"id":"redondo50cmccosturamarrom","nome":"Redondo 50cm - C/Costura - Marrom","grupo":"C"},{"id":"redondo50cmccosturapreto","nome":"Redondo 50cm - C/Costura - Preto","grupo":"C"},{"id":"organico60x40scosturamarrom","nome":"Orgânico 60x40 S/Costura - Marrom","grupo":"S"},{"id":"organico60x40scosturapreto","nome":"Orgânico 60x40 S/Costura - Preto","grupo":"S"},{"id":"organico60x40scosturabranco","nome":"Orgânico 60x40 S/Costura - Branco","grupo":"S"},{"id":"effect60x40scosturamarrom","nome":"Effect 60x40 S/Costura - Marrom","grupo":"S"},{"id":"effect60x40scosturapreto","nome":"Effect 60x40 S/Costura - Preto","grupo":"S"},{"id":"effect60x40scosturabranco","nome":"Effect 60x40 S/Costura - Branco","grupo":"S"},{"id":"lumina60x40scosturamarrom","nome":"Lumina 60x40 S/Costura - Marrom","grupo":"S"},{"id":"lumina60x40scosturapreto","nome":"Lumina 60x40 S/Costura - Preto","grupo":"S"},{"id":"lumina60x40scosturabranco","nome":"Lumina 60x40 S/Costura - Branco","grupo":"S"},{"id":"empire60x40scosturamarrom","nome":"Empire 60x40 S/Costura - Marrom","grupo":"S"},{"id":"empire60x40scosturapreto","nome":"Empire 60x40 S/Costura - Preto","grupo":"S"},{"id":"empire60x40scosturabranco","nome":"Empire 60x40 S/Costura - Branco","grupo":"S"},{"id":"effect70x50scosturamarron","nome":"Effect 70x50 S/Costura-Marron","grupo":"S"},{"id":"effect70x50scosturapreto","nome":"Effect 70x50 S/Costura-Preto","grupo":"S"},{"id":"lumina70x50scosturamarrom","nome":"Lumina 70x50 S/Costura- Marrom","grupo":"S"},{"id":"lumina70x50scosturapreto","nome":"Lumina 70x50 S/Costura- Preto","grupo":"S"},{"id":"lumina70x50scosturabranco","nome":"Lumina 70x50 S/Costura- Branco","grupo":"S"},{"id":"meialua60x30scosturamarrom","nome":"Meia Lua 60x30 S/Costura - Marrom","grupo":"S"},{"id":"meialua60x30scosturapreto","nome":"Meia Lua 60x30 S/Costura - Preto","grupo":"S"},{"id":"feijao60x40scosturamarrom","nome":"FEIJAO 60x40 S/Costura - Marrom","grupo":"S"},{"id":"feijao60x40scosturapreto","nome":"FEIJAO 60x40 S/Costura - Preto","grupo":"S"},{"id":"feijao60x40scosturabranco","nome":"FEIJAO 60x40 S/Costura - Branco","grupo":"S"},{"id":"urso115x43scosturamarrom","nome":"URSO 1,15X43 S/Costura - Marrom","grupo":"S"},{"id":"bandejaeffect38x26scmarrom","nome":"BANDEJA Effect 38x26 S/C - Marrom","grupo":"S"},{"id":"bandejaeffect38x26scpreto","nome":"BANDEJA Effect 38x26 S/C - Preto","grupo":"S"},{"id":"bandejaeffect38x26scbranco","nome":"BANDEJA Effect 38x26 S/C - Branco","grupo":"S"},{"id":"bandejaeffect38x26strassprata","nome":"BANDEJA Effect 38x26 - STRASS PRATA","grupo":"S"},{"id":"bandejaeffect38x26strasspreto","nome":"BANDEJA Effect 38x26 - STRASS PRETO","grupo":"S"},{"id":"bandejaeffect38x26strassdourado","nome":"BANDEJA Effect 38x26 - STRASS DOURADO","grupo":"S"},{"id":"bandejaempire38x26scmarrom","nome":"Bandeja EMPIRE 38X26  S/C-MARROM","grupo":"S"},{"id":"bandejaempire38x26scpreto","nome":"Bandeja EMPIRE 38X26  S/C-PRETO","grupo":"S"},{"id":"bandejaempire38x26scbranco","nome":"Bandeja EMPIRE 38X26  S/C-BRANCO","grupo":"S"},{"id":"smolduraeffect60x40cfita","nome":"S/MOLDURA - Effect 60x40 -  C/Fita","grupo":"S"},{"id":"smolduraeffect60x40csuporte","nome":"S/MOLDURA - Effect 60x40-C/Suporte","grupo":"S"},{"id":"smolduraorganico60x40cfita","nome":"S/MOLDURA - Orgânico  60x40  -  C/Fita","grupo":"S"},{"id":"smolduraorganico60x40csuporte","nome":"S/MOLDURA - Orgânico 60x40 -C/Suporte","grupo":"S"},{"id":"smolduraeffect70x50cfita","nome":"S/MOLDURA - Effect  70x50 -  C/Fita","grupo":"S"},{"id":"smolduraeffect70x50csuporte","nome":"S/MOLDURA - Effect  70x50 -  C/Suporte","grupo":"S"},{"id":"smolduraempire60x40cfita","nome":"S/MOLDURA - Empire 60x40 - C/Fita","grupo":"S"},{"id":"smolduraempire60x40csuporte","nome":"S/MOLDURA - Empire 60x40 - C/suporte","grupo":"S"},{"id":"smolduralumina60x40cfita","nome":"S/MOLDURA - Lumina 60x40 - C/Fita","grupo":"S"},{"id":"smolduralumina60x40csuporte","nome":"S/MOLDURA - Lumina 60x40 - C/suporte","grupo":"S"},{"id":"smolduraredondo50cfita","nome":"S/MOLDURA - Redondo 50 - C/Fita","grupo":"S"},{"id":"smolduraredondo40cfita","nome":"S/MOLDURA - Redondo 40 - C/Fita","grupo":"S"},{"id":"smolduraredondo30cfita","nome":"S/MOLDURA - Redondo 30 - C/Fita","grupo":"S"}],"hist":{"2026-06":{"organico60x40ccosturamarrom":1157,"organico60x40ccosturapreto":131,"organico80x60ccosturamarrom":136,"organico80x60ccosturapreto":41,"effect70x50ccosturamarrom":723,"effect70x50ccosturapreto":180,"redondo50cmccosturamarrom":19,"redondo50cmccosturapreto":2,"organico60x40scosturamarrom":128,"organico60x40scosturapreto":23,"organico60x40scosturabranco":7,"effect60x40scosturamarrom":2015,"effect60x40scosturapreto":832,"effect60x40scosturabranco":245,"empire60x40scosturamarrom":225,"empire60x40scosturapreto":28,"empire60x40scosturabranco":1,"effect70x50scosturamarron":158,"effect70x50scosturapreto":21,"meialua60x30scosturamarrom":102,"meialua60x30scosturapreto":16,"bandejaeffect38x26scmarrom":989,"bandejaeffect38x26scpreto":142,"bandejaeffect38x26scbranco":71,"smolduraeffect60x40cfita":78,"smolduraeffect60x40csuporte":95,"smolduraorganico60x40cfita":125,"smolduraorganico60x40csuporte":5,"smolduraeffect70x50cfita":4,"smolduraredondo50cfita":10,"smolduraredondo40cfita":48,"smolduraredondo30cfita":11},"2026-07":{"organico60x40ccosturamarrom":940,"organico60x40ccosturapreto":176,"organico80x60ccosturamarrom":99,"organico80x60ccosturapreto":48,"effect70x50ccosturamarrom":593,"effect70x50ccosturapreto":115,"redondo50cmccosturamarrom":8,"redondo50cmccosturapreto":3,"organico60x40scosturamarrom":86,"organico60x40scosturapreto":2,"organico60x40scosturabranco":4,"effect60x40scosturamarrom":2131,"effect60x40scosturapreto":813,"effect60x40scosturabranco":262,"empire60x40scosturamarrom":349,"empire60x40scosturapreto":55,"empire60x40scosturabranco":5,"effect70x50scosturamarron":133,"effect70x50scosturapreto":22,"meialua60x30scosturamarrom":99,"meialua60x30scosturapreto":15,"bandejaeffect38x26scmarrom":1546,"bandejaeffect38x26scpreto":273,"bandejaeffect38x26scbranco":162,"bandejaeffect38x26strassprata":4,"bandejaeffect38x26strasspreto":1,"bandejaeffect38x26strassdourado":4,"bandejaempire38x26scmarrom":3,"smolduraeffect60x40cfita":57,"smolduraeffect60x40csuporte":228,"smolduraorganico60x40cfita":231,"smolduraorganico60x40csuporte":20,"smolduraredondo50cfita":11,"smolduraredondo40cfita":18},"2026-08":{"organico60x40ccosturamarrom":925,"organico60x40ccosturapreto":80,"organico80x60ccosturamarrom":114,"organico80x60ccosturapreto":72,"effect70x50ccosturamarrom":632,"effect70x50ccosturapreto":75,"redondo50cmccosturamarrom":1,"redondo50cmccosturapreto":2,"organico60x40scosturamarrom":76,"organico60x40scosturapreto":11,"organico60x40scosturabranco":2,"effect60x40scosturamarrom":2305,"effect60x40scosturapreto":746,"effect60x40scosturabranco":199,"empire60x40scosturamarrom":270,"empire60x40scosturapreto":43,"empire60x40scosturabranco":2,"effect70x50scosturamarron":188,"effect70x50scosturapreto":28,"meialua60x30scosturamarrom":100,"meialua60x30scosturapreto":15,"bandejaeffect38x26scmarrom":1600,"bandejaeffect38x26scpreto":275,"bandejaeffect38x26scbranco":135,"bandejaeffect38x26strassprata":14,"bandejaeffect38x26strasspreto":2,"bandejaeffect38x26strassdourado":20,"bandejaempire38x26scmarrom":9,"bandejaempire38x26scpreto":6,"smolduraeffect60x40cfita":26,"smolduraeffect60x40csuporte":126,"smolduraorganico60x40cfita":229,"smolduraorganico60x40csuporte":7,"smolduraeffect70x50cfita":1,"smolduraredondo50cfita":25,"smolduraredondo40cfita":16,"smolduraredondo30cfita":2}},"estoque":{"organico60x40ccosturamarrom":35,"organico60x40ccosturapreto":14,"organico80x60ccosturamarrom":19,"organico80x60ccosturapreto":9,"effect70x50ccosturamarrom":10,"effect70x50ccosturapreto":4,"redondo50cmccosturapreto":1,"organico60x40scosturamarrom":12,"organico60x40scosturapreto":14,"effect60x40scosturamarrom":107,"effect60x40scosturapreto":74,"effect60x40scosturabranco":16,"empire60x40scosturamarrom":20,"empire60x40scosturapreto":9,"effect70x50scosturamarron":19,"effect70x50scosturapreto":8,"meialua60x30scosturamarrom":8,"meialua60x30scosturapreto":6,"bandejaeffect38x26scmarrom":72,"bandejaeffect38x26scpreto":12,"bandejaeffect38x26scbranco":4,"bandejaeffect38x26strassdourado":1,"smolduraeffect60x40cfita":34,"smolduraeffect60x40csuporte":16,"smolduraorganico60x40cfita":27,"smolduraredondo50cfita":9,"smolduraredondo40cfita":18}};
+
+/* ------------------------------------------------------------------ estado */
+let S = {produtos:SEED.produtos.slice(), vendas:{}, producao:{}, ordens:{},
+         estoque:Object.assign({},SEED.estoque),
+         cfg:{cobertura:10, dias:{}, contagem:'', capacidade:0, lote:5}, extras:[],
+         acesso:{gestor:'',producao:''}, autor:{}};
+let view='dia', semana=null, dia=null, filtro='', mesAlvo=null, dataDia=null, storageOK=true;
+let modoDia='ordem', fecharTodos=false, recado='';
+let perfil=null, tentativa=null, erroPin='';
+const ehGestor = () => perfil==='gestor';
+const PERFIS = {gestor:'Gestor', producao:'Produção'};
+const HOJE = new Date();
+
+const KEY_EST='esp:estoque', KEY_CFG='esp:cfg', KEY_PROD='esp:produtos';
+const KEY_ACC='esp:acesso', KEY_PERFIL='esp:perfil';
+const nf = new Intl.NumberFormat('pt-BR');
+const DIAS = ['dom','seg','ter','qua','qui','sex','sáb'];
+const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const MESES_C = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+
+const fmt = n => (n===null||n===undefined||n===0||isNaN(n)) ? '–' : nf.format(Math.round(n));
+const fmt0 = n => nf.format(Math.round(n||0));
+const iso = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const mesDe = s => s.slice(0,7);
+const chave = s => (s||'').toLowerCase()
+  .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+  .replace(/modulra|modura/g,'moldura').replace(/bandela/g,'bandeja').replace(/marron/g,'marrom')
+  .replace(/[^a-z0-9]/g,'');
+function segunda(d){const x=new Date(d);const w=(x.getDay()+6)%7;x.setDate(x.getDate()-w);x.setHours(12,0,0,0);return x}
+function addDias(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
+const UTIL_MAX=5;   /* semana de trabalho: segunda (1) a sexta (5) */
+const ehUtil=d=>d.getDay()>=1&&d.getDay()<=UTIL_MAX;
+function diasUteisMes(y,m){let c=0;const u=new Date(y,m+1,0).getDate();
+  for(let i=1;i<=u;i++){const w=new Date(y,m,i).getDay();if(w>=1&&w<=UTIL_MAX)c++}return c}
+function diasRestantesMes(y,m){let c=0;const u=new Date(y,m+1,0).getDate();
+  for(let i=1;i<=u;i++){const d=new Date(y,m,i);d.setHours(12,0,0,0);
+    if(d>=new Date(HOJE.getFullYear(),HOJE.getMonth(),HOJE.getDate()) && ehUtil(d))c++}return c}
+function mesFechado(mes){const [y,m]=mes.split('-').map(Number);return new Date(y,m,0,23,59) < HOJE}
+const mesNome = mes => {const [y,m]=mes.split('-').map(Number);return MESES[m-1]+'/'+y};
+const mesCurto = mes => {const [y,m]=mes.split('-').map(Number);return MESES_C[m-1]+'/'+String(y).slice(2)};
+
+/* ------------------------------------------------------------- persistência */
+async function sGet(k){try{const r=await window.storage.get(k);return r?JSON.parse(r.value):null}catch(e){return null}}
+async function sSet(k,v){try{const r=await window.storage.set(k,JSON.stringify(v));if(!r)throw 0;return true}
+  catch(e){storageOK=false;render();return false}}
+let timers={};
+function salvarDepois(k,fn){clearTimeout(timers[k]);marcar('salvando…');
+  timers[k]=setTimeout(async()=>{const ok=await fn();marcar(ok?'salvo':'não salvou')},500)}
+function marcar(t){const el=document.getElementById('savedot');if(!el)return;
+  el.textContent=t;el.className='savedot'+(t==='salvando…'?' on':'');
+  if(t==='salvo')setTimeout(()=>{if(el.textContent==='salvo')el.textContent=''},1800)}
+
+async function carregar(){
+  const [est,cfg,extras,acc,pf]=await Promise.all([sGet(KEY_EST),sGet(KEY_CFG),sGet(KEY_PROD),
+    sGet(KEY_ACC),sGet(KEY_PERFIL)]);
+  if(acc)S.acesso=Object.assign(S.acesso,acc);
+  perfil = S.acesso.gestor ? (pf&&PERFIS[pf]?pf:null) : 'gestor';
+  S.extras = extras||[];
+  S.produtos = SEED.produtos.concat(S.extras);
+  S.estoque = est || Object.assign({},SEED.estoque);
+  if(cfg) S.cfg = Object.assign(S.cfg,cfg);
+  try{
+    const l = await window.storage.list('esp:');
+    if(l && l.keys) for(const k of l.keys){
+      if(k.startsWith('esp:vendas:')){const v=await sGet(k); if(v) Object.assign(S.vendas,v)}
+      if(k.startsWith('esp:producao:')){const v=await sGet(k); if(v) Object.assign(S.producao,v)}
+      if(k.startsWith('esp:ordem:')){const v=await sGet(k); if(v) Object.assign(S.ordens,v)}
+      if(k.startsWith('esp:autor:')){const v=await sGet(k); if(v) Object.assign(S.autor,v)}
+    }
+  }catch(e){}
+}
+
+/* ------------------------------------------------------------------- vendas */
+function vendaDia(d,pid){return (S.vendas[d]||{})[pid]||0}
+function setVenda(d,pid,q){
+  if(!S.vendas[d])S.vendas[d]={};
+  if(q>0)S.vendas[d][pid]=q; else delete S.vendas[d][pid];
+  const mes=mesDe(d);
+  salvarDepois('v'+mes,()=>{
+    const bloco={};for(const k in S.vendas){if(mesDe(k)===mes&&Object.keys(S.vendas[k]).length)bloco[k]=S.vendas[k]}
+    return sSet('esp:vendas:'+mes,bloco);
+  });
+}
+function totalDia(d){return Object.values(S.vendas[d]||{}).reduce((a,b)=>a+b,0)}
+function prodDia(d,pid){return (S.producao[d]||{})[pid]||0}
+function totalProdDia(d){return Object.values(S.producao[d]||{}).reduce((a,b)=>a+b,0)}
+function setProd(d,pid,q){
+  const mesA=mesDe(d);
+  if(!S.autor[d])S.autor[d]={};
+  if(q>0)S.autor[d][pid]=perfil==='producao'?'P':'G'; else delete S.autor[d][pid];
+  salvarDepois('a'+mesA,()=>{
+    const b={};for(const k in S.autor){if(mesDe(k)===mesA&&Object.keys(S.autor[k]).length)b[k]=S.autor[k]}
+    return sSet('esp:autor:'+mesA,b);
+  });
+  if(!S.producao[d])S.producao[d]={};
+  if(q>0)S.producao[d][pid]=q; else delete S.producao[d][pid];
+  const mes=mesDe(d);
+  salvarDepois('p'+mes,()=>{
+    const bloco={};for(const k in S.producao){if(mesDe(k)===mes&&Object.keys(S.producao[k]).length)bloco[k]=S.producao[k]}
+    return sSet('esp:producao:'+mes,bloco);
+  });
+}
+function ordemDe(d){return S.ordens[d]||null}
+function setOrdem(d,obj){
+  S.ordens[d]=obj;const mes=mesDe(d);
+  salvarDepois('o'+mes,()=>{
+    const b={};for(const k in S.ordens){if(mesDe(k)===mes&&Object.keys(S.ordens[k]).length)b[k]=S.ordens[k]}
+    return sSet('esp:ordem:'+mes,b);
+  });
+}
+function emitirOrdem(d){
+  const P=planoDia(d),obj={};
+  P.plano.forEach(i=>obj[i.id]=i.qtd);
+  setOrdem(d,obj);return P;
+}
+function itensOrdem(d){
+  const P=planoDia(d),sal=ordemDe(d);
+  if(!sal)return {emitida:false,itens:P.plano,P};
+  const mapa={};P.todos.forEach(i=>mapa[i.id]=i);
+  const itens=Object.keys(sal).filter(id=>sal[id]>0).map(id=>{
+    const b=mapa[id]||S.produtos.find(x=>x.id===id)||{id,nome:id,est:0,nec:0,diaria:0,cobDias:null};
+    return {...b,qtd:sal[id]};
+  }).sort((a,b)=>b.qtd-a.qtd);
+  return {emitida:true,itens,P};
+}
+function dataBase(){return S.cfg.contagem||'2026-08-31'}
+function estoqueEm(pid,ate){
+  const b=dataBase();let v=S.estoque[pid]||0;
+  for(const d in S.producao)if(d>b&&d<=ate)v+=S.producao[d][pid]||0;
+  for(const d in S.vendas)if(d>b&&d<=ate)v-=S.vendas[d][pid]||0;
+  return v;
+}
+const estoqueHoje = pid => estoqueEm(pid,iso(HOJE));
+function proxDiaUtil(from){let d=addDias(from,1);while(!ehUtil(d))d=addDias(d,1);return d}
+function diasUteisDe(dIso){
+  const d=new Date(dIso+'T12:00:00'),y=d.getFullYear(),m=d.getMonth();
+  let c=0;const u=new Date(y,m+1,0).getDate();
+  for(let i=d.getDate();i<=u;i++){const w=new Date(y,m,i).getDay();if(w>=1&&w<=UTIL_MAX)c++}
+  return c;
+}
+function capacidadeSugerida(){
+  const ms=mesesComDados().filter(mesFechado).slice(-3);
+  if(!ms.length)return 300;
+  let t=0,du=0;
+  ms.forEach(m=>{const [y,mm]=m.split('-').map(Number);t+=totalMes(m);du+=diasUteisMes(y,mm-1)});
+  return du?Math.round(t/du):300;
+}
+const capacidade = () => S.cfg.capacidade||capacidadeSugerida();
+function lancadoNoMes(mes){return Object.keys(S.vendas).some(d=>mesDe(d)===mes&&Object.keys(S.vendas[d]).length)}
+function totalMesProduto(mes,pid){
+  if(lancadoNoMes(mes)){let t=0;for(const d in S.vendas)if(mesDe(d)===mes)t+=S.vendas[d][pid]||0;return t}
+  if(SEED.hist[mes])return SEED.hist[mes][pid]||0;
+  return null;
+}
+function mesTemDados(mes){return lancadoNoMes(mes)||!!SEED.hist[mes]}
+function totalMes(mes){return S.produtos.reduce((a,p)=>a+(totalMesProduto(mes,p.id)||0),0)}
+function mesesComDados(){
+  const set=new Set(Object.keys(SEED.hist));
+  for(const d in S.vendas)if(Object.keys(S.vendas[d]).length)set.add(mesDe(d));
+  return [...set].sort();
+}
+
+/* ------------------------------------------------------------- programação */
+function baseHistorica(alvo){
+  const out=[];let [y,m]=alvo.split('-').map(Number);
+  for(let i=0;i<24&&out.length<3;i++){
+    m--;if(m===0){m=12;y--}
+    const k=y+'-'+String(m).padStart(2,'0');
+    if(mesTemDados(k)&&mesFechado(k))out.push(k);
+  }
+  return out;
+}
+function programacao(alvo){
+  const base=baseHistorica(alvo);
+  const [y,m]=alvo.split('-').map(Number);
+  const duTot=S.cfg.dias[alvo]||diasUteisMes(y,m-1);
+  const atual = alvo === iso(HOJE).slice(0,7);
+  const duRest = atual ? Math.min(duTot,diasRestantesMes(y,m-1)) : duTot;
+  const cob=S.cfg.cobertura;
+  const itens=S.produtos.map(p=>{
+    const vals=base.map(k=>totalMesProduto(k,p.id)).filter(v=>v!==null);
+    const prev=vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):0;
+    const seg=duTot?Math.round(prev/duTot*cob):0;
+    const est=estoqueHoje(p.id);
+    const prevRest=Math.round(prev*(duRest/(duTot||1)));
+    return {...p,prev,prevRest,seg,est,fazer:Math.max(0,prevRest+seg-est),semBase:vals.length===0};
+  });
+  return {base,itens,duTot,duRest,atual,total:itens.reduce((a,i)=>a+i.fazer,0)};
+}
+
+function planoDia(dIso){
+  const mes=mesDe(dIso), [y,m]=mes.split('-').map(Number);
+  const duTot=S.cfg.dias[mes]||diasUteisMes(y,m-1);
+  const duRest=Math.max(1,diasUteisDe(dIso));
+  const cobMeta=S.cfg.cobertura, cap=capacidade(), lote=Math.max(1,S.cfg.lote||1);
+  const ant=iso(addDias(new Date(dIso+'T12:00:00'),-1));
+  const base=baseHistorica(mes);
+  const arred=q=>lote>1?Math.round(q/lote)*lote:Math.round(q);
+  const itens=S.produtos.map(p=>{
+    const vals=base.map(k=>totalMesProduto(k,p.id)).filter(v=>v!==null);
+    const prevMes=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:0;
+    const diaria=duTot?prevMes/duTot:0;
+    const est=estoqueEm(p.id,ant);
+    const seg=Math.round(diaria*cobMeta);
+    const nec=Math.max(0,Math.round(diaria*duRest)+seg-est);
+    return {...p,prevMes,diaria,est,seg,nec,cobDias:diaria>0?est/diaria:null};
+  });
+  const cands=itens.filter(i=>i.nec>0);
+  const necMes=cands.reduce((a,i)=>a+i.nec,0);
+  const alvo={};let usado=0;
+  const posto=i=>alvo[i.id]||0;
+
+  /* 1) primeiro quem corre risco de parar: repõe até dois dias de venda */
+  cands.filter(i=>i.diaria>=1&&i.est<i.diaria*2)
+       .sort((a,b)=>a.cobDias-b.cobDias)
+       .forEach(i=>{
+    if(usado>=cap)return;
+    const q=Math.min(i.nec,Math.max(lote,arred(i.diaria*2-i.est)),cap-usado);
+    if(q>0){alvo[i.id]=posto(i)+q;usado+=q}
+  });
+
+  /* 2) o resto da capacidade vai no ritmo do mês, proporcional a cada produto */
+  let livre=cap-usado;
+  const ritmo=i=>Math.max(0,(i.nec-posto(i))/duRest);
+  const soma=cands.reduce((a,i)=>a+ritmo(i),0);
+  const f=soma>0?Math.min(1,livre/soma):0;
+  cands.slice().sort((a,b)=>ritmo(b)-ritmo(a)).forEach(i=>{
+    if(livre<=0)return;
+    const q=Math.min(arred(ritmo(i)*f),i.nec-posto(i),livre);
+    if(q>0){alvo[i.id]=posto(i)+q;usado+=q;livre-=q}
+  });
+
+  /* 3) se sobrou capacidade, fecha os lotes pequenos que ainda faltam */
+  cands.slice().sort((a,b)=>(a.nec-posto(a))-(b.nec-posto(b))).forEach(i=>{
+    if(livre<=0)return;
+    const falta=i.nec-posto(i);
+    if(falta>0&&falta<=lote*2&&falta<=livre){alvo[i.id]=posto(i)+falta;usado+=falta;livre-=falta}
+  });
+
+  const plano=cands.filter(i=>posto(i)>0).map(i=>({...i,qtd:posto(i)})).sort((a,b)=>b.qtd-a.qtd);
+  const fora=cands.filter(i=>posto(i)===0).sort((a,b)=>b.nec-a.nec);
+  const precisa=Math.round(necMes/duRest);
+  return {dIso,plano,fora,todos:itens,cap,usado,duRest,base,necMes,precisa,
+    falta:precisa>cap?Math.round((precisa-cap)*duRest):0,
+    urgentes:plano.filter(i=>i.cobDias!==null&&i.cobDias<cobMeta).length};
+}
+
+function vTrava(){
+  if(tentativa){
+    return `<section class="trava">
+      <h2>${PERFIS[tentativa]}</h2>
+      <p class="sub" style="margin-bottom:12px">Digite o PIN para entrar.</p>
+      <input type="password" id="pin" inputmode="numeric" autocomplete="off" placeholder="PIN">
+      ${erroPin?`<p class="erro">${erroPin}</p>`:''}
+      <button class="btn" data-act="entrar">Entrar</button>
+      <button class="btn ghost" data-act="voltarperfil">Voltar</button>
+    </section>`;
+  }
+  return `<section class="trava">
+    <h2>Quem está usando</h2>
+    <p class="sub">O acesso da produção mostra só a ordem do dia e o registro do que foi produzido.</p>
+    <button class="btn ghost" data-perfil="producao">Produção</button>
+    <button class="btn" data-perfil="gestor">Gestor</button>
+  </section>`;
+}
+
+/* --------------------------------------------------------------------- UI */
+const TABS=[['dia','Dia'],['vendas','Semana'],['estoque','Estoque'],['prog','Mês'],['dados','Dados']];
+function render(){
+  const tabs=document.getElementById('tabs');
+  const el=document.getElementById('view');
+  const dot=document.getElementById('savedot');
+  const pbox=document.getElementById('perfilbox');
+  if(!perfil){
+    tabs.innerHTML='';el.innerHTML=vTrava();
+    document.getElementById('topsub').textContent='acesso ao programa';
+    if(dot)dot.innerHTML='';if(pbox)pbox.innerHTML='';
+    const i=document.getElementById('pin');if(i)i.focus();
+    return;
+  }
+  if(pbox)pbox.innerHTML=S.acesso.gestor?
+    `<button class="tprofile" data-act="trocarperfil">${PERFIS[perfil]} · trocar</button>`:'';
+  const libera=ehGestor()?TABS:TABS.filter(([k])=>k==='dia');
+  if(!libera.some(([k])=>k===view))view='dia';
+  tabs.innerHTML=libera.map(([k,l])=>
+    `<button data-tab="${k}" class="${view===k?'sel':''}"><b>${l}</b></button>`).join('');
+  el.innerHTML=(view==='dia'?vDia():view==='vendas'?vVendas():view==='estoque'?vEstoque()
+    :view==='prog'?vProg():vDados());
+  const sub={dia:modoDia==='fechar'?'fechamento do dia':'ordem de produção do dia',
+    vendas:'conferência e correção da semana',
+    estoque:'contagem em estoque',prog:'quanto produzir no mês',
+    dados:'histórico, produtos, acessos e cópia de segurança'}[view];
+  document.getElementById('topsub').textContent=sub||'espelhos e bandejas';
+  if(!storageOK) el.insertAdjacentHTML('afterbegin',
+    `<div class="warn">Os dados não estão sendo salvos neste momento. Vá em Dados e baixe uma cópia antes de fechar, para não perder o lançamento.</div>`);
+}
+function lista(valor, onKey, hint){
+  let h='',g=null;
+  const f=chave(filtro);
+  for(const p of S.produtos){
+    if(f&&!chave(p.nome).includes(f))continue;
+    if(p.grupo!==g){g=p.grupo;h+=`<div class="grp">${g==='C'?'com costura':'sem costura'}</div>`}
+    const v=valor(p);
+    h+=`<div class="item"><label for="i_${p.id}">${p.nome}${hint?`<span class="hint">${hint(p)}</span>`:''}</label>
+      <input class="qty${v?' has':''}" id="i_${p.id}" data-pid="${p.id}" data-k="${onKey}"
+        type="number" inputmode="numeric" min="0" step="1" value="${v||''}" placeholder="0"></div>`;
+  }
+  if(!h)h='<div class="pad sub">Nenhum produto com esse nome.</div>';
+  return `<div class="panel">${h}</div>`;
+}
+
+/* ------------------------------------------------------------ aba: dia */
+function vDia(){
+  const d=new Date(dataDia+'T12:00:00');
+  const rot=`${DIAS[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]}`;
+  const ehHoje=dataDia===iso(HOJE);
+  if(!ehGestor())modoDia='ordem';
+  const nav=`<div class="weeknav">
+      <button class="arrow" data-dnav="-1" aria-label="Dia anterior">‹</button>
+      <span class="lbl">${rot}${ehHoje?' · hoje':''}</span>
+      <button class="arrow" data-dnav="1" aria-label="Próximo dia">›</button>
+    </div>
+    ${ehGestor()?`<div class="seg">
+      <button data-modo="ordem" class="${modoDia==='ordem'?'sel':''}">Ordem de produção</button>
+      <button data-modo="fechar" class="${modoDia==='fechar'?'sel':''}">Fechar o dia</button>
+    </div>`:''}`;
+  const msg=recado?`<div class="ok">${recado}</div>`:'';
+  return `<section>${nav}${msg}${modoDia==='fechar'?dFechar():dOrdem()}</section>`;
+}
+
+function dOrdem(){
+  const O=itensOrdem(dataDia), P=O.P;
+  const total=O.itens.reduce((a,i)=>a+i.qtd,0);
+  const prodTot=totalProdDia(dataDia);
+  let aviso='';
+  if(!ehGestor())aviso='';
+  else if(!P.base.length)aviso=`<div class="warn">Sem mês fechado de vendas, não há como calcular o dia. Lance um mês completo na aba Semana.</div>`;
+  else if(P.falta)aviso=`<div class="warn">O mês pede ${fmt0(P.precisa)} peças por dia útil e a capacidade informada é ${fmt0(P.cap)}.
+    Mantendo esse ritmo, ${fmt0(P.falta)} peças ficam para trás até o fim do mês — vale rever a capacidade,
+    o estoque de segurança ou aceitar a folga em alguns itens.</div>`;
+  let rows='';
+  for(const i of O.itens){
+    const c=i.cobDias;
+    const tag=c===null||c===undefined?'':c<1?`<em class="tag late">estoque zerado</em>`
+      :c<S.cfg.cobertura?`<em class="tag">${Math.floor(c)} dia${Math.floor(c)===1?'':'s'} de estoque</em>`:'';
+    const fe=prodDia(dataDia,i.id);
+    rows+=`<div class="prow"><div class="pn">${i.nome}${ehGestor()?tag:''}</div>
+      <div class="pd">${ehGestor()?`<span class="c" data-l="estoque">${fmt(i.est)}</span>
+      <span class="c" data-l="vende/dia">${i.diaria<1?i.diaria.toFixed(1).replace('.',','):fmt0(i.diaria)}</span>
+      <span class="c" data-l="falta no mês">${fmt(i.nec)}</span>`:''}</div>
+      <span class="pf">${fmt0(i.qtd)}</span>
+      <input class="pin${fe?' has':''}" data-pid="${i.id}" data-k="prod" type="number"
+        inputmode="numeric" min="0" step="1" value="${fe||''}" placeholder="0" aria-label="Produzido"></div>`;
+  }
+  const forats=(ehGestor()&&P.fora.length)?`<p class="note">Não entram neste dia (ficam para os próximos):
+    ${P.fora.slice(0,12).map(i=>i.nome+' ('+fmt0(i.nec)+')').join('; ')}${P.fora.length>12?' e mais '+(P.fora.length-12):''}.</p>`:'';
+  return `
+    ${aviso}
+    <div class="figures">
+      <div class="fig"><span>${(O.emitida||!ehGestor())?'a produzir no dia':'prévia da ordem'}</span>
+        <b>${fmt0(total)}<em>peças</em></b></div>
+      <div class="fig"><span>já produzido</span><b id="figprod">${fmt0(prodTot)}<em>peças</em></b></div>
+      <div class="fig"><span>falta</span><b id="figfalta" data-tot="${total}">${fmt0(Math.max(0,total-prodTot))}<em>peças</em></b></div>
+    </div>
+    <div class="panel plist d3">
+      <div class="prow phead"><div class="pn">Produto</div>
+        <div class="pd">${ehGestor()?`<span class="c">Estoque</span><span class="c">Vende/dia</span>
+        <span class="c">Falta no mês</span>`:''}</div><span class="pf">Produzir</span>
+        <span class="c ph6">Produzido</span></div>
+      ${rows||'<div class="pad sub">Nada a produzir neste dia com os números atuais.</div>'}
+    </div>
+    <div class="tools" style="margin-top:12px">
+      <button class="btn" data-act="imprimirdia">Imprimir ordem do dia</button>
+      ${ehGestor()?`<button class="btn ghost" data-act="reemitir">${O.emitida?'Recalcular a ordem':'Emitir esta ordem'}</button>`:''}
+    </div>
+    ${ehGestor()?`<div class="two" style="margin-top:12px">
+      <div class="field"><span>Capacidade do dia (peças)</span>
+        <input type="number" id="capac" min="1" value="${P.cap}"></div>
+      <div class="field"><span>Múltiplo de produção</span>
+        <input type="number" id="lote" min="1" value="${S.cfg.lote||1}"></div>
+    </div>`:''}
+    ${forats}
+    <p class="note">${ehGestor()
+      ? (O.emitida?'Esta ordem está guardada como foi emitida, então o que está na mão da fábrica não muda sozinho. Use “Recalcular” se quiser refazer com os números de agora.'
+        :'Esta é uma prévia: ela se recalcula sozinha conforme você lança vendas e produção. Ela vira ordem fixa quando você fecha o dia anterior ou clica em “Emitir esta ordem”.')
+        + ' A capacidade é dividida em três etapas: primeiro quem está a menos de dois dias de acabar o estoque, depois o ritmo necessário para fechar o mês, e por último os lotes pequenos que ainda faltam.'
+      : 'Anote na última coluna o que foi produzido de cada item, conforme for saindo. Os números salvam sozinhos.'}</p>`;
+}
+
+function dFechar(){
+  const O=itensOrdem(dataDia);
+  const ordem={};O.itens.forEach(i=>ordem[i.id]=i.qtd);
+  const f=chave(filtro);
+  let ids;
+  if(f) ids=S.produtos.filter(p=>chave(p.nome).includes(f)).map(p=>p.id);
+  else if(fecharTodos) ids=S.produtos.map(p=>p.id);
+  else{
+    const set=new Set(Object.keys(ordem));
+    Object.keys(S.vendas[dataDia]||{}).forEach(k=>set.add(k));
+    Object.keys(S.producao[dataDia]||{}).forEach(k=>set.add(k));
+    ids=S.produtos.filter(p=>set.has(p.id)).map(p=>p.id);
+  }
+  const vTot=totalDia(dataDia), pTot=totalProdDia(dataDia);
+  const oTot=Object.values(ordem).reduce((a,b)=>a+b,0);
+  let rows='';
+  for(const id of ids){
+    const p=S.produtos.find(x=>x.id===id);if(!p)continue;
+    const v=vendaDia(dataDia,id), q=prodDia(dataDia,id), o=ordem[id]||0;
+    const au=(S.autor[dataDia]||{})[id];
+    rows+=`<div class="prow"><div class="pn">${p.nome}${o?`<em class="tag">ordem ${fmt0(o)}</em>`:''}${au==='P'?`<em class="tag">lançado pela produção</em>`:''}</div>
+      <div class="pd"><span class="c" data-l="estoque">${fmt(estoqueEm(id,dataDia))}</span></div>
+      <input class="pin v${v?' has':''}" data-pid="${id}" data-k="vdia" type="number" inputmode="numeric"
+        min="0" step="1" value="${v||''}" placeholder="0" aria-label="Vendido">
+      <input class="pin p${q?' has':''}" data-pid="${id}" data-k="prod" type="number" inputmode="numeric"
+        min="0" step="1" value="${q||''}" placeholder="0" aria-label="Produzido"></div>`;
+  }
+  const prox=iso(proxDiaUtil(new Date(dataDia+'T12:00:00')));
+  const pd=new Date(prox+'T12:00:00');
+  return `
+    <div class="figures">
+      <div class="fig"><span>vendido no dia</span><b id="figv">${fmt0(vTot)}<em>peças</em></b></div>
+      <div class="fig"><span>produzido no dia</span><b id="figprod">${fmt0(pTot)}<em>peças</em></b></div>
+      <div class="fig"><span>ordem do dia</span><b>${fmt0(oTot)}<em>peças</em></b></div>
+    </div>
+    <div class="tools">
+      <input type="text" id="filtro" placeholder="Buscar outro produto" value="${filtro.replace(/"/g,'&quot;')}">
+      <button class="btn ghost" data-act="todosprod">${fecharTodos?'Só os do dia':'Todos'}</button>
+    </div>
+    <div class="panel plist f2">
+      <div class="prow phead"><div class="pn">Produto</div>
+        <div class="pd"><span class="c">Estoque</span></div>
+        <span class="c fh3">Vendido</span><span class="c fh4">Produzido</span></div>
+      ${rows||'<div class="pad sub">Nenhum produto na lista deste dia. Use a busca ou o botão Todos.</div>'}
+    </div>
+    <div class="tools" style="margin-top:14px">
+      <button class="btn" data-act="fechardia">Fechar o dia e gerar ${DIAS[pd.getDay()]} ${pd.getDate()}/${String(pd.getMonth()+1).padStart(2,'0')}</button>
+    </div>
+    <p class="note">A lista traz os produtos da ordem do dia mais qualquer um que já tenha lançamento.
+      Para um produto fora da lista, use a busca acima ou o botão Todos.
+      Ao fechar o dia, o estoque de cada item é recalculado (contagem + produzido − vendido)
+      e a ordem do dia seguinte é gerada e guardada.</p>`;
+}
+
+/* --------------------------------------------------------- aba: vendas */
+function vVendas(){
+  const ini=semana, fim=addDias(semana,4);
+  const rot=`${ini.getDate()} de ${MESES[ini.getMonth()]} a ${fim.getDate()} de ${MESES[fim.getMonth()]}`;
+  const hojeIso=iso(HOJE);
+  let chips='';
+  for(let i=0;i<5;i++){const d=addDias(semana,i),k=iso(d),t=totalDia(k);
+    chips+=`<button class="day${k===dia?' sel':''}${k===hojeIso?' today':''}" data-dia="${k}">
+      <i>${DIAS[d.getDay()]}</i><b>${String(d.getDate()).padStart(2,'0')}</b><u id="d_${k}">${t?fmt0(t):''}</u></button>`}
+  const tSem=[0,1,2,3,4].reduce((a,i)=>a+totalDia(iso(addDias(semana,i))),0);
+  const d=new Date(dia+'T12:00:00');
+  return `
+  <section>
+    <div class="weeknav">
+      <button class="arrow" data-sem="-1" aria-label="Semana anterior">‹</button>
+      <span class="lbl">${rot}</span>
+      <button class="arrow" data-sem="1" aria-label="Próxima semana">›</button>
+    </div>
+    <div class="days">${chips}</div>
+    <div class="figures">
+      <div class="fig"><span>${DIAS[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]}</span>
+        <b id="figdia">${fmt0(totalDia(dia))}<em>peças</em></b></div>
+      <div class="fig"><span>total da semana</span><b id="figsem">${fmt0(tSem)}<em>peças</em></b></div>
+    </div>
+    <div class="tools">
+      <input type="text" id="filtro" placeholder="Filtrar produto" value="${filtro.replace(/"/g,'&quot;')}">
+      <button class="btn ghost" data-act="colar">Colar do Excel</button>
+    </div>
+    ${lista(p=>vendaDia(dia,p.id),'venda')}
+    <p class="note">Digite o que foi vendido no dia selecionado. Cada número é salvo sozinho, sem botão de salvar.
+      Como a fábrica trabalha de segunda a sexta, o que for vendido no fim de semana entra na segunda.</p>
+  </section>`;
+}
+
+/* --------------------------------------------------------- aba: estoque */
+function vEstoque(){
+  const tot=S.produtos.reduce((a,p)=>a+(S.estoque[p.id]||0),0);
+  const hoje=S.produtos.reduce((a,p)=>a+estoqueHoje(p.id),0);
+  return `
+  <section>
+    <div class="figures">
+      <div class="fig"><span>estoque hoje</span><b>${fmt0(hoje)}<em>peças</em></b></div>
+      <div class="fig"><span>na contagem</span><b id="figest">${fmt0(tot)}<em>peças</em></b></div>
+      <div class="fig"><span>contado em</span><b style="font-size:17px">${S.cfg.contagem?S.cfg.contagem.split('-').reverse().join('/'):'—'}</b></div>
+    </div>
+    <div class="field"><span>Data da contagem</span>
+      <input type="date" id="dtcontagem" value="${S.cfg.contagem||''}"></div>
+    <div class="tools"><input type="text" id="filtro" placeholder="Filtrar produto" value="${filtro.replace(/"/g,'&quot;')}"></div>
+    ${lista(p=>S.estoque[p.id]||0,'estoque',p=>{
+      const h=estoqueHoje(p.id),b=S.estoque[p.id]||0;
+      return h===b?'':'hoje: '+fmt0(h)+(h<0?' (contagem atrasada)':'');
+    })}
+    <p class="note">Digite aqui a contagem física e a data em que ela foi feita. Do dia da contagem
+      para cá o app vai somando o que foi produzido e descontando o que foi vendido, então o
+      “estoque hoje” anda sozinho. Faça uma contagem nova quando quiser corrigir o rumo.</p>
+  </section>`;
+}
+
+/* ------------------------------------------------------ aba: programação */
+function opcoesMes(){
+  const out=[];const d=new Date(HOJE.getFullYear(),HOJE.getMonth(),1);
+  for(let i=0;i<13;i++){const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+    out.push(k);d.setMonth(d.getMonth()+1)}
+  return out;
+}
+function vProg(){
+  const P=programacao(mesAlvo);
+  const fazer=P.itens.filter(i=>i.fazer>0).sort((a,b)=>b.fazer-a.fazer);
+  const zero=P.itens.filter(i=>i.fazer===0);
+  const ritmo=P.duRest?Math.round(P.total/P.duRest):0;
+  let aviso='';
+  if(!P.base.length) aviso=`<div class="warn">Ainda não há mês fechado com vendas lançadas para calcular a previsão. Lance pelo menos um mês completo na aba Vendas.</div>`;
+  else if(P.base.length<3) aviso=`<div class="ok">Previsão calculada com ${P.base.length} mês${P.base.length>1?'es':''} de histórico (${P.base.map(mesCurto).join(', ')}). Fica mais firme quando houver três.</div>`;
+  const semBase=P.itens.filter(i=>i.semBase).length;
+
+  let rows='';
+  for(const i of fazer){
+    rows+=`<div class="prow"><div class="pn">${i.nome}</div>
+      <div class="pd"><span class="c" data-l="estoque">${fmt(i.est)}</span>
+      <span class="c" data-l="previsão">${fmt(i.prevRest)}</span>
+      <span class="c" data-l="segurança">${fmt(i.seg)}</span></div>
+      <span class="pf">${fmt0(i.fazer)}</span></div>`}
+  return `
+  <section>
+    <div class="two">
+      <div class="field"><span>Mês a programar</span>
+        <select id="mesalvo">${opcoesMes().map(k=>`<option value="${k}"${k===mesAlvo?' selected':''}>${mesNome(k)}</option>`).join('')}</select></div>
+      <div class="field"><span>Dias úteis no mês</span>
+        <input type="number" id="duteis" min="1" max="31" value="${P.duTot}"></div>
+      <div class="field"><span>Estoque de segurança (dias)</span>
+        <input type="number" id="cobertura" min="0" max="60" value="${S.cfg.cobertura}"></div>
+    </div>
+    ${aviso}
+    <div class="figures">
+      <div class="fig"><span>total a produzir</span><b>${fmt0(P.total)}<em>peças</em></b></div>
+      <div class="fig"><span>por dia útil${P.atual?' restante':''}</span><b>${fmt0(ritmo)}<em>em ${P.duRest} dias</em></b></div>
+      <div class="fig"><span>itens na lista</span><b>${fazer.length}<em>de ${P.itens.length}</em></b></div>
+    </div>
+    <div class="panel plist">
+      <div class="prow phead"><div class="pn">Produto</div>
+        <div class="pd"><span class="c">Estoque</span><span class="c">Previsão</span>
+        <span class="c">Segurança</span></div><span class="pf">A produzir</span></div>
+      ${rows||'<div class="pad sub">Nada a produzir com os números atuais.</div>'}
+      ${fazer.length?`<div class="prow ptot"><div class="pn">Total</div><span class="pf">${fmt0(P.total)}</span></div>`:''}
+    </div>
+    <div class="tools" style="margin-top:12px">
+      <button class="btn" data-act="imprimir">Imprimir folha da produção</button>
+      <button class="btn ghost" data-act="csv">Baixar CSV</button>
+    </div>
+    <p class="note">
+      A produzir = previsão de vendas + estoque de segurança − estoque atual.
+      ${P.base.length?`Previsão pela média de ${P.base.map(mesNome).join(', ')}.`:''}
+      ${P.atual?` Como ${mesNome(mesAlvo)} já começou, a previsão foi reduzida para os ${P.duRest} dias úteis que faltam.`:''}
+      ${semBase?` ${semBase} produto${semBase>1?'s ficam':' fica'} fora da conta por não ter histórico de vendas.`:''}
+      ${zero.length?`<br>Sem necessidade neste mês: ${zero.map(i=>i.nome).join('; ')}.`:''}
+    </p>
+  </section>`;
+}
+
+/* ----------------------------------------------------------- aba: dados */
+function vDados(){
+  const meses=mesesComDados().reverse();
+  const linhas=meses.map(m=>{
+    const lanc=lancadoNoMes(m);
+    return `<tr><td class="prod">${mesNome(m)}</td><td>${fmt0(totalMes(m))}</td>
+      <td class="${lanc?'':'zero'}">${lanc?'lançado':'inicial'}</td>
+      <td class="${mesFechado(m)?'':'zero'}">${mesFechado(m)?'fechado':'em curso'}</td></tr>`}).join('');
+  return `
+  <section>
+    <h2>Meses de vendas</h2>
+    <div class="panel" style="overflow:hidden">
+      <table><thead><tr><th>Mês</th><th>Vendas</th><th>Origem</th><th>Situação</th></tr></thead>
+      <tbody>${linhas}</tbody></table>
+    </div>
+    <p class="note">Os meses marcados como “inicial” vieram da sua planilha de junho, julho e agosto de 2026. Quando você lançar vendas em um desses meses, o lançamento passa a valer no lugar. Só meses fechados entram na média da previsão.</p>
+  </section>
+  <section>
+    <h2>Novo produto</h2>
+    <div class="panel pad">
+      <div class="field"><span>Nome como aparece na sua planilha</span>
+        <input type="text" id="npnome" placeholder="Ex.: Lumina 60x40 S/Costura - Verde"></div>
+      <div class="field"><span>Grupo</span>
+        <select id="npgrupo"><option value="S">sem costura</option><option value="C">com costura</option></select></div>
+      <button class="btn" data-act="addprod">Adicionar produto</button>
+      ${S.extras.length?`<p class="note">Adicionados por você: ${S.extras.map(p=>p.nome).join('; ')}.</p>`:''}
+    </div>
+  </section>
+  <section>
+    <h2>Acessos</h2>
+    <div class="panel pad">
+      ${S.acesso.gestor?'':`<div class="ok">Sem PIN definido, o app abre direto no perfil de gestor.
+        Defina o PIN abaixo para separar o acesso da produção.</div>`}
+      <div class="two">
+        <div class="field"><span>PIN do gestor (você)</span>
+          <input type="text" inputmode="numeric" id="pingestor" value="${S.acesso.gestor||''}" placeholder="ex.: 4071"></div>
+        <div class="field"><span>PIN da produção (em branco = sem PIN)</span>
+          <input type="text" inputmode="numeric" id="pinproducao" value="${S.acesso.producao||''}" placeholder="opcional"></div>
+      </div>
+      <p class="note">O perfil de produção abre direto na ordem do dia e só pode anotar o que foi
+        produzido. Não vê vendas, estoque, previsão nem os parâmetros de cálculo, e não apaga dados.
+        Os lançamentos feitos por ele aparecem marcados para você no fechamento do dia.</p>
+      <p class="note">Este PIN separa funções e evita mexida sem querer, mas não é segurança de
+        verdade: quem tiver o arquivo e souber abrir o código do navegador consegue contornar.
+        Para trancar de fato, é preciso login com banco de dados.</p>
+    </div>
+  </section>
+  <section>
+    <h2>Cópia de segurança</h2>
+    <div class="panel pad">
+      <p class="sub" style="margin-bottom:10px">Baixe um arquivo com tudo que você já lançou. Serve para guardar, passar para outro aparelho ou recuperar depois.</p>
+      <div class="tools">
+        <button class="btn" data-act="backup">Baixar cópia</button>
+        <button class="btn ghost" data-act="restaurar">Restaurar de um arquivo</button>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h2>Apagar tudo</h2>
+    <div class="panel pad">
+      <p class="sub" style="margin-bottom:10px">Remove vendas, estoque e produtos adicionados, e volta aos números iniciais da planilha.</p>
+      <button class="btn danger" data-act="zerar">Apagar meus dados</button>
+    </div>
+  </section>`;
+}
+
+/* ------------------------------------------------------------- impressão */
+function folha(){
+  const P=programacao(mesAlvo);
+  const fazer=P.itens.filter(i=>i.fazer>0).sort((a,b)=>b.fazer-a.fazer);
+  const ritmo=P.duRest?Math.round(P.total/P.duRest):0;
+  const hoje=iso(HOJE).split('-').reverse().join('/');
+  document.getElementById('print').innerHTML=`
+    <h1>Programação de produção — ${mesNome(mesAlvo)}</h1>
+    <div class="m">Emitido em ${hoje} &nbsp;•&nbsp; ${fmt0(P.total)} peças no total &nbsp;•&nbsp;
+      ${fmt0(ritmo)} peças por dia útil em ${P.duRest} dias &nbsp;•&nbsp; ${fazer.length} produtos</div>
+    <table><thead><tr><th style="text-align:left">Produto</th><th>Estoque</th><th>Previsão</th>
+      <th>Segurança</th><th>A produzir</th><th style="width:70px">Produzido</th></tr></thead><tbody>
+      ${fazer.map(i=>`<tr><td style="text-align:left">${i.nome}</td><td>${fmt(i.est)}</td>
+        <td>${fmt(i.prevRest)}</td><td>${fmt(i.seg)}</td><td class="make">${fmt0(i.fazer)}</td><td></td></tr>`).join('')}
+      <tr><td style="text-align:left"><b>Total</b></td><td></td><td></td><td></td><td class="make"><b>${fmt0(P.total)}</b></td><td></td></tr>
+    </tbody></table>`;
+  setTimeout(()=>window.print(),60);
+}
+function folhaDia(){
+  const O=itensOrdem(dataDia), P=O.P;
+  const lin=O.itens, tot=lin.reduce((a,i)=>a+i.qtd,0);
+  const d=new Date(dataDia+'T12:00:00');
+  document.getElementById('print').innerHTML=`
+    <h1>Ordem de produção — ${DIAS[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}</h1>
+    <div class="m">${fmt0(tot)} peças no dia &nbsp;•&nbsp; capacidade de ${fmt0(P.cap)} &nbsp;•&nbsp;
+      ${lin.length} produtos &nbsp;•&nbsp; do maior lote para o menor</div>
+    <table><thead><tr><th style="text-align:left">Produto</th><th>Estoque</th><th>Falta no mês</th>
+      <th>Produzir</th><th style="width:70px">Produzido</th></tr></thead><tbody>
+      ${lin.map(i=>`<tr><td style="text-align:left">${i.nome}</td><td>${fmt(i.est)}</td>
+        <td>${fmt(i.nec)}</td><td class="make">${fmt0(i.qtd)}</td><td></td></tr>`).join('')}
+      <tr><td style="text-align:left"><b>Total</b></td><td></td><td></td>
+        <td class="make"><b>${fmt0(tot)}</b></td><td></td></tr>
+    </tbody></table>`;
+  setTimeout(()=>window.print(),60);
+}
+function csv(){
+  const P=programacao(mesAlvo);
+  const l=[['Produto','Grupo','Estoque atual','Previsao de vendas','Estoque de seguranca','Quantidade a produzir']];
+  P.itens.forEach(i=>l.push([i.nome,i.grupo==='C'?'Com costura':'Sem costura',i.est,i.prevRest,i.seg,i.fazer]));
+  baixar('programacao-'+mesAlvo+'.csv',l.map(r=>r.join(';')).join('\n'),'text/csv');
+}
+function baixar(nome,txt,tipo){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['\ufeff'+txt],{type:tipo+';charset=utf-8'}));
+  a.download=nome;a.click();URL.revokeObjectURL(a.href);
+}
+
+/* ---------------------------------------------------------------- modais */
+function modal(html){document.getElementById('modalbox').innerHTML=html;document.getElementById('modal').classList.add('on')}
+function fecharModal(){document.getElementById('modal').classList.remove('on')}
+function modalColar(){
+  modal(`<h3>Colar do Excel</h3>
+    <p class="sub" style="margin-bottom:10px">Copie duas colunas da sua planilha — nome do produto e quantidade — e cole abaixo.
+    Os números entram no dia ${dia.split('-').reverse().join('/')}.</p>
+    <textarea id="colartxt" rows="9" placeholder="Effect 60x40 S/Costura - Marrom&#9;120&#10;Bandeja Effect 38x26 S/C - Marrom&#9;64"></textarea>
+    <div class="tools" style="margin-top:11px"><button class="btn" data-act="colarok">Lançar no dia</button>
+    <button class="btn ghost" data-act="fechar">Cancelar</button></div>`);
+}
+function processarColagem(){
+  const txt=document.getElementById('colartxt').value;
+  const mapa={};S.produtos.forEach(p=>mapa[chave(p.nome)]=p.id);
+  let ok=0;const nao=[];
+  txt.split(/\r?\n/).forEach(l=>{
+    if(!l.trim())return;
+    const p=l.split(/\t|;|\s{2,}/).filter(x=>x.trim()!=='');
+    if(p.length<2){nao.push(l.trim());return}
+    const q=parseInt(String(p[p.length-1]).replace(/[^\d-]/g,''),10);
+    const id=mapa[chave(p.slice(0,-1).join(' '))];
+    if(!id||isNaN(q)){nao.push(l.trim());return}
+    setVenda(dia,id,q);ok++;
+  });
+  fecharModal();render();
+  modal(`<h3>${ok} produto${ok===1?'':'s'} lançado${ok===1?'':'s'}</h3>
+    ${nao.length?`<p class="sub" style="margin:8px 0">Estas linhas não bateram com nenhum produto e ficaram de fora:</p>
+      <p style="font-size:13px">${nao.slice(0,15).join('<br>')}</p>
+      <p class="sub" style="margin-top:8px">Confira o nome ou cadastre o produto na aba Dados.</p>`
+      :'<p class="sub" style="margin-top:8px">Tudo bateu com os produtos cadastrados.</p>'}
+    <div class="tools" style="margin-top:12px"><button class="btn" data-act="fechar">Fechar</button></div>`);
+}
+function backup(){
+  baixar('vendas-espelhos-'+iso(HOJE)+'.json',
+    JSON.stringify({v:3,vendas:S.vendas,producao:S.producao,ordens:S.ordens,estoque:S.estoque,cfg:S.cfg,extras:S.extras}),'application/json');
+}
+function restaurar(){
+  modal(`<h3>Restaurar de um arquivo</h3>
+    <p class="sub" style="margin-bottom:10px">Escolha o arquivo .json que você baixou antes. Isso substitui os lançamentos atuais.</p>
+    <input type="file" id="arq" accept=".json,application/json">
+    <div class="tools" style="margin-top:12px"><button class="btn ghost" data-act="fechar">Cancelar</button></div>`);
+  document.getElementById('arq').onchange=async e=>{
+    const f=e.target.files[0];if(!f)return;
+    try{
+      const d=JSON.parse(await f.text());
+      S.vendas=d.vendas||{};S.producao=d.producao||{};S.ordens=d.ordens||{};
+      S.estoque=d.estoque||{};S.extras=d.extras||[];
+      if(d.cfg)S.cfg=Object.assign(S.cfg,d.cfg);
+      S.produtos=SEED.produtos.concat(S.extras);
+      for(const m of new Set(Object.keys(S.vendas).map(mesDe))){
+        const b={};for(const k in S.vendas)if(mesDe(k)===m)b[k]=S.vendas[k];await sSet('esp:vendas:'+m,b)}
+      for(const m of new Set(Object.keys(S.producao).map(mesDe))){
+        const b={};for(const k in S.producao)if(mesDe(k)===m)b[k]=S.producao[k];await sSet('esp:producao:'+m,b)}
+      for(const m of new Set(Object.keys(S.ordens).map(mesDe))){
+        const b={};for(const k in S.ordens)if(mesDe(k)===m)b[k]=S.ordens[k];await sSet('esp:ordem:'+m,b)}
+      await sSet(KEY_EST,S.estoque);await sSet(KEY_CFG,S.cfg);await sSet(KEY_PROD,S.extras);
+      fecharModal();render();marcar('salvo');
+    }catch(err){
+      modal(`<h3>Arquivo não reconhecido</h3><p class="sub" style="margin-top:8px">
+        Use o arquivo .json gerado pelo botão “Baixar cópia”.</p>
+        <div class="tools" style="margin-top:12px"><button class="btn" data-act="fechar">Fechar</button></div>`);
+    }
+  };
+}
+
+/* --------------------------------------------------------------- eventos */
+document.addEventListener('click',async e=>{
+  const t=e.target.closest('[data-tab],[data-dia],[data-sem],[data-dnav],[data-modo],[data-perfil],[data-act]');
+  if(!t)return;
+  if(t.dataset.perfil){
+    const alvo=t.dataset.perfil;
+    const pin=alvo==='gestor'?S.acesso.gestor:S.acesso.producao;
+    if(pin){tentativa=alvo;erroPin='';render()}
+    else{perfil=alvo;await sSet(KEY_PERFIL,alvo);render()}
+    return}
+  if(t.dataset.tab){view=t.dataset.tab;filtro='';recado='';render();return}
+  if(t.dataset.modo){modoDia=t.dataset.modo;filtro='';recado='';render();return}
+  if(t.dataset.dia){dia=t.dataset.dia;render();return}
+  if(t.dataset.sem){semana=addDias(semana,7*Number(t.dataset.sem));
+    const k=iso(semana);dia=k;render();return}
+  if(t.dataset.dnav){recado='';const p=Number(t.dataset.dnav);
+    let d=addDias(new Date(dataDia+'T12:00:00'),p);
+    while(!ehUtil(d))d=addDias(d,p);dataDia=iso(d);render();return}
+  const a=t.dataset.act;
+  if(a==='colar')modalColar();
+  if(a==='colarok')processarColagem();
+  if(a==='fechar')fecharModal();
+  if(a==='voltarperfil'){tentativa=null;erroPin='';render()}
+  if(a==='entrar'){
+    const v=(document.getElementById('pin')||{}).value||'';
+    const pin=tentativa==='gestor'?S.acesso.gestor:S.acesso.producao;
+    if(v===pin){perfil=tentativa;tentativa=null;erroPin='';view='dia';
+      await sSet(KEY_PERFIL,perfil);render()}
+    else{erroPin='PIN incorreto.';render()}
+    return}
+  if(a==='trocarperfil'){perfil=null;tentativa=null;erroPin='';
+    await sSet(KEY_PERFIL,'');render();return}
+  if(a==='imprimir')folha();
+  if(a==='imprimirdia')folhaDia();
+  if(a==='todosprod'){fecharTodos=!fecharTodos;render()}
+  if(a==='reemitir'){const P=emitirOrdem(dataDia);
+    recado=`Ordem de ${dataDia.split('-').reverse().slice(0,2).join('/')} emitida: ${fmt0(P.usado)} peças em ${P.plano.length} produtos.`;
+    render();marcar('salvo')}
+  if(a==='fechardia'){
+    const prox=iso(proxDiaUtil(new Date(dataDia+'T12:00:00')));
+    const ant=dataDia;
+    const P=emitirOrdem(prox);
+    const pd=new Date(prox+'T12:00:00');
+    dataDia=prox;modoDia='ordem';
+    recado=`Dia ${ant.split('-').reverse().slice(0,2).join('/')} fechado: ${fmt0(totalDia(ant))} vendidas e ${fmt0(totalProdDia(ant))} produzidas.
+      Ordem de ${DIAS[pd.getDay()]}, ${pd.getDate()} de ${MESES[pd.getMonth()]} gerada com ${fmt0(P.usado)} peças.`;
+    render();marcar('salvo')}
+  if(a==='csv')csv();
+  if(a==='backup')backup();
+  if(a==='restaurar')restaurar();
+  if(a==='addprod'){
+    const nome=document.getElementById('npnome').value.trim();
+    if(!nome)return;
+    const id='x'+chave(nome).slice(0,30);
+    if(S.produtos.some(p=>p.id===id))return;
+    S.extras.push({id,nome,grupo:document.getElementById('npgrupo').value});
+    S.produtos=SEED.produtos.concat(S.extras);
+    await sSet(KEY_PROD,S.extras);render();marcar('salvo');
+  }
+  if(a==='zerar'){
+    modal(`<h3>Apagar meus dados</h3><p class="sub" style="margin:8px 0">
+      Vendas lançadas, estoque e produtos adicionados serão removidos. Não tem como desfazer.</p>
+      <div class="tools"><button class="btn danger" data-act="zerarok">Apagar mesmo</button>
+      <button class="btn ghost" data-act="fechar">Cancelar</button></div>`);
+  }
+  if(a==='zerarok'){
+    try{const l=await window.storage.list('esp:');if(l&&l.keys)for(const k of l.keys)await window.storage.delete(k)}catch(err){}
+    S.vendas={};S.producao={};S.ordens={};S.extras=[];S.estoque=Object.assign({},SEED.estoque);
+    S.cfg={cobertura:10,dias:{},contagem:'2026-08-31',capacidade:0,lote:5};S.produtos=SEED.produtos.slice();
+    fecharModal();render();
+  }
+});
+document.addEventListener('input',e=>{
+  const el=e.target;
+  if(el.id==='filtro'){filtro=el.value;
+    if(view==='dia'){const p=el.closest('section').querySelector('.plist');
+      if(p){const tmp=document.createElement('div');tmp.innerHTML=dFechar();
+        p.replaceWith(tmp.querySelector('.plist'))}
+      return}
+    const p=el.closest('section').querySelector('.panel');
+    if(p)p.outerHTML=lista(view==='vendas'?(x=>vendaDia(dia,x.id)):(x=>S.estoque[x.id]||0),
+      view==='vendas'?'venda':'estoque');
+    return}
+  if(el.dataset.k==='venda'){
+    const q=Math.max(0,parseInt(el.value||'0',10)||0);
+    setVenda(dia,el.dataset.pid,q);
+    el.classList.toggle('has',q>0);
+    document.getElementById('figdia').innerHTML=fmt0(totalDia(dia))+'<em>peças</em>';
+    const ts=[0,1,2,3,4].reduce((a,i)=>a+totalDia(iso(addDias(semana,i))),0);
+    document.getElementById('figsem').innerHTML=fmt0(ts)+'<em>peças</em>';
+    const u=document.getElementById('d_'+dia);if(u)u.textContent=totalDia(dia)?fmt0(totalDia(dia)):'';
+    return}
+  if(el.dataset.k==='vdia'){
+    const q=Math.max(0,parseInt(el.value||'0',10)||0);
+    setVenda(dataDia,el.dataset.pid,q);
+    el.classList.toggle('has',q>0);
+    const f=document.getElementById('figv');
+    if(f)f.innerHTML=fmt0(totalDia(dataDia))+'<em>peças</em>';
+    return}
+  if(el.dataset.k==='prod'){
+    const q=Math.max(0,parseInt(el.value||'0',10)||0);
+    setProd(dataDia,el.dataset.pid,q);
+    el.classList.toggle('has',q>0);
+    const f=document.getElementById('figprod');
+    if(f)f.innerHTML=fmt0(totalProdDia(dataDia))+'<em>peças</em>';
+    const g=document.getElementById('figfalta');
+    if(g)g.innerHTML=fmt0(Math.max(0,Number(g.dataset.tot)-totalProdDia(dataDia)))+'<em>peças</em>';
+    return}
+  if(el.dataset.k==='estoque'){
+    const q=Math.max(0,parseInt(el.value||'0',10)||0);
+    if(q>0)S.estoque[el.dataset.pid]=q;else delete S.estoque[el.dataset.pid];
+    el.classList.toggle('has',q>0);
+    const tot=S.produtos.reduce((a,p)=>a+(S.estoque[p.id]||0),0);
+    const f=document.getElementById('figest');if(f)f.innerHTML=fmt0(tot)+'<em>peças</em>';
+    salvarDepois('est',()=>sSet(KEY_EST,S.estoque));
+    return}
+  if(el.id==='dtcontagem'){S.cfg.contagem=el.value;salvarDepois('cfg',()=>sSet(KEY_CFG,S.cfg));return}
+});
+document.addEventListener('change',e=>{
+  const el=e.target;
+  if(el.id==='pingestor'||el.id==='pinproducao'){
+    const v=el.value.replace(/\D/g,'').slice(0,8);el.value=v;
+    S.acesso[el.id==='pingestor'?'gestor':'producao']=v;
+    salvarDepois('acc',()=>sSet(KEY_ACC,S.acesso));render();return}
+  if(el.id==='mesalvo'){mesAlvo=el.value;render();return}
+  if(el.id==='cobertura'){S.cfg.cobertura=Math.max(0,parseInt(el.value||'0',10)||0);
+    salvarDepois('cfg',()=>sSet(KEY_CFG,S.cfg));render();return}
+  if(el.id==='duteis'){const v=parseInt(el.value||'0',10);
+    if(v>0){S.cfg.dias[mesAlvo]=v;salvarDepois('cfg',()=>sSet(KEY_CFG,S.cfg));render()}return}
+  if(el.id==='capac'){const v=parseInt(el.value||'0',10);
+    if(v>0){S.cfg.capacidade=v;salvarDepois('cfg',()=>sSet(KEY_CFG,S.cfg));render()}return}
+  if(el.id==='lote'){const v=parseInt(el.value||'0',10);
+    if(v>0){S.cfg.lote=v;salvarDepois('cfg',()=>sSet(KEY_CFG,S.cfg));render()}return}
+});
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')fecharModal()});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.target.id==='pin'){e.preventDefault();
+    document.querySelector('[data-act=entrar]').click()}});
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+
+/* ----------------------------------------------------------------- start */
+(async()=>{
+  semana=segunda(HOJE);
+  dia=iso(ehUtil(HOJE)?HOJE:addDias(semana,4));
+  mesAlvo=iso(HOJE).slice(0,7);
+  dataDia=iso(proxDiaUtil(HOJE));
+  render();
+  await carregar();
+  if(!S.cfg.contagem)S.cfg.contagem='2026-08-31';
+  if(!S.cfg.lote)S.cfg.lote=5;
+  render();
+})();
+</script>
+
+</body>
+</html>
