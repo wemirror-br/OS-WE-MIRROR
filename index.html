@@ -8,13 +8,46 @@
 <meta name="theme-color" content="#24413B">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icone-192.png">
-<link rel="apple-touch-icon" href="./icone-192.png">
+<link rel="apple-touch-icon" href="./icone-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="OS We Mirror">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>html,body{margin:0;padding:0;background:#EDEFEA;-webkit-tap-highlight-color:transparent}</style>
 </head>
 <body>
+<!-- ---------- capa de abertura ---------- -->
+<style>
+  #capa{position:fixed;inset:0;z-index:9999;background:#24413B;color:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+    font-family:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;text-align:center;padding:24px;
+    animation:capaSai .55s ease 1.5s forwards}
+  #capa svg{width:104px;height:auto;animation:capaEntra .7s cubic-bezier(.2,.8,.3,1) both}
+  #capa .nome{font-size:29px;font-weight:400;letter-spacing:.055em;white-space:nowrap;
+    animation:capaEntra .7s cubic-bezier(.2,.8,.3,1) .1s both}
+  #capa .nome b{font-weight:700}
+  #capa .nome sup{font-size:.42em;vertical-align:.9em;letter-spacing:0;font-weight:400}
+  #capa .sub{font-size:13px;color:#B6C7C2;letter-spacing:.09em;text-transform:uppercase;
+    margin-top:-10px;animation:capaEntra .7s cubic-bezier(.2,.8,.3,1) .18s both}
+  #capa .fio{width:44px;height:2px;background:#A2650F;border-radius:2px;
+    animation:capaEntra .7s cubic-bezier(.2,.8,.3,1) .26s both}
+  @keyframes capaEntra{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @keyframes capaSai{to{opacity:0;visibility:hidden;pointer-events:none}}
+  @media (prefers-reduced-motion:reduce){#capa,#capa *{animation-duration:.01s!important;animation-delay:.6s!important}}
+</style>
+<div id="capa" aria-hidden="true">
+  <svg viewBox="0 0 132 190" aria-hidden="true">
+    <path d="M8 66a58 58 0 0 1 116 0v106a12 12 0 0 1-12 12H20a12 12 0 0 1-12-12z" fill="#A2650F"/>
+    <path d="M15 66a51 51 0 0 1 102 0v106a6 6 0 0 1-6 6H21a6 6 0 0 1-6-6z" fill="#EDEFEA"/>
+    <g fill="#B7C4BE"><rect x="36" y="54" width="60" height="9" rx="4.5"/>
+      <rect x="36" y="74" width="42" height="9" rx="4.5"/></g>
+    <path d="M39 124l19 19 37-43" fill="none" stroke="#A2650F" stroke-width="14"
+      stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="nome">WE MIRRO<b>R</b><sup>&reg;</sup></div>
+  <div class="sub">Programação de produção</div>
+  <div class="fio"></div>
+</div>
+<script>setTimeout(function(){var c=document.getElementById('capa');if(c&&c.parentNode)c.parentNode.removeChild(c)},2400);</script>
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -222,10 +255,24 @@
   #modal .box{background:var(--panel);border-radius:4px;max-width:520px;width:100%;padding:16px;
     max-height:88%;overflow:auto}
   #modal h3{font-family:var(--slab);font-size:17px;font-weight:600;margin-bottom:6px}
+  /* ---------- assinatura We Mirror ---------- */
+  .wm{font-family:var(--sans);font-weight:400;letter-spacing:.055em;white-space:nowrap}
+  .wm b{font-weight:700}
+  .wm sup{font-size:.42em;vertical-align:.9em;letter-spacing:0;font-weight:400}
+  .top .wm{font-size:11px;color:#9FB5AF;margin-bottom:5px}
+
   #print{display:none}
   @media print{
+    #print .phead{display:flex;align-items:flex-end;justify-content:space-between;
+      border-bottom:1.5px solid #24413B;padding-bottom:5px;margin-bottom:9px}
+    #print .phead .wm{font-size:15px;color:#000}
+    #print .phead .doc{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#555}
+    #print .rodape{margin-top:12px;border-top:.5px solid #999;padding-top:5px;
+      display:flex;align-items:baseline;justify-content:space-between;font-size:9.5px;color:#555}
+    #print .rodape .wm{font-size:10.5px;color:#000}
     nav,.top,.tools,.weeknav,.days,#modal{display:none!important}
-    #app{background:#fff}
+    html,body{background:#fff!important}
+    #app{display:none!important}
     main{display:none}
     #print{display:block;padding:0;font-family:var(--sans);color:#000}
     #print h1{font-family:var(--slab);font-size:19px;margin-bottom:2px}
@@ -241,6 +288,7 @@
   <div class="top">
     <div class="row">
       <div>
+        <div class="wm">WE MIRRO<b>R</b><sup>&reg;</sup></div>
         <h1>Programação de produção</h1>
         <p id="topsub">espelhos e bandejas</p>
       </div>
@@ -902,12 +950,23 @@ function vDados(){
 }
 
 /* ------------------------------------------------------------- impressão */
+const MARCA='WE MIRRO<b>R</b><sup>&reg;</sup>';
+function pTopo(){
+  return `<div class="phead"><div class="wm">${MARCA}</div>
+    <div class="doc">controle interno de produção</div></div>`;
+}
+function pRodape(){
+  const d=new Date(), p=n=>String(n).padStart(2,'0');
+  const q=`${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} às ${p(d.getHours())}:${p(d.getMinutes())}`;
+  return `<div class="rodape"><span class="wm">${MARCA}</span>
+    <span>Documento interno de produção &nbsp;•&nbsp; gerado pelo app OS We Mirror em ${q}</span></div>`;
+}
 function folha(){
   const P=programacao(mesAlvo);
   const fazer=P.itens.filter(i=>i.fazer>0).sort((a,b)=>b.fazer-a.fazer);
   const ritmo=P.duRest?Math.round(P.total/P.duRest):0;
   const hoje=iso(HOJE).split('-').reverse().join('/');
-  document.getElementById('print').innerHTML=`
+  document.getElementById('print').innerHTML=pTopo()+`
     <h1>Programação de produção — ${mesNome(mesAlvo)}</h1>
     <div class="m">Emitido em ${hoje} &nbsp;•&nbsp; ${fmt0(P.total)} peças no total &nbsp;•&nbsp;
       ${fmt0(ritmo)} peças por dia útil em ${P.duRest} dias &nbsp;•&nbsp; ${fazer.length} produtos</div>
@@ -916,14 +975,14 @@ function folha(){
       ${fazer.map(i=>`<tr><td style="text-align:left">${i.nome}</td><td>${fmt(i.est)}</td>
         <td>${fmt(i.prevRest)}</td><td>${fmt(i.seg)}</td><td class="make">${fmt0(i.fazer)}</td><td></td></tr>`).join('')}
       <tr><td style="text-align:left"><b>Total</b></td><td></td><td></td><td></td><td class="make"><b>${fmt0(P.total)}</b></td><td></td></tr>
-    </tbody></table>`;
+    </tbody></table>`+pRodape();
   setTimeout(()=>window.print(),60);
 }
 function folhaDia(){
   const O=itensOrdem(dataDia), P=O.P;
   const lin=O.itens, tot=lin.reduce((a,i)=>a+i.qtd,0);
   const d=new Date(dataDia+'T12:00:00');
-  document.getElementById('print').innerHTML=`
+  document.getElementById('print').innerHTML=pTopo()+`
     <h1>Ordem de produção — ${DIAS[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}</h1>
     <div class="m">${fmt0(tot)} peças no dia &nbsp;•&nbsp; capacidade de ${fmt0(P.cap)} &nbsp;•&nbsp;
       ${lin.length} produtos &nbsp;•&nbsp; do maior lote para o menor</div>
@@ -933,7 +992,7 @@ function folhaDia(){
         <td>${fmt(i.nec)}</td><td class="make">${fmt0(i.qtd)}</td><td></td></tr>`).join('')}
       <tr><td style="text-align:left"><b>Total</b></td><td></td><td></td>
         <td class="make"><b>${fmt0(tot)}</b></td><td></td></tr>
-    </tbody></table>`;
+    </tbody></table>`+pRodape();
   setTimeout(()=>window.print(),60);
 }
 function csv(){
