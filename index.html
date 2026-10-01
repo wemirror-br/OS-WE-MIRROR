@@ -3,51 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>OS We Mirror — programação de produção</title>
-<meta name="description" content="Ordem de produção diária de espelhos e bandejas.">
+<title>WE MIRROR — ordem de produção</title>
+<meta name="description" content="Programação diária de produção de espelhos e bandejas.">
 <meta name="theme-color" content="#24413B">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icone-192.png">
-<link rel="apple-touch-icon" href="./icone-180.png">
+<link rel="apple-touch-icon" href="./icone-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="OS We Mirror">
+<meta name="apple-mobile-web-app-title" content="WE MIRROR">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-startup-image" href="./abertura-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="./abertura-1179x2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="./abertura-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="./abertura-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="./abertura-1080x2340.png" media="(device-width: 360px) and (device-height: 780px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="./abertura-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="./abertura-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="./abertura-1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WE MIRROR — ordem de produção">
+<meta property="og:description" content="Programação diária de produção de espelhos e bandejas.">
+<meta property="og:image" content="https://wemirror-br.github.io/OS-WE-MIRROR/capa.png">
+<meta property="og:url" content="https://wemirror-br.github.io/OS-WE-MIRROR/">
+<meta name="twitter:card" content="summary_large_image">
 <style>html,body{margin:0;padding:0;background:#EDEFEA;-webkit-tap-highlight-color:transparent}</style>
 </head>
 <body>
-<!-- ---------- capa de abertura ---------- -->
-<style>
-  #capa{position:fixed;inset:0;z-index:9999;background:#24413B;color:#fff;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
-    font-family:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;text-align:center;padding:24px;
-    animation:capaSai .55s ease 1.5s forwards}
-  #capa svg{width:104px;height:auto;animation:capaEntra .7s cubic-bezier(.2,.8,.3,1) both}
-  #capa .nome{font-size:29px;font-weight:400;letter-spacing:.055em;white-space:nowrap;
-    animation:capaEntra .7s cubic-bezier(.2,.8,.3,1) .1s both}
-  #capa .nome b{font-weight:700}
-  #capa .nome sup{font-size:.42em;vertical-align:.9em;letter-spacing:0;font-weight:400}
-  #capa .sub{font-size:13px;color:#B6C7C2;letter-spacing:.09em;text-transform:uppercase;
-    margin-top:-10px;animation:capaEntra .7s cubic-bezier(.2,.8,.3,1) .18s both}
-  #capa .fio{width:44px;height:2px;background:#A2650F;border-radius:2px;
-    animation:capaEntra .7s cubic-bezier(.2,.8,.3,1) .26s both}
-  @keyframes capaEntra{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  @keyframes capaSai{to{opacity:0;visibility:hidden;pointer-events:none}}
-  @media (prefers-reduced-motion:reduce){#capa,#capa *{animation-duration:.01s!important;animation-delay:.6s!important}}
-</style>
-<div id="capa" aria-hidden="true">
-  <svg viewBox="0 0 132 190" aria-hidden="true">
-    <path d="M8 66a58 58 0 0 1 116 0v106a12 12 0 0 1-12 12H20a12 12 0 0 1-12-12z" fill="#A2650F"/>
-    <path d="M15 66a51 51 0 0 1 102 0v106a6 6 0 0 1-6 6H21a6 6 0 0 1-6-6z" fill="#EDEFEA"/>
-    <g fill="#B7C4BE"><rect x="36" y="54" width="60" height="9" rx="4.5"/>
-      <rect x="36" y="74" width="42" height="9" rx="4.5"/></g>
-    <path d="M39 124l19 19 37-43" fill="none" stroke="#A2650F" stroke-width="14"
-      stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-  <div class="nome">WE MIRRO<b>R</b><sup>&reg;</sup></div>
-  <div class="sub">Programação de produção</div>
-  <div class="fio"></div>
-</div>
-<script>setTimeout(function(){var c=document.getElementById('capa');if(c&&c.parentNode)c.parentNode.removeChild(c)},2400);</script>
+<meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -65,15 +47,20 @@
 
   /* ---------- topo ---------- */
   .top{background:var(--petrol);color:#fff;padding:14px 16px 13px}
-  .top h1{font-family:var(--slab);font-weight:600;font-size:19px;letter-spacing:-.01em;line-height:1.15}
+  .top h1{margin:0;line-height:0}
+  .marca{display:block;height:19px;width:154px;color:#fff}
+  .marca-grande{display:block;height:30px;width:244px;color:var(--ink);margin:0 auto 18px}
+  .marca-papel{display:block;height:20px;width:163px;color:#000}
   .top p{font-size:12.5px;color:#B6C7C2;margin-top:2px}
   .top .row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
   .savedot{font-size:11.5px;color:#9FB5AF;white-space:nowrap;padding-top:4px;text-align:right}
   .tprofile{display:block;margin-top:3px;margin-left:auto;background:none;border:0;padding:0;
     font-family:var(--sans);font-size:11.5px;color:#B6C7C2;cursor:pointer;text-decoration:underline}
-  .trava{max-width:330px;margin:26px auto}
+  .trava{max-width:330px;margin:26px auto;text-align:center}
+  .trava .sub{margin-bottom:14px}
   .trava h2{font-size:19px;margin-bottom:4px}
-  .trava .btn{width:100%;margin-top:8px;padding:12px}
+  .trava .btn{width:100%;margin-top:8px;padding:11px 12px}
+  .trava .btn small{display:block;font-size:11.5px;font-weight:400;opacity:.72;margin-top:2px}
   .erro{font-size:13px;color:var(--rust);margin-top:8px}
   .savedot.on{color:#F0D9A8}
 
@@ -152,6 +139,8 @@
   .plist.f2 .pin.v{grid-column:2;grid-row:1 / span 2}
   .plist.f2 .pin.p{grid-column:3;grid-row:1 / span 2}
   @media (max-width:719px){
+    .graf{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .graf svg{min-width:520px}
     .plist.d3 .prow{grid-template-columns:1fr 62px 64px}
     .plist.d3 .pf{width:62px;min-width:0}
     .plist.d3 .pin{width:64px}
@@ -174,6 +163,51 @@
     .plist.f2 .phead .fh3{grid-column:2}
     .plist.f2 .phead .fh4{grid-column:3}
   }
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(146px,1fr));gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:14px}
+  .kpi{background:var(--panel);padding:10px 11px 11px;min-width:0}
+  .kpi span{display:block;font-size:11.5px;color:var(--mute)}
+  .kpi b{display:block;font-family:var(--slab);font-size:23px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+  .kpi i{display:block;font-style:normal;font-size:11.5px;margin-top:1px;color:var(--mute)}
+  .kpi i.sobe{color:#2C6B4E} .kpi i.desce{color:var(--rust)}
+  .barras{padding:12px 13px 4px}
+  .barra{margin-bottom:10px}
+  .barra .rot{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;margin-bottom:3px}
+  .barra .rot em{font-style:normal;color:var(--mute);white-space:nowrap}
+  .barra .tri{height:8px;background:var(--line-2);border-radius:2px;overflow:hidden}
+  .barra .tri>i{display:block;height:100%;background:var(--petrol)}
+  .barra.ocre .tri>i{background:var(--ochre)}
+  .colunas{display:flex;align-items:flex-end;gap:9px;padding:14px 13px 10px}
+  .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-width:0}
+  .col .v{font-size:11.5px;font-weight:600;margin-bottom:4px}
+  .col .b{width:100%;background:var(--petrol);border-radius:2px 2px 0 0}
+  .col.dest .b{background:var(--ochre)}
+  .col .l{font-size:11px;color:var(--mute);margin-top:6px;white-space:nowrap}
+  .resumo{background:#F3F6F3;border:1px solid var(--line);border-left:3px solid var(--petrol);
+    border-radius:3px;padding:11px 12px;margin-bottom:14px;font-size:13px;line-height:1.6}
+  .resumo b{font-weight:600}
+  .dica{background:#F3F6F3;border:1px solid var(--line);border-left:3px solid var(--petrol);
+    border-radius:3px;padding:9px 11px;margin-bottom:13px;font-size:12.5px;line-height:1.55;color:var(--ink)}
+  .dica b{font-weight:600}
+  .passos{counter-reset:pa;margin:2px 0 0;list-style:none}
+  .passos li{counter-increment:pa;position:relative;padding:3px 0 3px 25px;font-size:12.8px;line-height:1.5}
+  .passos li::before{content:counter(pa);position:absolute;left:0;top:3px;width:18px;height:18px;
+    border-radius:50%;background:var(--petrol);color:#fff;font-size:11px;font-weight:600;
+    display:flex;align-items:center;justify-content:center}
+  .leitura{border-left:2.5px solid var(--ochre);margin:2px 13px 13px;padding:1px 0 1px 11px;
+    font-size:12.5px;line-height:1.55;color:var(--ink)}
+  .leitura b{font-weight:600}
+  .graf{padding:10px 8px 6px}
+  .graf svg{display:block;width:100%;height:auto}
+  .rosca{display:flex;align-items:center;gap:12px;padding:12px 13px;flex-wrap:wrap}
+  .rosca svg{width:150px;height:150px;flex:none}
+  .legenda{list-style:none;flex:1;min-width:150px}
+  .legenda li{display:flex;align-items:center;gap:7px;font-size:12.5px;padding:2.5px 0}
+  .legenda li i{width:10px;height:10px;border-radius:2px;flex:none}
+  .legenda li span{flex:1}
+  .legenda li em{font-style:normal;color:var(--mute);white-space:nowrap;font-size:11.5px}
+  h3.bloco{font-family:var(--slab);font-size:13.5px;font-weight:600;color:var(--petrol);
+    margin:16px 0 6px;letter-spacing:.01em}
   .seg{display:flex;gap:0;margin-bottom:12px;border:1px solid var(--line);border-radius:3px;overflow:hidden}
   .seg button{flex:1;background:var(--panel);border:0;padding:9px 6px;cursor:pointer;
     font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--mute)}
@@ -255,27 +289,67 @@
   #modal .box{background:var(--panel);border-radius:4px;max-width:520px;width:100%;padding:16px;
     max-height:88%;overflow:auto}
   #modal h3{font-family:var(--slab);font-size:17px;font-weight:600;margin-bottom:6px}
-  /* ---------- assinatura We Mirror ---------- */
-  .wm{font-family:var(--sans);font-weight:400;letter-spacing:.055em;white-space:nowrap}
-  .wm b{font-weight:700}
-  .wm sup{font-size:.42em;vertical-align:.9em;letter-spacing:0;font-weight:400}
-  .top .wm{font-size:11px;color:#9FB5AF;margin-bottom:5px}
-
   #print{display:none}
   @media print{
-    #print .phead{display:flex;align-items:flex-end;justify-content:space-between;
-      border-bottom:1.5px solid #24413B;padding-bottom:5px;margin-bottom:9px}
-    #print .phead .wm{font-size:15px;color:#000}
-    #print .phead .doc{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#555}
-    #print .rodape{margin-top:12px;border-top:.5px solid #999;padding-top:5px;
-      display:flex;align-items:baseline;justify-content:space-between;font-size:9.5px;color:#555}
-    #print .rodape .wm{font-size:10.5px;color:#000}
     nav,.top,.tools,.weeknav,.days,#modal{display:none!important}
-    html,body{background:#fff!important}
     #app{display:none!important}
     main{display:none}
+    html,body{background:#fff}
     #print{display:block;padding:0;font-family:var(--sans);color:#000}
+    #print .marca-papel{height:15px;width:122px;color:#000;margin:0}
     #print h1{font-family:var(--slab);font-size:19px;margin-bottom:2px}
+    #print .rodape{margin-top:14px;padding-top:7px;border-top:.5px solid #999;
+      font-size:9.5px;color:#555;letter-spacing:.02em}
+    #print h2{font-family:var(--slab);font-size:12.5px;margin:13px 0 4px;color:#24413B}
+    #print .obs{font-size:9.5px;color:#555;margin-top:4px}
+    #print .kpi4{margin-top:8px}
+    #print .kpi4 td{text-align:left;padding:7px 9px;width:25%;vertical-align:top}
+    #print .kpi4 b{display:block;font-family:var(--slab);font-size:19px;line-height:1.1}
+    #print .kpi4 span{display:block;font-size:8.5px;color:#555;margin-top:1px}
+    #print table{margin-bottom:2px}
+    #print td,#print th{font-size:9.5px;padding:3px 5px}
+    #print table.limpa td{border:0;padding:2px 6px}
+    #print .gp{margin:4px 0 3px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    #print .topo{border-bottom:.5px solid #C8CDC9;margin-bottom:9px}
+    #print .topo td{padding:0 0 5px;border:0;font-size:9px;color:#555;vertical-align:bottom}
+    #print h1{margin:0 0 3px}
+    #print h2{margin:22px 0 5px;font-size:13.5px;page-break-after:avoid}
+    #print .resumo{background:#F3F6F3;border-left:3px solid #24413B;padding:9px 12px;
+      margin:9px 0 2px;font-size:10.6px;line-height:1.6;color:#1a1a1a;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact}
+    #print .resumo b{font-weight:600}
+    #print h2.primeiro{margin-top:6px}
+    #print h3{font-family:var(--slab);font-size:11.5px;font-weight:600;color:#24413B;margin:4px 0 2px}
+    #print .gp,#print table{page-break-inside:avoid}
+    #print table.dez{margin-top:3px}
+    #print table.dez td,#print table.dez th{font-size:10px;padding:3.5px 6px}
+    #print table.duas>tbody>tr>td{padding:0 11px 0 0;width:50%}
+    #print table.duas>tbody>tr>td+td{padding:0 0 0 11px}
+    #print .leitura{margin:5px 0 2px}
+    #print .kpi4{margin:6px 0 2px}
+    #print .kpi4 td{padding:9px 11px}
+    #print .kpi4 b{font-size:21px}
+    #print .kpi4 span{font-size:9px}
+    #print .pag2{page-break-before:always;break-before:page;padding-top:2px}
+    #print .obs{margin-top:3px;font-size:9px}
+    @page{size:A4;margin:11mm 11mm}
+    #print .gp svg{width:100%;height:auto;display:block}
+    #print .gp .rosca{display:flex;align-items:center;gap:8px;padding:0}
+    #print .gp .rosca svg{width:148px;height:148px;flex:none}
+    #print .gp .legenda{list-style:none;flex:1;margin:0;padding:0}
+    #print .gp .legenda li{display:flex;align-items:center;gap:6px;font-size:9.6px;padding:2px 0}
+    #print .gp .legenda li i{width:9px;height:9px;border-radius:1.5px;flex:none}
+    #print .gp .legenda li span{flex:1;text-align:left}
+    #print .gp .legenda{max-width:230px}
+    #print table.duas td{text-align:left}
+    #print .gp .legenda li em{font-style:normal;color:#555}
+    #print table.duas td{width:50%;vertical-align:top;padding:0 8px 0 0}
+    #print table.duas td+td{padding:0 0 0 8px}
+    #print .gp .note{display:none}
+    #print .leitura{border-left:2.5px solid #A2650F;padding:2px 0 2px 9px;margin:5px 0 2px;
+      font-size:10.3px;line-height:1.55;color:#1a1a1a}
+    #print .leitura b{font-weight:600}
+    #print .kpi4 td{border:.5px solid #999}
     #print .m{font-size:12px;color:#444;margin-bottom:10px}
     #print th{background:#24413B!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     #print td.make{background:#F7EBD7!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -284,13 +358,13 @@
   }
 </style>
 
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="marca" viewBox="0 0 8125 1000"><g fill="currentColor"><path d="M285.90604026845637 1000.0 13.422818791946309 0.0H135.5704697986577L297.31543624161077 624.1610738255033Q310.06711409395973 672.48322147651 321.4765100671141 720.8053691275168Q332.8859060402685 769.1275167785235 343.6241610738255 817.4496644295302Q354.36241610738256 865.7718120805368 363.758389261745 914.0939597315436H349.66442953020135Q359.7315436241611 865.7718120805368 370.4697986577181 817.4496644295302Q381.2080536912752 769.1275167785235 392.9530201342282 720.8053691275168Q404.6979865771812 672.48322147651 417.44966442953023 624.1610738255033L582.5503355704698 0.0H722.1476510067115L885.9060402684564 624.1610738255033Q898.6577181208054 672.48322147651 910.7382550335572 720.8053691275168Q922.8187919463088 769.1275167785235 933.8926174496645 817.4496644295302Q944.9664429530202 865.7718120805368 955.0335570469799 914.0939597315436H938.9261744966443Q948.993288590604 865.7718120805368 959.7315436241611 817.4496644295302Q970.4697986577181 769.1275167785235 982.5503355704698 720.8053691275168Q994.6308724832215 672.48322147651 1006.7114093959732 624.1610738255033L1167.785234899329 0.0H1291.275167785235L1017.4496644295302 1000.0H876.510067114094L701.3422818791946 355.7046979865771Q683.2214765100672 288.59060402684565 668.1208053691275 221.47651006711408Q653.020134228188 154.3624161073825 638.9261744966443 87.24832214765092H664.4295302013423Q650.3355704697987 154.3624161073825 635.5704697986578 221.47651006711408Q620.8053691275168 288.59060402684565 602.6845637583893 355.7046979865771L428.18791946308727 1000.0Z"/><path d="M1389.0268456375838 1000.0V0.0H2039.3624161073826V107.38255033557039H1509.8322147651006V434.22818791946304H2000.4362416107383V541.6107382550335H1509.8322147651006V892.6174496644295H2039.3624161073826V1000.0Z"/><path d="M2499.2953020134228 1000.0V0.0H2663.7248322147652L2917.4161073825508 645.6375838926174Q2926.1409395973155 667.1140939597315 2938.221476510067 698.6577181208054Q2950.302013422819 730.2013422818792 2963.053691275168 764.4295302013422Q2975.805369127517 798.6577181208054 2987.2147651006717 829.1946308724832Q2998.6241610738257 859.7315436241611 3005.3355704697988 879.1946308724832H2977.818791946309Q2984.530201342282 859.7315436241611 2995.6040268456377 829.1946308724832Q3006.6778523489934 798.6577181208054 3019.4295302013425 764.4295302013422Q3032.1812080536915 730.2013422818792 3044.261744966443 698.6577181208054Q3056.342281879195 667.1140939597315 3064.3959731543628 645.6375838926174L3314.060402684564 0.0H3479.1610738255035V1000.0H3360.3691275167785V420.13422818791946Q3360.3691275167785 387.91946308724835 3360.7046979865772 351.00671140939596Q3361.040268456376 314.0939597315436 3362.0469798657723 275.16778523489927Q3363.053691275168 236.24161073825496 3364.060402684564 196.64429530201335Q3365.06711409396 157.04697986577173 3365.7382550335574 119.46308724832215H3382.5167785234903Q3365.7382550335574 166.44295302013415 3349.6308724832215 210.73825503355698Q3333.523489932886 255.0335570469798 3319.0939597315437 293.9597315436241Q3304.6644295302017 332.8859060402684 3292.58389261745 364.7651006711409Q3280.503355704698 396.64429530201335 3271.107382550336 420.13422818791946L3038.8926174496646 1000.0H2939.563758389262L2706.0067114093963 420.13422818791946Q2696.6107382550335 396.64429530201335 2684.1946308724832 364.7651006711409Q2671.778523489933 332.8859060402684 2657.013422818792 293.9597315436241Q2642.2483221476514 255.0335570469798 2625.4697986577185 210.73825503355698Q2608.6912751677855 166.44295302013415 2590.570469798658 119.46308724832215H2613.3892617449665Q2614.731543624161 157.04697986577173 2615.402684563758 196.64429530201335Q2616.0738255033557 236.24161073825496 2617.080536912752 275.16778523489927Q2618.087248322148 314.0939597315436 2618.422818791946 351.00671140939596Q2618.758389261745 387.91946308724835 2618.758389261745 420.13422818791946V1000.0Z"/><path d="M3783.624161073826 0.0V1000.0H3662.818791946309V0.0Z"/><path d="M3967.281879194631 1000.0V0.0H4338.422818791947Q4443.120805369128 0.0 4519.295302013423 36.91275167785233Q4595.4697986577185 73.82550335570465 4636.744966442953 141.9463087248322Q4678.020134228188 210.06711409395973 4678.020134228188 303.35570469798654Q4678.020134228188 396.64429530201335 4634.060402684564 465.10067114093954Q4590.10067114094 533.5570469798657 4511.577181208055 570.469798657718Q4433.053691275169 607.3825503355704 4329.026845637584 607.3825503355704H4034.3959731543628V500.0H4335.738255033558Q4404.865771812081 500.0 4454.865771812081 476.1744966442953Q4504.865771812081 452.3489932885906 4531.7114093959735 408.05369127516775Q4558.557046979866 363.7583892617449 4558.557046979866 303.35570469798654Q4558.557046979866 242.28187919463085 4531.375838926175 198.65771812080533Q4504.194630872484 155.0335570469798 4454.194630872484 131.2080536912751Q4404.194630872484 107.38255033557039 4334.395973154363 107.38255033557039H4088.0872483221483V1000.0ZM4549.161073825504 1000.0 4307.55033557047 550.3355704697987H4444.463087248323L4690.10067114094 1000.0Z"/><path d="M4821.4093959731545 1000.0V0.0H5192.55033557047Q5297.248322147651 0.0 5373.422818791947 36.91275167785233Q5449.597315436242 73.82550335570465 5490.872483221477 141.9463087248322Q5532.147651006711 210.06711409395973 5532.147651006711 303.35570469798654Q5532.147651006711 396.64429530201335 5488.187919463087 465.10067114093954Q5444.228187919463 533.5570469798657 5365.704697986577 570.469798657718Q5287.181208053692 607.3825503355704 5183.154362416108 607.3825503355704H4888.523489932886V500.0H5189.865771812081Q5258.993288590605 500.0 5308.993288590605 476.1744966442953Q5358.993288590605 452.3489932885906 5385.838926174497 408.05369127516775Q5412.684563758389 363.7583892617449 5412.684563758389 303.35570469798654Q5412.684563758389 242.28187919463085 5385.503355704698 198.65771812080533Q5358.322147651007 155.0335570469798 5308.322147651007 131.2080536912751Q5258.322147651007 107.38255033557039 5188.523489932886 107.38255033557039H4942.214765100672V1000.0ZM5403.288590604027 1000.0 5161.677852348994 550.3355704697987H5298.5906040268455L5544.228187919463 1000.0Z"/><path d="M6090.973154362417 1016.1073825503356Q5958.758389261745 1016.1073825503356 5856.073825503356 949.6644295302013Q5753.3892617449665 883.2214765100671 5695.0 766.7785234899329Q5636.6107382550335 650.3355704697987 5636.6107382550335 500.6711409395973Q5636.6107382550335 349.66442953020135 5695.0 233.22147651006708Q5753.3892617449665 116.77852348993281 5856.073825503356 50.3355704697986Q5958.758389261745 -16.107382550335615 6090.973154362417 -16.107382550335615Q6223.859060402685 -16.107382550335615 6326.208053691275 50.3355704697986Q6428.557046979866 116.77852348993281 6486.946308724832 233.22147651006708Q6545.335570469799 349.66442953020135 6545.335570469799 500.6711409395973Q6545.335570469799 650.3355704697987 6486.946308724832 766.7785234899329Q6428.557046979866 883.2214765100671 6326.208053691275 949.6644295302013Q6223.859060402685 1016.1073825503356 6090.973154362417 1016.1073825503356ZM6090.973154362417 903.3557046979865Q6181.577181208054 903.3557046979865 6257.416107382551 856.7114093959731Q6333.255033557047 810.0671140939597 6378.892617449665 720.1342281879195Q6424.530201342282 630.2013422818792 6424.530201342282 500.6711409395973Q6424.530201342282 370.4697986577181 6378.892617449665 280.2013422818792Q6333.255033557047 189.93288590604027 6257.416107382551 143.2885906040268Q6181.577181208054 96.64429530201335 6090.973154362417 96.64429530201335Q6000.3691275167785 96.64429530201335 5924.530201342282 143.2885906040268Q5848.6912751677855 189.93288590604027 5803.053691275169 280.2013422818792Q5757.416107382551 370.4697986577181 5757.416107382551 500.6711409395973Q5757.416107382551 630.2013422818792 5803.053691275169 720.1342281879195Q5848.6912751677855 810.0671140939597 5924.530201342282 856.7114093959731Q6000.3691275167785 903.3557046979865 6090.973154362417 903.3557046979865Z"/><path d="M6665.234899328859 1000.0V0.0H7065.234899328859Q7177.986577181208 0.0 7260.201342281879 39.93288590604027Q7342.41610738255 79.86577181208054 7387.046979865771 153.35570469798654Q7431.677852348993 226.84563758389254 7431.677852348993 328.18791946308727Q7431.677852348993 426.84563758389254 7384.697986577181 499.32885906040264Q7337.718120805369 571.8120805369127 7252.818791946309 611.0738255033557Q7167.919463087248 650.3355704697987 7053.154362416108 650.3355704697987H6789.395973154362V484.5637583892617H7053.154362416108Q7107.51677852349 484.5637583892617 7147.114093959732 465.10067114093954Q7186.7114093959735 445.6375838926174 7208.187919463087 410.4026845637583Q7229.664429530201 375.16778523489927 7229.664429530201 328.18791946308727Q7229.664429530201 279.86577181208054 7208.187919463087 245.3020134228188Q7186.7114093959735 210.73825503355704 7147.114093959732 191.27516778523488Q7107.51677852349 171.81208053691273 7052.48322147651 171.81208053691273H6871.946308724832V1000.0ZM7232.3489932885905 1000.0 7003.489932885906 548.3221476510066H7220.2684563758385L7453.825503355704 1000.0Z"/><path d="M7839.697986577181 570.0Q7780.935099979243 570.0 7729.272728845222 547.7190721649484Q7677.610357711202 525.4381443298969 7638.435099979242 486.2628865979382Q7599.259842247284 447.0876288659794 7576.978914412232 395.4252577319588Q7554.697986577181 343.7628865979382 7554.697986577181 285.00000000000006Q7554.697986577181 226.23711340206194 7576.978914412232 174.5747422680413Q7599.259842247284 122.91237113402065 7638.435099979242 83.73711340206188Q7677.610357711202 44.561855670103114 7729.272728845222 22.280927835051614Q7780.935099979243 1.1368683772161603e-13 7839.697986577181 1.1368683772161603e-13Q7898.9505638967685 1.1368683772161603e-13 7950.612935030789 22.280927835051614Q8002.27530616481 44.561855670103114 8041.450563896769 83.73711340206188Q8080.625821628728 122.91237113402065 8102.661904102954 174.5747422680413Q8124.697986577181 226.23711340206194 8124.697986577181 285.00000000000006Q8124.697986577181 343.7628865979382 8102.661904102954 395.4252577319588Q8080.625821628728 447.0876288659794 8041.450563896769 486.2628865979382Q8002.27530616481 525.4381443298969 7950.612935030789 547.7190721649484Q7898.9505638967685 570.0 7839.697986577181 570.0ZM7839.697986577181 516.6237113402062Q7904.337161834913 516.6237113402062 7956.734069051408 485.2835051546392Q8009.130976267903 453.9432989690722 8040.226337092645 401.5463917525774Q8071.321697917388 349.1494845360825 8071.321697917388 285.00000000000006Q8071.321697917388 220.85051546391753 8040.226337092645 168.45360824742272Q8009.130976267903 116.05670103092791 7956.734069051408 84.7164948453609Q7904.337161834913 53.376288659793886 7839.697986577181 53.376288659793886Q7775.548502041099 53.376288659793886 7723.151594824603 84.7164948453609Q7670.754687608109 116.05670103092791 7639.414481422542 168.45360824742272Q7608.074275236975 220.85051546391753 7608.074275236975 285.00000000000006Q7608.074275236975 349.1494845360825 7639.414481422542 401.5463917525774Q7670.754687608109 453.9432989690722 7723.151594824603 485.2835051546392Q7775.548502041099 516.6237113402062 7839.697986577181 516.6237113402062ZM7902.378398948315 414.27835051546396 7840.187677298831 295.2835051546392H7895.033038123573L7958.692831938006 414.27835051546396ZM7739.801079360686 414.27835051546396V151.80412371134025H7852.429945340068Q7882.790770082336 151.80412371134025 7904.826852556563 162.5773195876289Q7926.862935030789 173.35051546391753 7938.615512350377 192.44845360824746Q7950.368089669964 211.5463917525774 7950.368089669964 237.98969072164954Q7950.368089669964 263.4536082474227 7938.125821628728 282.5515463917526Q7925.8835535874905 301.6494845360825 7903.357780391614 312.1778350515465Q7880.832007195738 322.7061855670104 7849.98149173182 322.7061855670104H7771.141285546253V279.6134020618557H7849.002110288521Q7872.507264927696 279.6134020618557 7885.728914412232 268.10567010309285Q7898.9505638967685 256.59793814432993 7898.9505638967685 237.98969072164954Q7898.9505638967685 218.8917525773196 7885.728914412232 207.6288659793815Q7872.507264927696 196.36597938144337 7849.002110288521 196.36597938144337H7791.218605133882V414.27835051546396Z"/></g></symbol></svg>
 <div id="app">
   <div class="top">
     <div class="row">
       <div>
-        <div class="wm">WE MIRRO<b>R</b><sup>&reg;</sup></div>
-        <h1>Programação de produção</h1>
-        <p id="topsub">espelhos e bandejas</p>
+        <h1 id="topmarca"><svg class="marca" role="img" aria-label="WE MIRROR"><use href="#marca"/></svg></h1>
+        <p id="topsub">programação de produção</p>
       </div>
       <div style="text-align:right">
         <div class="savedot" id="savedot"></div>
@@ -320,15 +394,15 @@ if(!window.storage){
   };
 }
 
-const SEED = {"produtos":[{"id":"organico60x40ccosturamarrom","nome":"Orgânico 60x40 C/Costura - Marrom","grupo":"C"},{"id":"organico60x40ccosturapreto","nome":"Orgânico 60x40 C/Costura - Preto","grupo":"C"},{"id":"organico80x60ccosturamarrom","nome":"Orgânico 80x60 C/Costura - Marrom","grupo":"C"},{"id":"organico80x60ccosturapreto","nome":"Orgânico 80x60 C/Costura - Preto","grupo":"C"},{"id":"effect70x50ccosturamarrom","nome":"Effect 70x50 C/Costura - Marrom","grupo":"C"},{"id":"effect70x50ccosturapreto","nome":"Effect 70x50 C/Costura - Preto","grupo":"C"},{"id":"redondo50cmccosturamarrom","nome":"Redondo 50cm - C/Costura - Marrom","grupo":"C"},{"id":"redondo50cmccosturapreto","nome":"Redondo 50cm - C/Costura - Preto","grupo":"C"},{"id":"organico60x40scosturamarrom","nome":"Orgânico 60x40 S/Costura - Marrom","grupo":"S"},{"id":"organico60x40scosturapreto","nome":"Orgânico 60x40 S/Costura - Preto","grupo":"S"},{"id":"organico60x40scosturabranco","nome":"Orgânico 60x40 S/Costura - Branco","grupo":"S"},{"id":"effect60x40scosturamarrom","nome":"Effect 60x40 S/Costura - Marrom","grupo":"S"},{"id":"effect60x40scosturapreto","nome":"Effect 60x40 S/Costura - Preto","grupo":"S"},{"id":"effect60x40scosturabranco","nome":"Effect 60x40 S/Costura - Branco","grupo":"S"},{"id":"lumina60x40scosturamarrom","nome":"Lumina 60x40 S/Costura - Marrom","grupo":"S"},{"id":"lumina60x40scosturapreto","nome":"Lumina 60x40 S/Costura - Preto","grupo":"S"},{"id":"lumina60x40scosturabranco","nome":"Lumina 60x40 S/Costura - Branco","grupo":"S"},{"id":"empire60x40scosturamarrom","nome":"Empire 60x40 S/Costura - Marrom","grupo":"S"},{"id":"empire60x40scosturapreto","nome":"Empire 60x40 S/Costura - Preto","grupo":"S"},{"id":"empire60x40scosturabranco","nome":"Empire 60x40 S/Costura - Branco","grupo":"S"},{"id":"effect70x50scosturamarron","nome":"Effect 70x50 S/Costura-Marron","grupo":"S"},{"id":"effect70x50scosturapreto","nome":"Effect 70x50 S/Costura-Preto","grupo":"S"},{"id":"lumina70x50scosturamarrom","nome":"Lumina 70x50 S/Costura- Marrom","grupo":"S"},{"id":"lumina70x50scosturapreto","nome":"Lumina 70x50 S/Costura- Preto","grupo":"S"},{"id":"lumina70x50scosturabranco","nome":"Lumina 70x50 S/Costura- Branco","grupo":"S"},{"id":"meialua60x30scosturamarrom","nome":"Meia Lua 60x30 S/Costura - Marrom","grupo":"S"},{"id":"meialua60x30scosturapreto","nome":"Meia Lua 60x30 S/Costura - Preto","grupo":"S"},{"id":"feijao60x40scosturamarrom","nome":"FEIJAO 60x40 S/Costura - Marrom","grupo":"S"},{"id":"feijao60x40scosturapreto","nome":"FEIJAO 60x40 S/Costura - Preto","grupo":"S"},{"id":"feijao60x40scosturabranco","nome":"FEIJAO 60x40 S/Costura - Branco","grupo":"S"},{"id":"urso115x43scosturamarrom","nome":"URSO 1,15X43 S/Costura - Marrom","grupo":"S"},{"id":"bandejaeffect38x26scmarrom","nome":"BANDEJA Effect 38x26 S/C - Marrom","grupo":"S"},{"id":"bandejaeffect38x26scpreto","nome":"BANDEJA Effect 38x26 S/C - Preto","grupo":"S"},{"id":"bandejaeffect38x26scbranco","nome":"BANDEJA Effect 38x26 S/C - Branco","grupo":"S"},{"id":"bandejaeffect38x26strassprata","nome":"BANDEJA Effect 38x26 - STRASS PRATA","grupo":"S"},{"id":"bandejaeffect38x26strasspreto","nome":"BANDEJA Effect 38x26 - STRASS PRETO","grupo":"S"},{"id":"bandejaeffect38x26strassdourado","nome":"BANDEJA Effect 38x26 - STRASS DOURADO","grupo":"S"},{"id":"bandejaempire38x26scmarrom","nome":"Bandeja EMPIRE 38X26  S/C-MARROM","grupo":"S"},{"id":"bandejaempire38x26scpreto","nome":"Bandeja EMPIRE 38X26  S/C-PRETO","grupo":"S"},{"id":"bandejaempire38x26scbranco","nome":"Bandeja EMPIRE 38X26  S/C-BRANCO","grupo":"S"},{"id":"smolduraeffect60x40cfita","nome":"S/MOLDURA - Effect 60x40 -  C/Fita","grupo":"S"},{"id":"smolduraeffect60x40csuporte","nome":"S/MOLDURA - Effect 60x40-C/Suporte","grupo":"S"},{"id":"smolduraorganico60x40cfita","nome":"S/MOLDURA - Orgânico  60x40  -  C/Fita","grupo":"S"},{"id":"smolduraorganico60x40csuporte","nome":"S/MOLDURA - Orgânico 60x40 -C/Suporte","grupo":"S"},{"id":"smolduraeffect70x50cfita","nome":"S/MOLDURA - Effect  70x50 -  C/Fita","grupo":"S"},{"id":"smolduraeffect70x50csuporte","nome":"S/MOLDURA - Effect  70x50 -  C/Suporte","grupo":"S"},{"id":"smolduraempire60x40cfita","nome":"S/MOLDURA - Empire 60x40 - C/Fita","grupo":"S"},{"id":"smolduraempire60x40csuporte","nome":"S/MOLDURA - Empire 60x40 - C/suporte","grupo":"S"},{"id":"smolduralumina60x40cfita","nome":"S/MOLDURA - Lumina 60x40 - C/Fita","grupo":"S"},{"id":"smolduralumina60x40csuporte","nome":"S/MOLDURA - Lumina 60x40 - C/suporte","grupo":"S"},{"id":"smolduraredondo50cfita","nome":"S/MOLDURA - Redondo 50 - C/Fita","grupo":"S"},{"id":"smolduraredondo40cfita","nome":"S/MOLDURA - Redondo 40 - C/Fita","grupo":"S"},{"id":"smolduraredondo30cfita","nome":"S/MOLDURA - Redondo 30 - C/Fita","grupo":"S"}],"hist":{"2026-06":{"organico60x40ccosturamarrom":1157,"organico60x40ccosturapreto":131,"organico80x60ccosturamarrom":136,"organico80x60ccosturapreto":41,"effect70x50ccosturamarrom":723,"effect70x50ccosturapreto":180,"redondo50cmccosturamarrom":19,"redondo50cmccosturapreto":2,"organico60x40scosturamarrom":128,"organico60x40scosturapreto":23,"organico60x40scosturabranco":7,"effect60x40scosturamarrom":2015,"effect60x40scosturapreto":832,"effect60x40scosturabranco":245,"empire60x40scosturamarrom":225,"empire60x40scosturapreto":28,"empire60x40scosturabranco":1,"effect70x50scosturamarron":158,"effect70x50scosturapreto":21,"meialua60x30scosturamarrom":102,"meialua60x30scosturapreto":16,"bandejaeffect38x26scmarrom":989,"bandejaeffect38x26scpreto":142,"bandejaeffect38x26scbranco":71,"smolduraeffect60x40cfita":78,"smolduraeffect60x40csuporte":95,"smolduraorganico60x40cfita":125,"smolduraorganico60x40csuporte":5,"smolduraeffect70x50cfita":4,"smolduraredondo50cfita":10,"smolduraredondo40cfita":48,"smolduraredondo30cfita":11},"2026-07":{"organico60x40ccosturamarrom":940,"organico60x40ccosturapreto":176,"organico80x60ccosturamarrom":99,"organico80x60ccosturapreto":48,"effect70x50ccosturamarrom":593,"effect70x50ccosturapreto":115,"redondo50cmccosturamarrom":8,"redondo50cmccosturapreto":3,"organico60x40scosturamarrom":86,"organico60x40scosturapreto":2,"organico60x40scosturabranco":4,"effect60x40scosturamarrom":2131,"effect60x40scosturapreto":813,"effect60x40scosturabranco":262,"empire60x40scosturamarrom":349,"empire60x40scosturapreto":55,"empire60x40scosturabranco":5,"effect70x50scosturamarron":133,"effect70x50scosturapreto":22,"meialua60x30scosturamarrom":99,"meialua60x30scosturapreto":15,"bandejaeffect38x26scmarrom":1546,"bandejaeffect38x26scpreto":273,"bandejaeffect38x26scbranco":162,"bandejaeffect38x26strassprata":4,"bandejaeffect38x26strasspreto":1,"bandejaeffect38x26strassdourado":4,"bandejaempire38x26scmarrom":3,"smolduraeffect60x40cfita":57,"smolduraeffect60x40csuporte":228,"smolduraorganico60x40cfita":231,"smolduraorganico60x40csuporte":20,"smolduraredondo50cfita":11,"smolduraredondo40cfita":18},"2026-08":{"organico60x40ccosturamarrom":925,"organico60x40ccosturapreto":80,"organico80x60ccosturamarrom":114,"organico80x60ccosturapreto":72,"effect70x50ccosturamarrom":632,"effect70x50ccosturapreto":75,"redondo50cmccosturamarrom":1,"redondo50cmccosturapreto":2,"organico60x40scosturamarrom":76,"organico60x40scosturapreto":11,"organico60x40scosturabranco":2,"effect60x40scosturamarrom":2305,"effect60x40scosturapreto":746,"effect60x40scosturabranco":199,"empire60x40scosturamarrom":270,"empire60x40scosturapreto":43,"empire60x40scosturabranco":2,"effect70x50scosturamarron":188,"effect70x50scosturapreto":28,"meialua60x30scosturamarrom":100,"meialua60x30scosturapreto":15,"bandejaeffect38x26scmarrom":1600,"bandejaeffect38x26scpreto":275,"bandejaeffect38x26scbranco":135,"bandejaeffect38x26strassprata":14,"bandejaeffect38x26strasspreto":2,"bandejaeffect38x26strassdourado":20,"bandejaempire38x26scmarrom":9,"bandejaempire38x26scpreto":6,"smolduraeffect60x40cfita":26,"smolduraeffect60x40csuporte":126,"smolduraorganico60x40cfita":229,"smolduraorganico60x40csuporte":7,"smolduraeffect70x50cfita":1,"smolduraredondo50cfita":25,"smolduraredondo40cfita":16,"smolduraredondo30cfita":2}},"estoque":{"organico60x40ccosturamarrom":35,"organico60x40ccosturapreto":14,"organico80x60ccosturamarrom":19,"organico80x60ccosturapreto":9,"effect70x50ccosturamarrom":10,"effect70x50ccosturapreto":4,"redondo50cmccosturapreto":1,"organico60x40scosturamarrom":12,"organico60x40scosturapreto":14,"effect60x40scosturamarrom":107,"effect60x40scosturapreto":74,"effect60x40scosturabranco":16,"empire60x40scosturamarrom":20,"empire60x40scosturapreto":9,"effect70x50scosturamarron":19,"effect70x50scosturapreto":8,"meialua60x30scosturamarrom":8,"meialua60x30scosturapreto":6,"bandejaeffect38x26scmarrom":72,"bandejaeffect38x26scpreto":12,"bandejaeffect38x26scbranco":4,"bandejaeffect38x26strassdourado":1,"smolduraeffect60x40cfita":34,"smolduraeffect60x40csuporte":16,"smolduraorganico60x40cfita":27,"smolduraredondo50cfita":9,"smolduraredondo40cfita":18}};
+const SEED = {"produtos":[{"id":"organico60x40ccosturamarrom","nome":"Orgânico 60x40 C/Costura - Marrom","grupo":"C"},{"id":"organico60x40ccosturapreto","nome":"Orgânico 60x40 C/Costura - Preto","grupo":"C"},{"id":"organico80x60ccosturamarrom","nome":"Orgânico 80x60 C/Costura - Marrom","grupo":"C"},{"id":"organico80x60ccosturapreto","nome":"Orgânico 80x60 C/Costura - Preto","grupo":"C"},{"id":"effect70x50ccosturamarrom","nome":"Effect 70x50 C/Costura - Marrom","grupo":"C"},{"id":"effect70x50ccosturapreto","nome":"Effect 70x50 C/Costura - Preto","grupo":"C"},{"id":"redondo50cmccosturamarrom","nome":"Redondo 50cm - C/Costura - Marrom","grupo":"C"},{"id":"redondo50cmccosturapreto","nome":"Redondo 50cm - C/Costura - Preto","grupo":"C"},{"id":"organico60x40scosturamarrom","nome":"Orgânico 60x40 S/Costura - Marrom","grupo":"S"},{"id":"organico60x40scosturapreto","nome":"Orgânico 60x40 S/Costura - Preto","grupo":"S"},{"id":"organico60x40scosturabranco","nome":"Orgânico 60x40 S/Costura - Branco","grupo":"S"},{"id":"effect60x40scosturamarrom","nome":"Effect 60x40 S/Costura - Marrom","grupo":"S"},{"id":"effect60x40scosturapreto","nome":"Effect 60x40 S/Costura - Preto","grupo":"S"},{"id":"effect60x40scosturabranco","nome":"Effect 60x40 S/Costura - Branco","grupo":"S"},{"id":"bandejaeffect38x26csuportemarrom","nome":"BANDEJA Effect 38x26 C/Suporte - Marrom","grupo":"S"},{"id":"bandejaeffect38x26csuportepreto","nome":"BANDEJA Effect 38x26 C/Suporte - Preto","grupo":"S"},{"id":"bandejaeffect38x26csuportebranco","nome":"BANDEJA Effect 38x26 C/Suporte - Branco","grupo":"S"},{"id":"lumina60x40scosturamarrom","nome":"Lumina 60x40 S/Costura - Marrom","grupo":"S"},{"id":"lumina60x40scosturapreto","nome":"Lumina 60x40 S/Costura - Preto","grupo":"S"},{"id":"lumina60x40scosturabranco","nome":"Lumina 60x40 S/Costura - Branco","grupo":"S"},{"id":"empire60x40scosturamarrom","nome":"Empire 60x40 S/Costura - Marrom","grupo":"S"},{"id":"empire60x40scosturapreto","nome":"Empire 60x40 S/Costura - Preto","grupo":"S"},{"id":"empire60x40scosturabranco","nome":"Empire 60x40 S/Costura - Branco","grupo":"S"},{"id":"effect70x50scosturamarrom","nome":"Effect 70x50 S/Costura-Marron","grupo":"S"},{"id":"effect70x50scosturapreto","nome":"Effect 70x50 S/Costura-Preto","grupo":"S"},{"id":"lumina70x50scosturamarrom","nome":"Lumina 70x50 S/Costura- Marrom","grupo":"S"},{"id":"lumina70x50scosturapreto","nome":"Lumina 70x50 S/Costura- Preto","grupo":"S"},{"id":"lumina70x50scosturabranco","nome":"Lumina 70x50 S/Costura- Branco","grupo":"S"},{"id":"meialua60x30scosturamarrom","nome":"Meia Lua 60x30 S/Costura - Marrom","grupo":"S"},{"id":"meialua60x30scosturapreto","nome":"Meia Lua 60x30 S/Costura - Preto","grupo":"S"},{"id":"meialua60x30scosturabranco","nome":"Meia Lua 60x30 S/Costura - Branco","grupo":"S"},{"id":"feijao60x40scosturamarrom","nome":"FEIJAO 60x40 S/Costura - Marrom","grupo":"S"},{"id":"feijao60x40scosturapreto","nome":"FEIJAO 60x40 S/Costura - Preto","grupo":"S"},{"id":"feijao60x40scosturabranco","nome":"FEIJAO 60x40 S/Costura - Branco","grupo":"S"},{"id":"urso115x43scosturamarrom","nome":"URSO 1,15X43 S/Costura - Marrom","grupo":"S"},{"id":"bandejaeffect38x26scmarrom","nome":"BANDEJA Effect 38x26 S/C - Marrom","grupo":"S"},{"id":"bandejaeffect38x26scpreto","nome":"BANDEJA Effect 38x26 S/C - Preto","grupo":"S"},{"id":"bandejaeffect38x26scbranco","nome":"BANDEJA Effect 38x26 S/C - Branco","grupo":"S"},{"id":"bandejaeffect38x26strassprata","nome":"BANDEJA Effect 38x26 - STRASS PRATA","grupo":"S"},{"id":"bandejaeffect38x26strasspreto","nome":"BANDEJA Effect 38x26 - STRASS PRETO","grupo":"S"},{"id":"bandejaeffect38x26strassdourado","nome":"BANDEJA Effect 38x26 - STRASS DOURADO","grupo":"S"},{"id":"bandejaempire38x26scmarrom","nome":"Bandeja EMPIRE 38X26  S/C-MARROM","grupo":"S"},{"id":"bandejaempire38x26scpreto","nome":"Bandeja EMPIRE 38X26  S/C-PRETO","grupo":"S"},{"id":"bandejaempire38x26scbranco","nome":"Bandeja EMPIRE 38X26  S/C-BRANCO","grupo":"S"},{"id":"smolduraeffect60x40cfita","nome":"S/MOLDURA - Effect 60x40 -  C/Fita","grupo":"S"},{"id":"smolduraeffect60x40csuporte","nome":"S/MOLDURA - Effect 60x40-C/Suporte","grupo":"S"},{"id":"smolduraorganico60x40cfita","nome":"S/MOLDURA - Orgânico  60x40  -  C/Fita","grupo":"S"},{"id":"smolduraorganico60x40csuporte","nome":"S/MOLDURA - Orgânico 60x40 -C/Suporte","grupo":"S"},{"id":"smolduraeffect70x50cfita","nome":"S/MOLDURA - Effect  70x50 -  C/Fita","grupo":"S"},{"id":"smolduraeffect70x50csuporte","nome":"S/MOLDURA - Effect  70x50 -  C/Suporte","grupo":"S"},{"id":"smolduraempire60x40cfita","nome":"S/MOLDURA - Empire 60x40 - C/Fita","grupo":"S"},{"id":"smolduraempire60x40csuporte","nome":"S/MOLDURA - Empire 60x40 - C/suporte","grupo":"S"},{"id":"smolduralumina60x40cfita","nome":"S/MOLDURA - Lumina 60x40 - C/Fita","grupo":"S"},{"id":"smolduralumina60x40csuporte","nome":"S/MOLDURA - Lumina 60x40 - C/suporte","grupo":"S"},{"id":"smolduraredondo50cfita","nome":"S/MOLDURA - Redondo 50 - C/Fita","grupo":"S"},{"id":"smolduraredondo40cfita","nome":"S/MOLDURA - Redondo 40 - C/Fita","grupo":"S"},{"id":"smolduraredondo30cfita","nome":"S/MOLDURA - Redondo 30 - C/Fita","grupo":"S"},{"id":"diamond60x40ccosturamarrom","nome":"Diamond 60x40 - C/Costura - Marrom","grupo":"C"},{"id":"diamond60x40ccosturapreto","nome":"Diamond 60x40 - C/Costura - Preto","grupo":"C"},{"id":"adnet50cmccosturamarrom","nome":"Adnet 50cm C/Costura - Marrom","grupo":"C"},{"id":"adnet50cmccosturapreto","nome":"Adnet 50cm C/Costura - Preto","grupo":"C"},{"id":"adnet23cmccosturamarrom","nome":"Adnet 23cm C/Costura - Marrom","grupo":"C"},{"id":"adnet23cmccosturapreto","nome":"Adnet 23cm C/Costura - Preto","grupo":"C"},{"id":"effect60x40strassprata","nome":"EFFECT 60X40 STRASS - PRATA","grupo":"S"},{"id":"effect60x40strasspreto","nome":"EFFECT 60X40 STRASS - PRETO","grupo":"S"},{"id":"effect60x40strassdourado","nome":"EFFECT 60X40 STRASS - DOURADO","grupo":"S"}],"hist":{"2026-02":{"organico60x40ccosturamarrom":566,"organico60x40ccosturapreto":141,"organico80x60ccosturamarrom":83,"organico80x60ccosturapreto":49,"effect70x50ccosturamarrom":226,"effect70x50ccosturapreto":148,"redondo50cmccosturamarrom":17,"redondo50cmccosturapreto":8,"diamond60x40ccosturamarrom":2,"diamond60x40ccosturapreto":4,"adnet50cmccosturamarrom":3,"adnet50cmccosturapreto":2,"adnet23cmccosturamarrom":1,"adnet23cmccosturapreto":1,"organico60x40scosturamarrom":83,"organico60x40scosturapreto":48,"organico60x40scosturabranco":18,"effect60x40scosturamarrom":1042,"effect60x40scosturapreto":497,"effect60x40scosturabranco":168,"empire60x40scosturamarrom":282,"empire60x40scosturapreto":63,"empire60x40scosturabranco":30,"meialua60x30scosturamarrom":86,"meialua60x30scosturapreto":3},"2026-03":{"organico60x40ccosturamarrom":1014,"organico60x40ccosturapreto":169,"organico80x60ccosturamarrom":116,"organico80x60ccosturapreto":65,"effect70x50ccosturamarrom":415,"effect70x50ccosturapreto":128,"redondo50cmccosturamarrom":21,"redondo50cmccosturapreto":2,"diamond60x40ccosturamarrom":1,"diamond60x40ccosturapreto":5,"organico60x40scosturamarrom":156,"organico60x40scosturapreto":29,"organico60x40scosturabranco":9,"effect60x40scosturamarrom":2527,"effect60x40scosturapreto":947,"effect60x40scosturabranco":410,"empire60x40scosturamarrom":485,"empire60x40scosturapreto":101,"empire60x40scosturabranco":24,"meialua60x30scosturamarrom":83,"meialua60x30scosturapreto":7,"bandejaeffect38x26scmarrom":146,"bandejaeffect38x26scpreto":18,"bandejaeffect38x26scbranco":11,"bandejaempire38x26scmarrom":8},"2026-04":{"organico60x40ccosturamarrom":830,"organico60x40ccosturapreto":137,"organico80x60ccosturamarrom":148,"organico80x60ccosturapreto":97,"effect70x50ccosturamarrom":529,"effect70x50ccosturapreto":180,"redondo50cmccosturamarrom":45,"redondo50cmccosturapreto":4,"organico60x40scosturamarrom":125,"organico60x40scosturapreto":39,"organico60x40scosturabranco":5,"effect60x40scosturamarrom":2035,"effect60x40scosturapreto":894,"effect60x40scosturabranco":412,"empire60x40scosturamarrom":310,"empire60x40scosturapreto":19,"empire60x40scosturabranco":3,"meialua60x30scosturamarrom":64,"meialua60x30scosturapreto":3,"bandejaeffect38x26scmarrom":571,"bandejaeffect38x26scpreto":93,"bandejaeffect38x26scbranco":30,"bandejaempire38x26scmarrom":3,"bandejaempire38x26scpreto":1},"2026-05":{"organico60x40ccosturamarrom":1057,"organico60x40ccosturapreto":138,"organico80x60ccosturamarrom":126,"organico80x60ccosturapreto":47,"effect70x50ccosturamarrom":605,"effect70x50ccosturapreto":170,"redondo50cmccosturamarrom":26,"redondo50cmccosturapreto":3,"organico60x40scosturamarrom":124,"organico60x40scosturapreto":19,"organico60x40scosturabranco":8,"effect60x40scosturamarrom":2018,"effect60x40scosturapreto":1080,"effect60x40scosturabranco":339,"empire60x40scosturamarrom":216,"empire60x40scosturapreto":7,"empire60x40scosturabranco":2,"effect70x50scosturamarrom":136,"effect70x50scosturapreto":16,"meialua60x30scosturamarrom":90,"meialua60x30scosturapreto":14,"bandejaeffect38x26scmarrom":885,"bandejaeffect38x26scpreto":131,"bandejaeffect38x26scbranco":79,"smolduraeffect60x40cfita":10,"smolduraeffect60x40csuporte":31,"smolduraorganico60x40cfita":140,"smolduraorganico60x40csuporte":9,"smolduraeffect70x50cfita":3,"smolduraeffect70x50csuporte":1,"smolduraempire60x40cfita":1,"smolduraempire60x40csuporte":1,"smolduraredondo50cfita":8,"smolduraredondo40cfita":51,"smolduraredondo30cfita":2},"2026-06":{"organico60x40ccosturamarrom":1171,"organico60x40ccosturapreto":133,"organico80x60ccosturamarrom":139,"organico80x60ccosturapreto":41,"effect70x50ccosturamarrom":730,"effect70x50ccosturapreto":181,"redondo50cmccosturamarrom":19,"redondo50cmccosturapreto":2,"organico60x40scosturamarrom":131,"organico60x40scosturapreto":23,"organico60x40scosturabranco":7,"effect60x40scosturamarrom":2058,"effect60x40scosturapreto":842,"effect60x40scosturabranco":254,"empire60x40scosturamarrom":231,"empire60x40scosturapreto":28,"empire60x40scosturabranco":1,"effect70x50scosturamarrom":158,"effect70x50scosturapreto":21,"meialua60x30scosturamarrom":102,"meialua60x30scosturapreto":16,"bandejaeffect38x26scmarrom":1018,"bandejaeffect38x26scpreto":144,"bandejaeffect38x26scbranco":71,"smolduraeffect60x40cfita":78,"smolduraeffect60x40csuporte":95,"smolduraorganico60x40cfita":125,"smolduraorganico60x40csuporte":5,"smolduraeffect70x50cfita":4,"smolduraredondo50cfita":10,"smolduraredondo40cfita":48,"smolduraredondo30cfita":11},"2026-07":{"organico60x40ccosturamarrom":940,"organico60x40ccosturapreto":176,"organico80x60ccosturamarrom":99,"organico80x60ccosturapreto":48,"effect70x50ccosturamarrom":593,"effect70x50ccosturapreto":115,"redondo50cmccosturamarrom":8,"redondo50cmccosturapreto":3,"organico60x40scosturamarrom":86,"organico60x40scosturapreto":2,"organico60x40scosturabranco":4,"effect60x40scosturamarrom":2131,"effect60x40scosturapreto":813,"effect60x40scosturabranco":262,"effect60x40strasspreto":1,"empire60x40scosturamarrom":349,"empire60x40scosturapreto":55,"empire60x40scosturabranco":5,"effect70x50scosturamarrom":133,"effect70x50scosturapreto":22,"meialua60x30scosturamarrom":99,"meialua60x30scosturapreto":15,"bandejaeffect38x26scmarrom":1546,"bandejaeffect38x26scpreto":273,"bandejaeffect38x26scbranco":162,"bandejaempire38x26scmarrom":3,"bandejaeffect38x26strassprata":4,"bandejaeffect38x26strasspreto":1,"bandejaeffect38x26strassdourado":4,"smolduraeffect60x40cfita":57,"smolduraeffect60x40csuporte":228,"smolduraorganico60x40cfita":231,"smolduraorganico60x40csuporte":20,"smolduraredondo50cfita":11,"smolduraredondo40cfita":18},"2026-08":{"organico60x40ccosturamarrom":925,"organico60x40ccosturapreto":80,"organico80x60ccosturamarrom":114,"organico80x60ccosturapreto":72,"effect70x50ccosturamarrom":632,"effect70x50ccosturapreto":75,"redondo50cmccosturamarrom":1,"redondo50cmccosturapreto":2,"organico60x40scosturamarrom":76,"organico60x40scosturapreto":11,"organico60x40scosturabranco":2,"effect60x40scosturamarrom":2305,"effect60x40scosturapreto":746,"effect60x40scosturabranco":199,"empire60x40scosturamarrom":270,"empire60x40scosturapreto":43,"empire60x40scosturabranco":2,"effect70x50scosturamarrom":188,"effect70x50scosturapreto":28,"meialua60x30scosturamarrom":100,"meialua60x30scosturapreto":15,"bandejaeffect38x26scmarrom":1600,"bandejaeffect38x26scpreto":275,"bandejaeffect38x26scbranco":135,"bandejaempire38x26scmarrom":9,"bandejaempire38x26scpreto":6,"bandejaeffect38x26strassprata":14,"bandejaeffect38x26strasspreto":2,"bandejaeffect38x26strassdourado":20,"smolduraeffect60x40cfita":26,"smolduraeffect60x40csuporte":126,"smolduraorganico60x40cfita":229,"smolduraorganico60x40csuporte":7,"smolduraeffect70x50cfita":1,"smolduraredondo50cfita":25,"smolduraredondo40cfita":16,"smolduraredondo30cfita":2},"2026-09":{"organico60x40ccosturamarrom":636,"organico60x40ccosturapreto":58,"organico80x60ccosturamarrom":127,"organico80x60ccosturapreto":59,"effect70x50ccosturamarrom":499,"effect70x50ccosturapreto":85,"redondo50cmccosturamarrom":2,"organico60x40scosturamarrom":44,"organico60x40scosturapreto":5,"organico60x40scosturabranco":3,"effect60x40scosturamarrom":2010,"effect60x40scosturapreto":707,"effect60x40scosturabranco":184,"lumina60x40scosturamarrom":34,"lumina60x40scosturapreto":13,"lumina60x40scosturabranco":6,"empire60x40scosturamarrom":341,"empire60x40scosturapreto":43,"empire60x40scosturabranco":1,"effect70x50scosturamarrom":136,"effect70x50scosturapreto":15,"lumina70x50scosturamarrom":4,"lumina70x50scosturapreto":4,"lumina70x50scosturabranco":1,"meialua60x30scosturamarrom":155,"meialua60x30scosturapreto":15,"feijao60x40scosturamarrom":43,"feijao60x40scosturapreto":4,"feijao60x40scosturabranco":4,"urso115x43scosturamarrom":1,"bandejaeffect38x26scmarrom":3311,"bandejaeffect38x26scpreto":569,"bandejaeffect38x26scbranco":294,"bandejaeffect38x26strassprata":33,"bandejaeffect38x26strasspreto":9,"bandejaeffect38x26strassdourado":52,"bandejaempire38x26scmarrom":32,"bandejaempire38x26scpreto":6,"bandejaempire38x26scbranco":5,"smolduraeffect60x40cfita":45,"smolduraeffect60x40csuporte":141,"smolduraorganico60x40cfita":21,"smolduraorganico60x40csuporte":2,"smolduraeffect70x50cfita":2,"smolduraeffect70x50csuporte":3,"smolduraempire60x40cfita":4,"smolduraempire60x40csuporte":3,"smolduraredondo50cfita":6,"smolduraredondo40cfita":4,"smolduraredondo30cfita":1}},"estoque":{"organico60x40ccosturamarrom":28,"organico80x60ccosturamarrom":7,"organico80x60ccosturapreto":3,"effect70x50ccosturamarrom":10,"effect70x50ccosturapreto":9,"redondo50cmccosturamarrom":1,"redondo50cmccosturapreto":1,"organico60x40scosturamarrom":5,"effect60x40scosturamarrom":58,"effect60x40scosturapreto":33,"effect60x40scosturabranco":19,"empire60x40scosturamarrom":32,"effect70x50scosturamarrom":14,"effect70x50scosturapreto":8,"meialua60x30scosturamarrom":3,"bandejaeffect38x26scmarrom":47,"bandejaeffect38x26scpreto":17,"bandejaeffect38x26scbranco":2,"organico60x40ccosturapreto":9,"organico60x40scosturapreto":7,"organico60x40scosturabranco":1,"empire60x40scosturapreto":13,"empire60x40scosturabranco":1,"meialua60x30scosturapreto":6,"smolduraeffect60x40cfita":4,"smolduraeffect60x40csuporte":1,"smolduraorganico60x40cfita":6,"smolduraredondo50cfita":7,"smolduraredondo40cfita":18,"bandejaeffect38x26strassdourado":1,"lumina60x40scosturamarrom":3,"lumina60x40scosturapreto":2,"bandejaeffect38x26strassprata":5,"bandejaempire38x26scmarrom":2,"smolduraeffect70x50csuporte":1}};
 
 /* ------------------------------------------------------------------ estado */
 let S = {produtos:SEED.produtos.slice(), vendas:{}, producao:{}, ordens:{},
          estoque:Object.assign({},SEED.estoque),
-         cfg:{cobertura:10, dias:{}, contagem:'', capacidade:0, lote:5}, extras:[],
+         cfg:{cobertura:10, dias:{}, contagem:'', capacidade:0, lote:5, modoProd:'ordem'}, extras:[],
          acesso:{gestor:'',producao:''}, autor:{}};
 let view='dia', semana=null, dia=null, filtro='', mesAlvo=null, dataDia=null, storageOK=true;
-let modoDia='ordem', fecharTodos=false, recado='';
+let modoDia='ordem', fecharTodos=false, recado='', modoMes='prog', mesAnalise=null;
 let perfil=null, tentativa=null, erroPin='';
 const ehGestor = () => perfil==='gestor';
 const PERFIS = {gestor:'Gestor', producao:'Produção'};
@@ -343,6 +417,8 @@ const MESES_C = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','no
 
 const fmt = n => (n===null||n===undefined||n===0||isNaN(n)) ? '–' : nf.format(Math.round(n));
 const fmt0 = n => nf.format(Math.round(n||0));
+const pc = (v,d=1) => v.toFixed(d).replace('.',',');
+const Mai = t => String(t).charAt(0).toUpperCase()+String(t).slice(1);
 const iso = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const mesDe = s => s.slice(0,7);
 const chave = s => (s||'').toLowerCase()
@@ -377,7 +453,8 @@ async function carregar(){
   const [est,cfg,extras,acc,pf]=await Promise.all([sGet(KEY_EST),sGet(KEY_CFG),sGet(KEY_PROD),
     sGet(KEY_ACC),sGet(KEY_PERFIL)]);
   if(acc)S.acesso=Object.assign(S.acesso,acc);
-  perfil = S.acesso.gestor ? (pf&&PERFIS[pf]?pf:null) : 'gestor';
+  /* o aparelho lembra apenas o perfil Produção; Gestor pede o PIN em cada abertura */
+  perfil = S.acesso.gestor ? (pf==='producao'?'producao':null) : 'gestor';
   S.extras = extras||[];
   S.produtos = SEED.produtos.concat(S.extras);
   S.estoque = est || Object.assign({},SEED.estoque);
@@ -446,12 +523,37 @@ function itensOrdem(d){
   }).sort((a,b)=>b.qtd-a.qtd);
   return {emitida:true,itens,P};
 }
-function dataBase(){return S.cfg.contagem||'2026-08-31'}
+function dataBase(){return S.cfg.contagem||'2026-09-30'}
+/* Produção de um dia: o número lançado quando existe. Quando não existe e o app está
+   no modo "a fábrica cumpre a ordem", vale a quantidade que foi mandada produzir. */
+function prodEfetiva(d,pid){
+  const l=prodDia(d,pid);
+  if(l>0)return l;
+  if(S.cfg.modoProd==='lancada')return 0;
+  const o=ordemDe(d);
+  return o?(o[pid]||0):0;
+}
 function estoqueEm(pid,ate){
   const b=dataBase();let v=S.estoque[pid]||0;
-  for(const d in S.producao)if(d>b&&d<=ate)v+=S.producao[d][pid]||0;
+  const dias=new Set([...Object.keys(S.producao),...(S.cfg.modoProd==='ordem'?Object.keys(S.ordens):[])]);
+  dias.forEach(d=>{if(d>b&&d<=ate)v+=prodEfetiva(d,pid)});
   for(const d in S.vendas)if(d>b&&d<=ate)v-=S.vendas[d][pid]||0;
   return v;
+}
+/* Ritmo de venda observado nos dias já lançados do mês */
+function diariaObservada(mes,pid){
+  const dias=Object.keys(S.vendas).filter(d=>mesDe(d)===mes&&Object.keys(S.vendas[d]).length);
+  if(!dias.length)return null;
+  const t=dias.reduce((a,d)=>a+(S.vendas[d][pid]||0),0);
+  return {n:dias.length, media:t/dias.length};
+}
+/* Mistura o histórico dos meses fechados com o que já foi vendido neste mês.
+   Quanto mais dias lançados, mais peso o mês corrente ganha (até 70%). */
+function diariaAjustada(mes,pid,base){
+  const o=diariaObservada(mes,pid);
+  if(!o)return {diaria:base,peso:0,n:0};
+  const peso=Math.min(0.7,o.n/15);
+  return {diaria:base*(1-peso)+o.media*peso, peso, n:o.n};
 }
 const estoqueHoje = pid => estoqueEm(pid,iso(HOJE));
 function proxDiaUtil(from){let d=addDias(from,1);while(!ehUtil(d))d=addDias(d,1);return d}
@@ -502,10 +604,12 @@ function programacao(alvo){
   const cob=S.cfg.cobertura;
   const itens=S.produtos.map(p=>{
     const vals=base.map(k=>totalMesProduto(k,p.id)).filter(v=>v!==null);
-    const prev=vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):0;
-    const seg=duTot?Math.round(prev/duTot*cob):0;
+    const prevH=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:0;
+    const aj=diariaAjustada(alvo,p.id,duTot?prevH/duTot:0);
+    const prev=Math.round(aj.diaria*duTot);
+    const seg=duTot?Math.round(aj.diaria*cob):0;
     const est=estoqueHoje(p.id);
-    const prevRest=Math.round(prev*(duRest/(duTot||1)));
+    const prevRest=Math.round(aj.diaria*duRest);
     return {...p,prev,prevRest,seg,est,fazer:Math.max(0,prevRest+seg-est),semBase:vals.length===0};
   });
   return {base,itens,duTot,duRest,atual,total:itens.reduce((a,i)=>a+i.fazer,0)};
@@ -522,7 +626,7 @@ function planoDia(dIso){
   const itens=S.produtos.map(p=>{
     const vals=base.map(k=>totalMesProduto(k,p.id)).filter(v=>v!==null);
     const prevMes=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:0;
-    const diaria=duTot?prevMes/duTot:0;
+    const diaria=diariaAjustada(mes,p.id,duTot?prevMes/duTot:0).diaria;
     const est=estoqueEm(p.id,ant);
     const seg=Math.round(diaria*cobMeta);
     const nec=Math.max(0,Math.round(diaria*duRest)+seg-est);
@@ -569,8 +673,9 @@ function planoDia(dIso){
 }
 
 function vTrava(){
+  const marca=`<svg class="marca-grande" role="img" aria-label="WE MIRROR"><use href="#marca"/></svg>`;
   if(tentativa){
-    return `<section class="trava">
+    return `<section class="trava">${marca}
       <h2>${PERFIS[tentativa]}</h2>
       <p class="sub" style="margin-bottom:12px">Digite o PIN para entrar.</p>
       <input type="password" id="pin" inputmode="numeric" autocomplete="off" placeholder="PIN">
@@ -579,24 +684,335 @@ function vTrava(){
       <button class="btn ghost" data-act="voltarperfil">Voltar</button>
     </section>`;
   }
-  return `<section class="trava">
+  return `<section class="trava">${marca}
     <h2>Quem está usando</h2>
-    <p class="sub">O acesso da produção mostra só a ordem do dia e o registro do que foi produzido.</p>
-    <button class="btn ghost" data-perfil="producao">Produção</button>
-    <button class="btn" data-perfil="gestor">Gestor</button>
+    <p class="sub">A produção vê só a ordem do dia e o registro do que foi produzido.</p>
+    <button class="btn ghost" data-perfil="producao">Produção
+      <small>${S.acesso.producao?'pede o PIN':'entra sem PIN'}</small></button>
+    <button class="btn" data-perfil="gestor">Gestor
+      <small>pede o PIN</small></button>
   </section>`;
 }
 
+
+/* ------------------------------------------------------- gráficos (SVG) */
+const PAL=['#24413B','#3D6159','#5A8078','#83A39B','#A2650F','#C99A3E','#8C3A2B','#AFBCB7'];
+const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function tetoBonito(v){
+  const p=Math.pow(10,Math.floor(Math.log10(v)));
+  return Math.ceil(v/(p/2))*(p/2);
+}
+
+/* linha do tempo com área sob a curva */
+function gLinha(serie,destaque,op){
+  if(serie.length<2){
+    return `<p class="note">Um mês só de histórico: o gráfico de evolução aparece a partir do segundo.</p>`;
+  }
+  const o=op||{}, W=o.W||580, H=o.H||210, ml=o.ml||46, mr=16, mt=24, mb=30;
+  const max=tetoBonito(Math.max(...serie.map(x=>x.total)));
+  const px=i=>ml+(W-ml-mr)*(serie.length===1?0.5:i/(serie.length-1));
+  const py=v=>H-mb-(H-mt-mb)*(v/max);
+  const pts=serie.map((x,i)=>[px(i),py(x.total)]);
+  const fs=o.fs||11, linha=pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+  const area=`${ml},${H-mb} ${linha} ${px(serie.length-1)},${H-mb}`;
+  let grade='';
+  for(let i=0;i<=4;i++){
+    const v=max*i/4, y=py(v);
+    grade+=`<line x1="${ml}" y1="${y.toFixed(1)}" x2="${W-mr}" y2="${y.toFixed(1)}" stroke="#DEE3DF" stroke-width="1"/>`
+      +`<text x="${ml-7}" y="${(y+3.5).toFixed(1)}" text-anchor="end" font-size="${fs-1}" fill="#6C7A75">${fmt0(v)}</text>`;
+  }
+  const marcas=serie.map((x,i)=>{
+    const d=x.mes===destaque;
+    const ult=i===serie.length-1;
+    const anc=i===0?'start':(ult?'end':'middle');
+    const dx=i===0?5:(ult?-5:0);
+    return `<circle cx="${px(i).toFixed(1)}" cy="${py(x.total).toFixed(1)}" r="${d?5:3.6}"
+       fill="${d?'#A2650F':'#24413B'}" stroke="#fff" stroke-width="1.5"/>
+      <text x="${(px(i)+dx).toFixed(1)}" y="${(py(x.total)-11).toFixed(1)}" text-anchor="${anc}"
+       font-size="${fs+1}" font-weight="600" fill="${d?'#A2650F':'#24413B'}">${fmt0(x.total)}</text>
+      <text x="${px(i).toFixed(1)}" y="${H-mb+15}" text-anchor="middle" font-size="${fs}"
+       fill="#6C7A75">${mesCurto(x.mes)}</text>`;
+  }).join('');
+  return `<div class="graf"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img"
+    aria-label="Evolução da produção mês a mês">
+    ${grade}
+    <polygon points="${area}" fill="#24413B" opacity="0.09"/>
+    <polyline points="${linha}" fill="none" stroke="#24413B" stroke-width="2.2"
+      stroke-linejoin="round" stroke-linecap="round"/>
+    ${marcas}
+  </svg></div>`;
+}
+
+/* colunas da evolução */
+function gColunas(serie,destaque,op){
+  const o=op||{}, W=o.W||580, H=o.H||210, ml=o.ml||52, mr=o.mr||14,
+        mt=o.mt||26, mb=o.mb||28, fs=o.fs||11;
+  const max=tetoBonito(Math.max(...serie.map(x=>x.total)));
+  const larg=(W-ml-mr)/serie.length;
+  const lb=Math.min(larg*0.52,78);
+  const py=v=>H-mb-(H-mt-mb)*(v/max);
+  let grade='';
+  for(let i=0;i<=4;i++){
+    const v=max*i/4, y=py(v);
+    grade+=`<line x1="${ml}" y1="${y.toFixed(1)}" x2="${W-mr}" y2="${y.toFixed(1)}"
+      stroke="${i?'#E4E8E4':'#C9D0CB'}" stroke-width="1"/>
+      <text x="${ml-8}" y="${(y+3.5).toFixed(1)}" text-anchor="end" font-size="${fs-1}"
+        fill="#6C7A75">${fmt0(v)}</text>`;
+  }
+  const barras=serie.map((x,i)=>{
+    const cx=ml+larg*i+larg/2, y=py(x.total), d=x.mes===destaque;
+    return `<rect x="${(cx-lb/2).toFixed(1)}" y="${y.toFixed(1)}" width="${lb.toFixed(1)}"
+      height="${(H-mb-y).toFixed(1)}" fill="${d?'#A2650F':'#24413B'}" rx="2"/>
+      <text x="${cx.toFixed(1)}" y="${(y-8).toFixed(1)}" text-anchor="middle" font-size="${fs+2}"
+        font-weight="700" fill="${d?'#A2650F':'#24413B'}">${fmt0(x.total)}</text>
+      <text x="${cx.toFixed(1)}" y="${H-mb+16}" text-anchor="middle" font-size="${fs}"
+        fill="#6C7A75">${mesCurto(x.mes)}</text>`;
+  }).join('');
+  return `<div class="graf"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img"
+    aria-label="Produção mês a mês">${grade}${barras}</svg></div>`;
+}
+
+/* rosca com legenda */
+function gRosca(dados,total,rotulo){
+  const R=92,r=54,cx=104,cy=104;
+  let ang=-Math.PI/2, fatias='';
+  if(dados.length===1){
+    fatias=`<circle cx="${cx}" cy="${cy}" r="${(R+r)/2}" fill="none" stroke="${PAL[0]}" stroke-width="${R-r}"/>`;
+  } else dados.forEach(([k,v],i)=>{
+    const a=Math.max(v/total*Math.PI*2, 0.004);
+    const P=(rr,t)=>[(cx+rr*Math.cos(t)).toFixed(2),(cy+rr*Math.sin(t)).toFixed(2)];
+    const [x1,y1]=P(R,ang),[x2,y2]=P(R,ang+a),[x3,y3]=P(r,ang+a),[x4,y4]=P(r,ang);
+    const big=a>Math.PI?1:0;
+    fatias+=`<path d="M${x1} ${y1}A${R} ${R} 0 ${big} 1 ${x2} ${y2}L${x3} ${y3}A${r} ${r} 0 ${big} 0 ${x4} ${y4}Z"
+      fill="${PAL[i%PAL.length]}" stroke="#fff" stroke-width="1"/>`;
+    ang+=a;
+  });
+  const leg=dados.map(([k,v],i)=>`<li><i style="background:${PAL[i%PAL.length]}"></i>
+    <span>${esc(k)}</span><em>${fmt0(v)} · ${(v/total*100).toFixed(0)}%</em></li>`).join('');
+  return `<div class="rosca">
+    <svg viewBox="0 0 208 208" role="img" aria-label="${esc(rotulo||'Composição')}">${fatias}
+      <text x="${cx}" y="${cy-2}" text-anchor="middle" font-size="26" font-weight="700"
+        font-family="Zilla Slab, Georgia, serif" fill="#16211F">${fmt0(total)}</text>
+      <text x="${cx}" y="${cy+16}" text-anchor="middle" font-size="11" fill="#6C7A75">peças</text>
+    </svg>
+    <ul class="legenda">${leg}</ul></div>`;
+}
+
+/* Pareto: barras dos maiores + curva acumulada e linha dos 80% */
+function gPareto(itens,total,op){
+  const o=op||{}, lista=itens.slice(0,o.n||10);
+  const W=o.W||580, H=o.H||225, ml=40, mr=o.mr||38, mt=18, mb=o.mb||64;
+  const max=tetoBonito(lista[0].q);
+  const lw=(W-ml-mr)/lista.length;
+  let barras='',curva=[],rot='';
+  let acc=0;
+  lista.forEach((i,n)=>{
+    const x=ml+n*lw, h=(H-mt-mb)*(i.q/max);
+    barras+=`<rect x="${(x+lw*0.16).toFixed(1)}" y="${(H-mb-h).toFixed(1)}"
+      width="${(lw*0.68).toFixed(1)}" height="${h.toFixed(1)}" fill="${PAL[0]}" rx="1.5"/>
+      <text x="${(x+lw/2).toFixed(1)}" y="${(H-mb-h-5).toFixed(1)}" text-anchor="middle"
+        font-size="${o.fsv||9.5}" font-weight="600" fill="#24413B">${fmt0(i.q)}</text>`;
+    acc+=i.q;
+    curva.push([x+lw/2, mt+(H-mt-mb)*(1-acc/total)]);
+    const lim=o.lim||17;
+    const nome=i.nome.length>lim?i.nome.slice(0,lim-1)+'…':i.nome;
+    rot+=`<text transform="translate(${(x+lw/2).toFixed(1)} ${H-mb+8}) rotate(38)"
+      font-size="${o.fs||8.6}" fill="#6C7A75">${esc(nome)}</text>`;
+  });
+  const y80=mt+(H-mt-mb)*(1-0.8);
+  return `<div class="graf"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img"
+    aria-label="Curva ABC dos dez maiores produtos">
+    <line x1="${ml}" y1="${H-mb}" x2="${W-mr}" y2="${H-mb}" stroke="#C9D0CB"/>
+    <line x1="${ml}" y1="${y80.toFixed(1)}" x2="${W-mr}" y2="${y80.toFixed(1)}"
+      stroke="#8C3A2B" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="${W-mr+3}" y="${(y80+3.5).toFixed(1)}" font-size="9.5" fill="#8C3A2B">80%</text>
+    ${barras}
+    <polyline points="${curva.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}"
+      fill="none" stroke="#A2650F" stroke-width="2"/>
+    ${curva.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.6" fill="#A2650F"/>`).join('')}
+    ${rot}
+  </svg></div>`;
+}
+
+/* barras divergentes: altas e quedas */
+function gDiverg(lista,op){
+  if(!lista.length)return '';
+  const o=op||{}, W=o.W||580, lh=o.lh||21, mt=6;
+  const H=mt*2+lista.length*lh;
+  const max=Math.max(...lista.map(x=>Math.abs(x.d)))||1;
+  const xRot=o.xRot||196, x0=xRot+10, x1=W-6, mc=(x0+x1)/2, larg=(x1-mc)-42;
+  const linhas=lista.map((x,n)=>{
+    const y=mt+n*lh, w=larg*Math.abs(x.d)/max;
+    const pos=x.d>0;
+    const lim=o.lim||34, nome=x.nome.length>lim?x.nome.slice(0,lim-1)+'…':x.nome;
+    const fs=o.fs||10, alt=Math.round(lh*0.55);
+    return `<text x="${xRot}" y="${y+lh*0.68}" text-anchor="end" font-size="${fs}" fill="#16211F">${esc(nome)}</text>
+      <rect x="${pos?mc:mc-w}" y="${y+(lh-alt)/2}" width="${w.toFixed(1)}" height="${alt}" rx="1.5"
+        fill="${pos?'#3D6159':'#8C3A2B'}"/>
+      <text x="${pos?mc+w+5:mc-w-5}" y="${y+lh*0.68}" text-anchor="${pos?'start':'end'}"
+        font-size="${fs}" font-weight="600" fill="${pos?'#2C6B4E':'#8C3A2B'}">${x.d>0?'+':''}${fmt0(x.d)}</text>`;
+  }).join('');
+  return `<div class="graf"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img"
+    aria-label="Variação por produto contra o mês anterior">
+    <line x1="${mc}" y1="${mt}" x2="${mc}" y2="${H-mt}" stroke="#C9D0CB"/>
+    ${linhas}
+  </svg></div>`;
+}
+
+
+/* ------------------------------------- leituras automáticas dos gráficos */
+function duDe(mes){
+  const [y,m]=mes.split('-').map(Number);
+  return S.cfg.dias[mes]||diasUteisMes(y,m-1);
+}
+function leituraEvolucao(A){
+  if(!A.ant)return '';
+  const duA=duDe(A.ant), pdA=A.totalAnt/duA, pd=A.total/A.du;
+  const dTot=(A.total/A.totalAnt-1)*100, dDia=(pd/pdA-1)*100;
+  const pico=A.serie.reduce((a,b)=>b.total>a.total?b:a);
+  let t;
+  if(dTot<0&&dDia>0){
+    t=`No total, ${mesNome(A.mes)} recuou ${pc(Math.abs(dTot))}% contra ${mesNome(A.ant)} —
+       mas com ${duA-A.du} ${duA-A.du>1?'dias úteis':'dia útil'} a menos.
+       <b>Por dia útil a fábrica subiu</b>, de ${fmt0(pdA)} para ${fmt0(pd)} peças (+${pc(dDia)}%).`;
+  } else if(dTot>0&&dDia<0){
+    t=`${Mai(mesNome(A.mes))} produziu ${pc(dTot)}% mais no total, mas isso veio de
+       ${A.du-duA} ${A.du-duA>1?'dias úteis':'dia útil'} a mais: <b>por dia útil o ritmo caiu</b>,
+       de ${fmt0(pdA)} para ${fmt0(pd)} peças.`;
+  } else if(dTot>=0){
+    t=`Alta de ${pc(dTot)}% no total e de ${pc(dDia)}% por dia útil,
+       de ${fmt0(pdA)} para ${fmt0(pd)} peças. <b>Crescimento de ritmo, não de calendário.</b>`;
+  } else {
+    t=`Queda de ${pc(Math.abs(dTot))}% no total e de ${pc(Math.abs(dDia))}% por dia útil,
+       de ${fmt0(pdA)} para ${fmt0(pd)} peças. <b>A perda não se explica pelo calendário.</b>`;
+  }
+  if(pico.mes!==A.mes) t+=` ${Mai(mesNome(pico.mes))} segue como o maior volume da série (${fmt0(pico.total)} peças).`;
+  else t+=` É o maior volume da série até agora.`;
+  return `<div class="leitura">${t}</div>`;
+}
+function leituraLinhas(A){
+  if(!A.linhas.length)return '';
+  const tot=A.total, [n1,v1]=A.linhas[0], p1=v1/tot*100;
+  let peso;
+  if(p1>=60) peso='a maior parte de tudo que a fábrica faz';
+  else if(p1>=47) peso='metade de tudo que a fábrica faz';
+  else if(p1>=30) peso='a linha mais forte';
+  else peso='a linha mais forte, sem dominar o mix';
+  let t=`A <b>${n1}</b> é ${peso}: ${fmt0(v1)} peças, ${p1.toFixed(0)}% do mês.`;
+  if(A.linhas.length>=3){
+    const [n2,v2]=A.linhas[1], [n3,v3]=A.linhas[2];
+    const p=( (v1+v2+v3)/tot*100 );
+    t+=` Com <b>${n2}</b> (${(v2/tot*100).toFixed(0)}%) e <b>${n3}</b> (${(v3/tot*100).toFixed(0)}%),
+      as três somam ${p.toFixed(0)}% da fábrica — o resto do catálogo divide os
+      ${(100-p).toFixed(0)}% que sobram.`;
+  }
+  return `<div class="leitura">${t}</div>`;
+}
+function leituraCores(A){
+  if(!A.cores.length)return '';
+  const [n1,v1]=A.cores[0], p1=v1/A.total*100;
+  let t=`<b>${n1}</b> é ${p1.toFixed(0)}% da produção.`;
+  if(p1>=60) t+=` Concentração alta, e ela abre duas conversas: o <b>risco</b> de a fábrica
+    depender de um acabamento só, e a <b>oportunidade</b> que existe nos outros.`;
+  else if(p1>=40) t+=` Concentração relevante, ainda sem virar dependência — vale acompanhar
+    se a distância aumenta nos próximos meses.`;
+  else t+=` A produção está bem distribuída entre acabamentos, o que reduz o risco de depender
+    de um só.`;
+  return `<div class="leitura">${t}</div>`;
+}
+function resumoExecutivo(A){
+  const [l1,v1]=A.linhas[0]||['—',0], [c1,vc1]=A.cores[0]||['—',0];
+  let t=`Em ${mesNome(A.mes)} a fábrica produziu <b>${fmt0(A.total)} peças</b> em ${A.du} dias úteis,
+    uma média de <b>${fmt0(A.porDia)} peças por dia</b>.`;
+  if(A.ant){
+    const pdA=A.totalAnt/duDe(A.ant);
+    const d=(A.porDia/pdA-1)*100;
+    t+=` O ritmo diário ${d>=0?'subiu':'caiu'} ${pc(Math.abs(d))}% contra ${mesNome(A.ant)}
+      (${fmt0(pdA)} peças por dia).`;
+  }
+  t+=` A produção continua concentrada: <b>${l1}</b> responde por ${(v1/A.total*100).toFixed(0)}% do
+    volume, o acabamento <b>${c1}</b> por ${(vc1/A.total*100).toFixed(0)}%, e
+    <b>${A.n80} de ${A.itens.length} produtos ativos</b> formam 80% de tudo que saiu.`;
+  return `<div class="resumo">${t}</div>`;
+}
+function leituraABC(A){
+  const resto=A.itens.length-A.n80;
+  return `<div class="leitura"><b>${A.n80} produtos de ${A.itens.length}</b> respondem por 80% do
+    volume. É a informação que muda a prioridade da fábrica e do estoque: ruptura nesses ${A.n80}
+    custa caro e para o faturamento, enquanto os outros ${resto} podem esperar sem quebrar o mês.</div>`;
+}
+
+/* ------------------------------------------------------------- análise */
+function linhaDe(nome){
+  const n=chave(nome);
+  if(n.includes('smoldura'))return 'Sem moldura';
+  if(n.includes('bandeja'))return 'Bandejas';
+  if(n.includes('lumina'))return 'Lumina';
+  if(n.includes('feijao'))return 'Feijão';
+  if(n.includes('urso'))return 'Urso';
+  if(n.includes('effect'))return 'Effect';
+  if(n.includes('organico'))return 'Orgânico';
+  if(n.includes('empire'))return 'Empire';
+  if(n.includes('meialua'))return 'Meia Lua';
+  if(n.includes('redondo'))return 'Redondo';
+  return 'Outros';
+}
+function corDe(nome){
+  const n=chave(nome);
+  if(n.includes('strass'))return 'Strass';
+  if(n.includes('marrom'))return 'Marrom';
+  if(n.includes('preto'))return 'Preto';
+  if(n.includes('branco'))return 'Branco';
+  return 'Outras';
+}
+function mesAnterior(mes){
+  const ms=mesesComDados().filter(m=>m<mes);
+  return ms.length?ms[ms.length-1]:null;
+}
+function analiseMes(mes){
+  const [y,m]=mes.split('-').map(Number);
+  const du=S.cfg.dias[mes]||diasUteisMes(y,m-1);
+  const itens=S.produtos.map(p=>({...p,q:totalMesProduto(mes,p.id)||0}))
+    .filter(i=>i.q>0).sort((a,b)=>b.q-a.q);
+  const total=itens.reduce((a,i)=>a+i.q,0);
+  const ant=mesAnterior(mes);
+  const totalAnt=ant?totalMes(ant):null;
+  const soma=(f)=>{
+    const mapa={};
+    itens.forEach(i=>{const k=f(i.nome);mapa[k]=(mapa[k]||0)+i.q});
+    return Object.entries(mapa).sort((a,b)=>b[1]-a[1]);
+  };
+  // concentracao: quantos produtos formam 80% do volume
+  let acc=0,n80=0;
+  for(const i of itens){acc+=i.q;n80++;if(acc>=total*0.8)break}
+  // variacoes contra o mes anterior
+  const varia=ant?S.produtos.map(p=>{
+    const a=totalMesProduto(ant,p.id)||0, b=totalMesProduto(mes,p.id)||0;
+    return {nome:p.nome,a,b,d:b-a};
+  }).filter(x=>x.d!==0).sort((x,z)=>z.d-x.d):[];
+  const meses=mesesComDados();
+  return {mes,du,itens,total,ant,totalAnt,
+    porDia:du?total/du:0,
+    linhas:soma(linhaDe), cores:soma(corDe),
+    grupos:[['Sem costura',itens.filter(i=>i.grupo==='S').reduce((a,i)=>a+i.q,0)],
+            ['Com costura',itens.filter(i=>i.grupo==='C').reduce((a,i)=>a+i.q,0)]],
+    n80, top:itens.slice(0,10),
+    altas:varia.slice(0,5), quedas:varia.slice(-5).reverse().filter(x=>x.d<0),
+    serie:meses.map(k=>({mes:k,total:totalMes(k)}))};
+}
+
 /* --------------------------------------------------------------------- UI */
-const TABS=[['dia','Dia'],['vendas','Semana'],['estoque','Estoque'],['prog','Mês'],['dados','Dados']];
+const TABS=[['dia','Dia'],['vendas','Semana'],['prog','Mês'],['dados','Ajustes']];
 function render(){
   const tabs=document.getElementById('tabs');
   const el=document.getElementById('view');
   const dot=document.getElementById('savedot');
   const pbox=document.getElementById('perfilbox');
+  const tm=document.getElementById('topmarca');
+  if(tm)tm.style.visibility=perfil?'visible':'hidden';
   if(!perfil){
     tabs.innerHTML='';el.innerHTML=vTrava();
-    document.getElementById('topsub').textContent='acesso ao programa';
+    document.getElementById('topsub').textContent='';
     if(dot)dot.innerHTML='';if(pbox)pbox.innerHTML='';
     const i=document.getElementById('pin');if(i)i.focus();
     return;
@@ -607,12 +1023,12 @@ function render(){
   if(!libera.some(([k])=>k===view))view='dia';
   tabs.innerHTML=libera.map(([k,l])=>
     `<button data-tab="${k}" class="${view===k?'sel':''}"><b>${l}</b></button>`).join('');
-  el.innerHTML=(view==='dia'?vDia():view==='vendas'?vVendas():view==='estoque'?vEstoque()
-    :view==='prog'?vProg():vDados());
+  el.innerHTML=(view==='dia'?vDia():view==='vendas'?vVendas()
+    :view==='prog'?vMes():vDados());
   const sub={dia:modoDia==='fechar'?'fechamento do dia':'ordem de produção do dia',
     vendas:'conferência e correção da semana',
-    estoque:'contagem em estoque',prog:'quanto produzir no mês',
-    dados:'histórico, produtos, acessos e cópia de segurança'}[view];
+    prog:modoMes==='analise'?'análise da produção do mês':'quanto produzir no mês',
+    dados:'estoque, acessos e ajustes do app'}[view];
   document.getElementById('topsub').textContent=sub||'espelhos e bandejas';
   if(!storageOK) el.insertAdjacentHTML('afterbegin',
     `<div class="warn">Os dados não estão sendo salvos neste momento. Vá em Dados e baixe uma cópia antes de fechar, para não perder o lançamento.</div>`);
@@ -648,7 +1064,18 @@ function vDia(){
       <button data-modo="fechar" class="${modoDia==='fechar'?'sel':''}">Fechar o dia</button>
     </div>`:''}`;
   const msg=recado?`<div class="ok">${recado}</div>`:'';
-  return `<section>${nav}${msg}${modoDia==='fechar'?dFechar():dOrdem()}</section>`;
+  const dica=!ehGestor()
+    ? `<div class="dica">Produza as quantidades da coluna <b>Produzir</b> e vá anotando na coluna
+       <b>Produzido</b> o que for saindo. Os números salvam sozinhos.</div>`
+    : modoDia==='fechar'
+      ? `<div class="dica">Fim do expediente: lance quanto <b>vendeu</b> de cada item.
+         ${S.cfg.modoProd==='ordem'
+           ? 'A coluna <b>Produzido</b> só precisa ser tocada se a fábrica fez diferente da ordem.'
+           : 'Lance também quanto foi <b>produzido</b>.'}
+         No fim da página, o botão fecha o dia e já gera a ordem de amanhã.</div>`
+      : `<div class="dica">Esta é a lista que vai para a fábrica. Para lançar as vendas e a produção
+         do dia, toque em <b>Fechar o dia</b> ali em cima.</div>`;
+  return `<section>${nav}${msg}${dica}${modoDia==='fechar'?dFechar():dOrdem()}</section>`;
 }
 
 function dOrdem(){
@@ -669,7 +1096,7 @@ function dOrdem(){
     const fe=prodDia(dataDia,i.id);
     rows+=`<div class="prow"><div class="pn">${i.nome}${ehGestor()?tag:''}</div>
       <div class="pd">${ehGestor()?`<span class="c" data-l="estoque">${fmt(i.est)}</span>
-      <span class="c" data-l="vende/dia">${i.diaria<1?i.diaria.toFixed(1).replace('.',','):fmt0(i.diaria)}</span>
+      <span class="c" data-l="vende por dia">${i.diaria<1?i.diaria.toFixed(1).replace('.',','):fmt0(i.diaria)}</span>
       <span class="c" data-l="falta no mês">${fmt(i.nec)}</span>`:''}</div>
       <span class="pf">${fmt0(i.qtd)}</span>
       <input class="pin${fe?' has':''}" data-pid="${i.id}" data-k="prod" type="number"
@@ -687,7 +1114,7 @@ function dOrdem(){
     </div>
     <div class="panel plist d3">
       <div class="prow phead"><div class="pn">Produto</div>
-        <div class="pd">${ehGestor()?`<span class="c">Estoque</span><span class="c">Vende/dia</span>
+        <div class="pd">${ehGestor()?`<span class="c">Estoque</span><span class="c">Vende por dia</span>
         <span class="c">Falta no mês</span>`:''}</div><span class="pf">Produzir</span>
         <span class="c ph6">Produzido</span></div>
       ${rows||'<div class="pad sub">Nada a produzir neste dia com os números atuais.</div>'}
@@ -697,9 +1124,9 @@ function dOrdem(){
       ${ehGestor()?`<button class="btn ghost" data-act="reemitir">${O.emitida?'Recalcular a ordem':'Emitir esta ordem'}</button>`:''}
     </div>
     ${ehGestor()?`<div class="two" style="margin-top:12px">
-      <div class="field"><span>Capacidade do dia (peças)</span>
+      <div class="field"><span>Quanto a fábrica produz por dia</span>
         <input type="number" id="capac" min="1" value="${P.cap}"></div>
-      <div class="field"><span>Múltiplo de produção</span>
+      <div class="field"><span>Arredondar lotes de quantas em quantas peças</span>
         <input type="number" id="lote" min="1" value="${S.cfg.lote||1}"></div>
     </div>`:''}
     ${forats}
@@ -735,7 +1162,8 @@ function dFechar(){
       <input class="pin v${v?' has':''}" data-pid="${id}" data-k="vdia" type="number" inputmode="numeric"
         min="0" step="1" value="${v||''}" placeholder="0" aria-label="Vendido">
       <input class="pin p${q?' has':''}" data-pid="${id}" data-k="prod" type="number" inputmode="numeric"
-        min="0" step="1" value="${q||''}" placeholder="0" aria-label="Produzido"></div>`;
+        min="0" step="1" value="${q||''}" placeholder="${S.cfg.modoProd==='ordem'&&o?fmt0(o):'0'}"
+        aria-label="Produzido"></div>`;
   }
   const prox=iso(proxDiaUtil(new Date(dataDia+'T12:00:00')));
   const pd=new Date(prox+'T12:00:00');
@@ -760,8 +1188,10 @@ function dFechar(){
     </div>
     <p class="note">A lista traz os produtos da ordem do dia mais qualquer um que já tenha lançamento.
       Para um produto fora da lista, use a busca acima ou o botão Todos.
-      Ao fechar o dia, o estoque de cada item é recalculado (contagem + produzido − vendido)
-      e a ordem do dia seguinte é gerada e guardada.</p>`;
+      ${S.cfg.modoProd==='ordem'
+        ? 'A coluna <b>Produzido</b> é opcional: deixando em branco, o app considera que a fábrica fez a quantidade da ordem, que aparece em cinza no campo. Preencha só quando sair diferente.'
+        : 'A coluna <b>Produzido</b> alimenta o estoque, então precisa ser preenchida todo dia.'}
+      Ao fechar o dia, o estoque é recalculado e a ordem do dia seguinte é gerada.</p>`;
 }
 
 /* --------------------------------------------------------- aba: vendas */
@@ -788,6 +1218,8 @@ function vVendas(){
         <b id="figdia">${fmt0(totalDia(dia))}<em>peças</em></b></div>
       <div class="fig"><span>total da semana</span><b id="figsem">${fmt0(tSem)}<em>peças</em></b></div>
     </div>
+    <div class="dica">Use esta aba para <b>corrigir um dia passado</b> ou lançar vários de uma vez.
+      O dia a dia normal você faz na aba Dia.</div>
     <div class="tools">
       <input type="text" id="filtro" placeholder="Filtrar produto" value="${filtro.replace(/"/g,'&quot;')}">
       <button class="btn ghost" data-act="colar">Colar do Excel</button>
@@ -799,11 +1231,14 @@ function vVendas(){
 }
 
 /* --------------------------------------------------------- aba: estoque */
-function vEstoque(){
+function secEstoque(){
   const tot=S.produtos.reduce((a,p)=>a+(S.estoque[p.id]||0),0);
   const hoje=S.produtos.reduce((a,p)=>a+estoqueHoje(p.id),0);
   return `
   <section>
+    <h2>Contagem de estoque</h2>
+    <div class="dica">Você só mexe aqui quando fizer <b>contagem física</b>. No resto do tempo o
+      estoque anda sozinho: soma o que foi produzido e desconta o que foi vendido.</div>
     <div class="figures">
       <div class="fig"><span>estoque hoje</span><b>${fmt0(hoje)}<em>peças</em></b></div>
       <div class="fig"><span>na contagem</span><b id="figest">${fmt0(tot)}<em>peças</em></b></div>
@@ -816,9 +1251,6 @@ function vEstoque(){
       const h=estoqueHoje(p.id),b=S.estoque[p.id]||0;
       return h===b?'':'hoje: '+fmt0(h)+(h<0?' (contagem atrasada)':'');
     })}
-    <p class="note">Digite aqui a contagem física e a data em que ela foi feita. Do dia da contagem
-      para cá o app vai somando o que foi produzido e descontando o que foi vendido, então o
-      “estoque hoje” anda sozinho. Faça uma contagem nova quando quiser corrigir o rumo.</p>
   </section>`;
 }
 
@@ -829,6 +1261,88 @@ function opcoesMes(){
     out.push(k);d.setMonth(d.getMonth()+1)}
   return out;
 }
+function vMes(){
+  const seg=`<div class="seg">
+      <button data-modomes="prog" class="${modoMes==='prog'?'sel':''}">Programação</button>
+      <button data-modomes="analise" class="${modoMes==='analise'?'sel':''}">Análise do mês</button>
+    </div>`;
+  const dica=modoMes==='analise'
+    ? `<div class="dica">Fechamento do mês para apresentar. O botão no fim da página imprime em
+       duas folhas, com marca e gráficos.</div>`
+    : `<div class="dica">Visão do mês inteiro: quanto falta produzir de cada produto até o
+       fechamento. O dia a dia sai da aba Dia.</div>`;
+  return seg + dica + (modoMes==='analise'?vAnalise():vProg());
+}
+
+function barras(lista,total,classe){
+  const max=lista.length?lista[0][1]:1;
+  return `<div class="panel barras">`+lista.map(([k,v])=>`
+    <div class="barra ${classe||''}"><div class="rot"><span>${k}</span>
+      <em>${fmt0(v)} · ${(v/total*100).toFixed(0)}%</em></div>
+      <div class="tri"><i style="width:${(v/max*100).toFixed(1)}%"></i></div></div>`).join('')+`</div>`;
+}
+
+function vAnalise(){
+  const fechados=mesesComDados().filter(mesFechado);
+  if(!fechados.length)return `<div class="warn">Nenhum mês fechado com dados para analisar.</div>`;
+  if(!mesAnalise||!fechados.includes(mesAnalise))mesAnalise=fechados[fechados.length-1];
+  const A=analiseMes(mesAnalise);
+  const dif=A.totalAnt?(A.total-A.totalAnt):null;
+  const pct=A.totalAnt?((A.total/A.totalAnt-1)*100):null;
+  const linhasTop=A.top.map((i,n)=>{
+    const acc=A.top.slice(0,n+1).reduce((a,x)=>a+x.q,0);
+    return `<div class="prow"><div class="pn">${i.nome}</div>
+      <div class="pd"><span class="c" data-l="do total">${pc(i.q/A.total*100)}%</span>
+      <span class="c" data-l="acumulado">${(acc/A.total*100).toFixed(0)}%</span></div>
+      <span class="pf">${fmt0(i.q)}</span></div>`}).join('');
+  const mov=(l,sinal)=>l.length?`<div class="panel barras">`+l.map(x=>`
+      <div class="barra ${sinal>0?'':'ocre'}"><div class="rot"><span>${x.nome}</span>
+        <em>${x.d>0?'+':''}${fmt0(x.d)} · de ${fmt0(x.a)} para ${fmt0(x.b)}</em></div></div>`).join('')
+      +`</div>`:`<p class="note">Sem movimento relevante.</p>`;
+
+  return `
+    <div class="field"><span>Mês analisado</span>
+      <select id="mesanalise">${fechados.slice().reverse().map(k=>
+        `<option value="${k}"${k===mesAnalise?' selected':''}>${mesNome(k)}</option>`).join('')}</select></div>
+    <div class="kpis">
+      <div class="kpi"><span>produção total</span><b>${fmt0(A.total)}</b><i>peças no mês</i></div>
+      <div class="kpi"><span>por dia útil</span><b>${fmt0(A.porDia)}</b><i>em ${A.du} dias</i></div>
+      <div class="kpi"><span>produtos ativos</span><b>${A.itens.length}</b><i>de ${S.produtos.length} no cadastro</i></div>
+      <div class="kpi"><span>vs ${A.ant?mesCurto(A.ant):'—'}</span>
+        <b>${dif===null?'—':(dif>0?'+':'')+fmt0(dif)}</b>
+        <i class="${pct===null?'':pct>=0?'sobe':'desce'}">${pct===null?'sem base':(pct>0?'+':'')+pc(pct)+'%'}</i></div>
+    </div>
+    ${resumoExecutivo(A)}
+    <h3 class="bloco">Evolução mês a mês</h3>
+    <div class="panel">${gColunas(A.serie,A.mes)}${leituraEvolucao(A)}</div>
+    <h3 class="bloco">Composição por linha de produto</h3>
+    <div class="panel">${gRosca(A.linhas,A.total,'Composição por linha')}${leituraLinhas(A)}</div>
+    <h3 class="bloco">Composição por acabamento</h3>
+    <div class="panel">${gRosca(A.cores,A.total,'Composição por acabamento')}${leituraCores(A)}</div>
+    <h3 class="bloco">Com costura e sem costura</h3>
+    ${barras(A.grupos,A.total)}
+    <h3 class="bloco">Curva ABC — os dez maiores</h3>
+    <div class="panel">${gPareto(A.itens,A.total)}
+      <p class="note" style="padding:0 13px 8px">Barras: peças produzidas. Linha ocre: participação
+        acumulada, lida de baixo para cima. A tracejada marca os 80%.</p>
+      ${leituraABC(A)}</div>
+    <div class="panel plist" style="margin-top:10px">
+      <div class="prow phead"><div class="pn">Produto</div>
+        <div class="pd"><span class="c">Do total</span><span class="c">Acumulado</span></div>
+        <span class="pf">Peças</span></div>
+      ${linhasTop}
+    </div>
+
+    ${A.ant?`<h3 class="bloco">Variação contra ${mesNome(A.ant)}</h3>
+    <div class="panel">${gDiverg(A.altas.concat(A.quedas))}</div>`:''}
+    <div class="tools" style="margin-top:14px">
+      <button class="btn" data-act="imprimiranalise">Imprimir para a diretoria</button>
+      <button class="btn ghost" data-act="csvanalise">Baixar CSV</button>
+    </div>
+    <p class="note">Os números vêm do total mensal de cada produto. Nos meses trazidos da sua
+      planilha, é o total da coluna “Total” de cada aba; nos meses lançados no app, é a soma dos dias.</p>`;
+}
+
 function vProg(){
   const P=programacao(mesAlvo);
   const fazer=P.itens.filter(i=>i.fazer>0).sort((a,b)=>b.fazer-a.fazer);
@@ -853,7 +1367,7 @@ function vProg(){
         <select id="mesalvo">${opcoesMes().map(k=>`<option value="${k}"${k===mesAlvo?' selected':''}>${mesNome(k)}</option>`).join('')}</select></div>
       <div class="field"><span>Dias úteis no mês</span>
         <input type="number" id="duteis" min="1" max="31" value="${P.duTot}"></div>
-      <div class="field"><span>Estoque de segurança (dias)</span>
+      <div class="field"><span>Dias de venda a manter em estoque</span>
         <input type="number" id="cobertura" min="0" max="60" value="${S.cfg.cobertura}"></div>
     </div>
     ${aviso}
@@ -886,19 +1400,61 @@ function vProg(){
 /* ----------------------------------------------------------- aba: dados */
 function vDados(){
   const meses=mesesComDados().reverse();
+  const comoFunciona=`
+  <section>
+    <h2>Como o app funciona</h2>
+    <div class="panel pad">
+      <ol class="passos">
+        <li>Todo fim de dia, na aba <b>Dia</b>, você toca em <b>Fechar o dia</b> e lança
+          <b>quanto vendeu</b> de cada produto.${S.cfg.modoProd==='ordem'
+            ? ' A produção não precisa ser lançada: o app considera que a fábrica fez o que estava na ordem.'
+            : ' Lance também quanto foi produzido.'}</li>
+        <li>Ao fechar, o app atualiza o estoque de cada item e <b>gera a ordem do dia seguinte</b>,
+          já pronta para imprimir e entregar na produção.</li>
+        <li>A aba <b>Mês</b> mostra a visão do mês inteiro e, no outro botão, a análise para
+          apresentar à diretoria.</li>
+      </ol>
+    </div>
+    <div class="panel pad" style="margin-top:10px">
+      <p class="sub" style="margin-bottom:7px"><b>De onde saem os números</b></p>
+      <p class="note" style="margin-top:0">
+        <b>Previsão de vendas:</b> média dos três últimos meses fechados, produto por produto.
+        Conforme você lança as vendas do mês corrente, esses dias entram na conta e vão ganhando
+        peso, até responderem por 70% da previsão.<br>
+        <b>Estoque de segurança:</b> o quanto você vende em ${S.cfg.cobertura} dias — é o colchão para
+        não faltar peça. Dá para mudar esse número na aba Dia.<br>
+        <b>Quanto produzir:</b> previsão + colchão − o que já existe em estoque. Nunca passa da
+        capacidade que a fábrica dá conta no dia.<br>
+        <b>Ordem do dia:</b> primeiro os produtos a menos de dois dias de acabar, depois o ritmo
+        necessário para fechar o mês, e por último os lotes pequenos que ainda faltam.</p>
+    </div>
+  </section>`;
   const linhas=meses.map(m=>{
     const lanc=lancadoNoMes(m);
     return `<tr><td class="prod">${mesNome(m)}</td><td>${fmt0(totalMes(m))}</td>
       <td class="${lanc?'':'zero'}">${lanc?'lançado':'inicial'}</td>
       <td class="${mesFechado(m)?'':'zero'}">${mesFechado(m)?'fechado':'em curso'}</td></tr>`}).join('');
-  return `
+  const modo=`
+  <section>
+    <h2>Como o estoque é atualizado</h2>
+    <div class="seg">
+      <button data-modoprod="ordem" class="${S.cfg.modoProd!=='lancada'?'sel':''}">A fábrica cumpre a ordem</button>
+      <button data-modoprod="lancada" class="${S.cfg.modoProd==='lancada'?'sel':''}">Eu lanço a produção</button>
+    </div>
+    <div class="panel pad">
+      <p class="note" style="margin-top:0">${S.cfg.modoProd==='lancada'
+        ? 'O estoque só sobe com o que você digitar na coluna <b>Produzido</b>. Se um dia ficar sem lançamento, o estoque fica menor do que a realidade e a ordem do dia seguinte vem inflada.'
+        : 'Escolha certa para quem não consegue anotar a produção todo dia. O app considera que a fábrica produziu o que estava na ordem, e você só digita quando sair diferente. Como a conta trabalha com uma suposição, <b>faça contagem física de tempos em tempos</b> — é ela que corrige o rumo.'}</p>
+    </div>
+  </section>`;
+  return comoFunciona + modo + secEstoque() + `
   <section>
     <h2>Meses de vendas</h2>
     <div class="panel" style="overflow:hidden">
       <table><thead><tr><th>Mês</th><th>Vendas</th><th>Origem</th><th>Situação</th></tr></thead>
       <tbody>${linhas}</tbody></table>
     </div>
-    <p class="note">Os meses marcados como “inicial” vieram da sua planilha de junho, julho e agosto de 2026. Quando você lançar vendas em um desses meses, o lançamento passa a valer no lugar. Só meses fechados entram na média da previsão.</p>
+    <p class="note">Os meses marcados como “inicial” vieram da sua planilha de produção diária, de fevereiro a setembro de 2026. Quando você lançar vendas em um desses meses, o lançamento passa a valer no lugar. Só meses fechados entram na média da previsão.</p>
   </section>
   <section>
     <h2>Novo produto</h2>
@@ -925,6 +1481,11 @@ function vDados(){
       <p class="note">O perfil de produção abre direto na ordem do dia e só pode anotar o que foi
         produzido. Não vê vendas, estoque, previsão nem os parâmetros de cálculo, e não apaga dados.
         Os lançamentos feitos por ele aparecem marcados para você no fechamento do dia.</p>
+      <p class="note">O aparelho lembra quando o perfil escolhido é o de produção, para o pessoal da
+        fábrica não digitar PIN toda hora. O perfil de gestor <b>nunca</b> fica lembrado: ele pede o
+        PIN a cada vez que o app é aberto. Se o PIN da produção ficar em branco, aquele perfil entra
+        com um toque, sem senha — o que é conveniente no tablet da fábrica e ruim num celular que
+        sai da empresa.</p>
       <p class="note">Este PIN separa funções e evita mexida sem querer, mas não é segurança de
         verdade: quem tiver o arquivo e souber abrir o código do navegador consegue contornar.
         Para trancar de fato, é preciso login com banco de dados.</p>
@@ -950,23 +1511,13 @@ function vDados(){
 }
 
 /* ------------------------------------------------------------- impressão */
-const MARCA='WE MIRRO<b>R</b><sup>&reg;</sup>';
-function pTopo(){
-  return `<div class="phead"><div class="wm">${MARCA}</div>
-    <div class="doc">controle interno de produção</div></div>`;
-}
-function pRodape(){
-  const d=new Date(), p=n=>String(n).padStart(2,'0');
-  const q=`${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} às ${p(d.getHours())}:${p(d.getMinutes())}`;
-  return `<div class="rodape"><span class="wm">${MARCA}</span>
-    <span>Documento interno de produção &nbsp;•&nbsp; gerado pelo app OS We Mirror em ${q}</span></div>`;
-}
 function folha(){
   const P=programacao(mesAlvo);
   const fazer=P.itens.filter(i=>i.fazer>0).sort((a,b)=>b.fazer-a.fazer);
   const ritmo=P.duRest?Math.round(P.total/P.duRest):0;
   const hoje=iso(HOJE).split('-').reverse().join('/');
-  document.getElementById('print').innerHTML=pTopo()+`
+  document.getElementById('print').innerHTML=`
+    <svg class="marca-papel" role="img" aria-label="WE MIRROR"><use href="#marca"/></svg>
     <h1>Programação de produção — ${mesNome(mesAlvo)}</h1>
     <div class="m">Emitido em ${hoje} &nbsp;•&nbsp; ${fmt0(P.total)} peças no total &nbsp;•&nbsp;
       ${fmt0(ritmo)} peças por dia útil em ${P.duRest} dias &nbsp;•&nbsp; ${fazer.length} produtos</div>
@@ -975,14 +1526,17 @@ function folha(){
       ${fazer.map(i=>`<tr><td style="text-align:left">${i.nome}</td><td>${fmt(i.est)}</td>
         <td>${fmt(i.prevRest)}</td><td>${fmt(i.seg)}</td><td class="make">${fmt0(i.fazer)}</td><td></td></tr>`).join('')}
       <tr><td style="text-align:left"><b>Total</b></td><td></td><td></td><td></td><td class="make"><b>${fmt0(P.total)}</b></td><td></td></tr>
-    </tbody></table>`+pRodape();
+    </tbody></table>
+    <div class="rodape">WE MIRROR® &nbsp;·&nbsp; programação mensal &nbsp;·&nbsp;
+      emitida em ${iso(HOJE).split('-').reverse().join('/')}</div>`;
   setTimeout(()=>window.print(),60);
 }
 function folhaDia(){
   const O=itensOrdem(dataDia), P=O.P;
   const lin=O.itens, tot=lin.reduce((a,i)=>a+i.qtd,0);
   const d=new Date(dataDia+'T12:00:00');
-  document.getElementById('print').innerHTML=pTopo()+`
+  document.getElementById('print').innerHTML=`
+    <svg class="marca-papel" role="img" aria-label="WE MIRROR"><use href="#marca"/></svg>
     <h1>Ordem de produção — ${DIAS[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}</h1>
     <div class="m">${fmt0(tot)} peças no dia &nbsp;•&nbsp; capacidade de ${fmt0(P.cap)} &nbsp;•&nbsp;
       ${lin.length} produtos &nbsp;•&nbsp; do maior lote para o menor</div>
@@ -992,8 +1546,85 @@ function folhaDia(){
         <td>${fmt(i.nec)}</td><td class="make">${fmt0(i.qtd)}</td><td></td></tr>`).join('')}
       <tr><td style="text-align:left"><b>Total</b></td><td></td><td></td>
         <td class="make"><b>${fmt0(tot)}</b></td><td></td></tr>
-    </tbody></table>`+pRodape();
+    </tbody></table>
+    <div class="rodape">WE MIRROR® &nbsp;·&nbsp; ordem de produção &nbsp;·&nbsp;
+      emitida em ${iso(HOJE).split('-').reverse().join('/')} &nbsp;·&nbsp; conferido por ____________________</div>`;
   setTimeout(()=>window.print(),60);
+}
+function folhaAnalise(){
+  const A=analiseMes(mesAnalise);
+  const pct=A.totalAnt?((A.total/A.totalAnt-1)*100):null;
+  const cab=(pag)=>`
+    <table class="limpa topo"><tbody><tr>
+      <td><svg class="marca-papel" role="img" aria-label="WE MIRROR"><use href="#marca"/></svg></td>
+      <td style="text-align:right">Análise da produção &nbsp;·&nbsp; ${mesNome(A.mes)}
+        &nbsp;·&nbsp; emitida em ${iso(HOJE).split('-').reverse().join('/')}
+        &nbsp;·&nbsp; ${pag} de 2</td>
+    </tr></tbody></table>`;
+  const dez=A.top.map((i,n)=>{
+    const acc=A.top.slice(0,n+1).reduce((a,x)=>a+x.q,0);
+    return `<tr><td style="text-align:left">${n+1}. ${i.nome}</td><td>${fmt0(i.q)}</td>
+      <td>${pc(i.q/A.total*100)}%</td><td>${(acc/A.total*100).toFixed(0)}%</td></tr>`}).join('');
+
+  document.getElementById('print').innerHTML=`
+    ${cab(1)}
+    <h1>Análise da produção — ${mesNome(A.mes)}</h1>
+    <div class="m">${A.du} dias úteis no mês &nbsp;·&nbsp; ${A.itens.length} produtos ativos de
+      ${S.produtos.length} no cadastro &nbsp;·&nbsp; base: ${A.serie.map(x=>mesCurto(x.mes)).join(', ')}</div>
+
+    <table class="kpi4"><tbody><tr>
+      <td><b>${fmt0(A.total)}</b><span>peças produzidas no mês</span></td>
+      <td><b>${fmt0(A.porDia)}</b><span>peças por dia útil</span></td>
+      <td><b>${A.itens.length}</b><span>produtos ativos</span></td>
+      <td><b>${pct===null?'—':(pct>0?'+':'')+pc(pct)+'%'}</b>
+          <span>contra ${A.ant?mesNome(A.ant):'—'}</span></td>
+    </tr></tbody></table>
+
+    ${resumoExecutivo(A)}
+
+    <h2>Produção mês a mês</h2>
+    <div class="gp">${gColunas(A.serie,A.mes,{W:744,H:318,ml:64,mr:26,fs:13})}</div>
+    ${leituraEvolucao(A)}
+
+    <h2>Composição da produção</h2>
+    <table class="limpa duas"><tbody><tr>
+      <td><h3>Por linha de produto</h3>
+        <div class="gp">${gRosca(A.linhas,A.total,'linha')}</div>
+        ${leituraLinhas(A)}</td>
+      <td><h3>Por acabamento</h3>
+        <div class="gp">${gRosca(A.cores,A.total,'acabamento')}</div>
+        ${leituraCores(A)}</td>
+    </tr></tbody></table>
+
+    <div class="pag2">
+      ${cab(2)}
+      <h2 class="primeiro">Curva ABC — concentração da produção</h2>
+      <div class="gp">${gPareto(A.itens,A.total,{W:744,H:286,mb:92,mr:66,fs:10.5,fsv:11.5,lim:22})}</div>
+      <p class="obs">Barras: peças produzidas por produto. Linha ocre: participação acumulada,
+        lida de baixo para cima. A tracejada marca os 80% do volume.</p>
+      ${leituraABC(A)}
+
+      <h2>Os dez maiores em números</h2>
+      <table class="dez"><thead><tr><th style="text-align:left">Produto</th><th>Peças</th>
+        <th>Do total</th><th>Acumulado</th></tr></thead><tbody>${dez}</tbody></table>
+
+      ${A.ant?`<h2>Variação por produto contra ${mesNome(A.ant)}</h2>
+      <div class="gp">${gDiverg(A.altas.concat(A.quedas),{W:744,lh:23,xRot:320,fs:11,lim:40})}</div>
+      <p class="obs">Verde: produtos que cresceram. Vermelho: produtos que recuaram.
+        Cinco maiores altas e cinco maiores quedas, em peças.</p>`:''}
+
+      <div class="rodape">WE MIRROR® &nbsp;·&nbsp; análise de produção &nbsp;·&nbsp;
+        ${mesNome(A.mes)} &nbsp;·&nbsp; emitida em ${iso(HOJE).split('-').reverse().join('/')}</div>
+    </div>`;
+  setTimeout(()=>window.print(),60);
+}
+function csvAnalise(){
+  const A=analiseMes(mesAnalise);
+  const l=[['Produto','Grupo','Linha','Acabamento','Pecas produzidas','% do total']];
+  A.itens.forEach(i=>l.push([i.nome,i.grupo==='C'?'Com costura':'Sem costura',
+    linhaDe(i.nome),corDe(i.nome),i.q,(i.q/A.total*100).toFixed(2).replace('.',',')]));
+  l.push(['TOTAL','','','',A.total,'100']);
+  baixar('analise-producao-'+A.mes+'.csv',l.map(r=>r.join(';')).join('\n'),'text/csv');
 }
 function csv(){
   const P=programacao(mesAlvo);
@@ -1074,16 +1705,19 @@ function restaurar(){
 
 /* --------------------------------------------------------------- eventos */
 document.addEventListener('click',async e=>{
-  const t=e.target.closest('[data-tab],[data-dia],[data-sem],[data-dnav],[data-modo],[data-perfil],[data-act]');
+  const t=e.target.closest('[data-tab],[data-dia],[data-sem],[data-dnav],[data-modo],[data-modomes],[data-modoprod],[data-perfil],[data-act]');
   if(!t)return;
   if(t.dataset.perfil){
     const alvo=t.dataset.perfil;
     const pin=alvo==='gestor'?S.acesso.gestor:S.acesso.producao;
     if(pin){tentativa=alvo;erroPin='';render()}
-    else{perfil=alvo;await sSet(KEY_PERFIL,alvo);render()}
+    else{perfil=alvo;await sSet(KEY_PERFIL, alvo==='producao'?'producao':'');render()}
     return}
   if(t.dataset.tab){view=t.dataset.tab;filtro='';recado='';render();return}
   if(t.dataset.modo){modoDia=t.dataset.modo;filtro='';recado='';render();return}
+  if(t.dataset.modomes){modoMes=t.dataset.modomes;render();return}
+  if(t.dataset.modoprod){S.cfg.modoProd=t.dataset.modoprod;
+    await sSet(KEY_CFG,S.cfg);render();marcar('salvo');return}
   if(t.dataset.dia){dia=t.dataset.dia;render();return}
   if(t.dataset.sem){semana=addDias(semana,7*Number(t.dataset.sem));
     const k=iso(semana);dia=k;render();return}
@@ -1099,13 +1733,15 @@ document.addEventListener('click',async e=>{
     const v=(document.getElementById('pin')||{}).value||'';
     const pin=tentativa==='gestor'?S.acesso.gestor:S.acesso.producao;
     if(v===pin){perfil=tentativa;tentativa=null;erroPin='';view='dia';
-      await sSet(KEY_PERFIL,perfil);render()}
+      await sSet(KEY_PERFIL, perfil==='producao'?'producao':'');render()}
     else{erroPin='PIN incorreto.';render()}
     return}
   if(a==='trocarperfil'){perfil=null;tentativa=null;erroPin='';
     await sSet(KEY_PERFIL,'');render();return}
   if(a==='imprimir')folha();
   if(a==='imprimirdia')folhaDia();
+  if(a==='imprimiranalise')folhaAnalise();
+  if(a==='csvanalise')csvAnalise();
   if(a==='todosprod'){fecharTodos=!fecharTodos;render()}
   if(a==='reemitir'){const P=emitirOrdem(dataDia);
     recado=`Ordem de ${dataDia.split('-').reverse().slice(0,2).join('/')} emitida: ${fmt0(P.usado)} peças em ${P.plano.length} produtos.`;
@@ -1140,7 +1776,7 @@ document.addEventListener('click',async e=>{
   if(a==='zerarok'){
     try{const l=await window.storage.list('esp:');if(l&&l.keys)for(const k of l.keys)await window.storage.delete(k)}catch(err){}
     S.vendas={};S.producao={};S.ordens={};S.extras=[];S.estoque=Object.assign({},SEED.estoque);
-    S.cfg={cobertura:10,dias:{},contagem:'2026-08-31',capacidade:0,lote:5};S.produtos=SEED.produtos.slice();
+    S.cfg={cobertura:10,dias:{},contagem:'2026-09-30',capacidade:0,lote:5,modoProd:'ordem'};S.produtos=SEED.produtos.slice();
     fecharModal();render();
   }
 });
@@ -1153,7 +1789,9 @@ document.addEventListener('input',e=>{
       return}
     const p=el.closest('section').querySelector('.panel');
     if(p)p.outerHTML=lista(view==='vendas'?(x=>vendaDia(dia,x.id)):(x=>S.estoque[x.id]||0),
-      view==='vendas'?'venda':'estoque');
+      view==='vendas'?'venda':'estoque',
+      view==='vendas'?null:(x=>{const h=estoqueHoje(x.id),b=S.estoque[x.id]||0;
+        return h===b?'':'hoje: '+fmt0(h)+(h<0?' (contagem atrasada)':'')}));
     return}
   if(el.dataset.k==='venda'){
     const q=Math.max(0,parseInt(el.value||'0',10)||0);
@@ -1197,6 +1835,7 @@ document.addEventListener('change',e=>{
     S.acesso[el.id==='pingestor'?'gestor':'producao']=v;
     salvarDepois('acc',()=>sSet(KEY_ACC,S.acesso));render();return}
   if(el.id==='mesalvo'){mesAlvo=el.value;render();return}
+  if(el.id==='mesanalise'){mesAnalise=el.value;render();return}
   if(el.id==='cobertura'){S.cfg.cobertura=Math.max(0,parseInt(el.value||'0',10)||0);
     salvarDepois('cfg',()=>sSet(KEY_CFG,S.cfg));render();return}
   if(el.id==='duteis'){const v=parseInt(el.value||'0',10);
@@ -1223,7 +1862,7 @@ if('serviceWorker' in navigator){
   dataDia=iso(proxDiaUtil(HOJE));
   render();
   await carregar();
-  if(!S.cfg.contagem)S.cfg.contagem='2026-08-31';
+  if(!S.cfg.contagem)S.cfg.contagem='2026-09-30';
   if(!S.cfg.lote)S.cfg.lote=5;
   render();
 })();
